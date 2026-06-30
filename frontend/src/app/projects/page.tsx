@@ -1,35 +1,31 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import ProjectCard from '@/components/ProjectCard'
 import ProjectForm from '@/components/ProjectForm'
+import { getProjects, createProject } from '@/lib/db'
 import type { Project } from '@/lib/types'
 
 export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([])
+  const [loading, setLoading] = useState(true)
   const [showForm, setShowForm] = useState(false)
 
-  function handleSave(data: Partial<Project>) {
-    const project: Project = {
-      id: Date.now(),
-      name: data.name || '',
-      description: data.description || null,
-      category_id: null,
-      status: data.status || 'active',
-      progress: data.progress || 0,
-      priority: data.priority || 'medium',
-      client_name: data.client_name || null,
-      budget: null,
-      start_date: null,
-      target_date: data.target_date || null,
-      url_repo: data.url_repo || null,
-      url_deploy: data.url_deploy || null,
-      notes: null,
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
+  useEffect(() => {
+    getProjects()
+      .then(setProjects)
+      .catch(console.error)
+      .finally(() => setLoading(false))
+  }, [])
+
+  async function handleSave(data: Partial<Project>) {
+    try {
+      const project = await createProject(data)
+      setProjects((prev) => [project, ...prev])
+      setShowForm(false)
+    } catch (err) {
+      console.error('Error creating project:', err)
     }
-    setProjects((prev) => [...prev, project])
-    setShowForm(false)
   }
 
   return (
@@ -53,7 +49,11 @@ export default function ProjectsPage() {
         </div>
       )}
 
-      {projects.length === 0 ? (
+      {loading ? (
+        <div className="bg-white rounded-lg border border-gray-200 p-8 text-center text-gray-500">
+          Cargando proyectos...
+        </div>
+      ) : projects.length === 0 ? (
         <div className="bg-white rounded-lg border border-gray-200 p-8 text-center text-gray-500">
           <p>No hay proyectos todavía.</p>
           <p className="text-sm mt-1">Crea tu primer proyecto para empezar.</p>
