@@ -8,3 +8,9 @@ __pycache__/
 dist/
 out/
 data/
+
+# Sub-proyectos (cada uno con su propio repo)
+aplicaciones-web/
+sitios-web/
+scripts-automatizacion/
+ZammyDeportes/

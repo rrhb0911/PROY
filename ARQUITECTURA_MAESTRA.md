@@ -4,6 +4,8 @@
 
 ```
 PROY/                          ← Repositorio Padre (Dashboard)
+├── frontend/                  ← Next.js (Vercel)
+├── supabase/                  ← Esquemas SQL
 ├── aplicaciones-web/          ← Git repos independientes
 ├── sitios-web/                ← Git repos independientes
 ├── scripts-automatizacion/    ← Sin Git (carpetas sueltas)

@@ -19,7 +19,7 @@ PROY/
 │   └── schema.sql             # Esquema de base de datos
 ├── aplicaciones-web/          # Apps Next.js con Vercel + Supabase
 │   ├── vitaldent-web/         # Web app VitalDent
-│   └── zammy-portal/          # Portal ZammyDeportes
+│   └── zammy-portal/          # Portal ZammyDeportes (git: rrhb0911/zammy-portal)
 ├── sitios-web/
 │   └── dra-angela-ramirez/    # Sitio web Dra. Angela Ramirez
 ├── scripts-automatizacion/
