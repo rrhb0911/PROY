@@ -15,26 +15,24 @@ Este archivo centraliza los pendientes **compartidos** del ecosistema. Cada proy
 
 ## 🔴 Críticos — Seguridad
 
-### 1. SUPABASE_SERVICE_ROLE_KEY expuesta en git
-**Archivos:** `../aplicaciones-web/zammy-portal/.env.local`, `../../ZammyDeportes/zammy-portal/.env.local`
-**Riesgo:** La service role key tiene acceso **total** (lectura/escritura/delete) a toda la base de datos de Supabase. Está commitada en el historial de git.
-**Acción:**
-1. Rotar la key en Supabase Dashboard → Project Settings → API → Service Role Key → Regenerate
-2. Agregar `.env.local` al `.gitignore` del subproyecto
-3. Eliminar el archivo del historial git con `git filter-branch` o `bfg`
+> **Verificado 2026-07-02**: se auditó el historial completo de git (`git rev-list --all` + búsqueda de JWTs y del nombre de la variable) en `PROY`, `zammy-portal`, `vitaldent-web` y `scripts-automatizacion/vitaldent`. Dos de los tres puntos críticos originales resultaron ser falsas alarmas ya resueltas; se dejan documentados abajo con su estado real.
 
-### 2. SSH Hostinger en texto plano
-**Archivo:** `../sitios-web/dra-angela-ramirez/Consultorio/SSH.txt`
-**Riesgo:** IP, puerto, usuario y contraseña del VPS Hostinger expuestos.
-**Acción:**
-1. Eliminar `SSH.txt` del disco y mover credenciales a gestor de contraseñas
-2. Usar variables de entorno o GitHub Secrets si se necesita en CI/CD
+### 1. ~~SUPABASE_SERVICE_ROLE_KEY expuesta en git~~ — ✅ Falsa alarma, verificado
+**Verificación:** Se buscó el valor real de la key (patrón JWT `eyJ...`) y el nombre de la variable en todo el historial de los 4 repos. `.env.local` **nunca fue trackeado** en ninguno; el código (`src/lib/supabase/admin.ts`, scripts) solo referencia `process.env.SUPABASE_SERVICE_ROLE_KEY`, nunca el valor hardcodeado.
+**Estado:** Sin acción requerida. No rotar la key innecesariamente.
 
-### 3. .env.local sin .gitignore en subproyectos
-**Proyectos:** `frontend/`, `vitaldent-web/`, `zammy-portal/`
-**Riesgo:** Las keys de Supabase (anónimas y de servicio) están commitadas.
-**Acción:**
-- Agregar `.env.local` y `.env` al `.gitignore` de CADA subproyecto (no solo el raíz)
+### 2. SSH Hostinger en texto plano — 🔴 Real, pendiente
+**Archivos:** `../sitios-web/dra-angela-ramirez/Consultorio/SSH.txt`, `../sitios-web/dra-angela-ramirez/SSH Hostinger.md`
+**Riesgo:** IP, puerto, usuario y contraseña del VPS Hostinger en texto plano. No están en git (esa carpeta no tiene repo propio y PROY la ignora), pero sí se sincronizan vía OneDrive.
+**Estado:** El usuario pidió **no borrar los archivos todavía** (2026-07-02). Se guardó una copia de respaldo en el scratchpad de la sesión para facilitar el paso a un gestor de contraseñas, pero los archivos originales siguen intactos.
+**Acción pendiente:**
+1. Mover las credenciales a un gestor de contraseñas
+2. Eliminar `SSH.txt` y `SSH Hostinger.md` del disco (solo cuando el usuario lo confirme)
+3. Considerar rotar la contraseña del VPS en Hostinger, ya que estuvo en texto plano
+
+### 3. ~~.env.local sin .gitignore en subproyectos~~ — ✅ Falsa alarma, verificado
+**Verificación:** `frontend/`, `vitaldent-web/` y `zammy-portal/` ya tienen `.env*` en su propio `.gitignore`, y ninguno aparece en su historial de git.
+**Estado:** Sin acción requerida.
 
 ---
 
@@ -169,7 +167,7 @@ done
 | Git | ✅ `github.com/rrhb0911/PROY.git` — branch `main` |
 | Supabase | ✅ `ajepmezimkestxjrwqna.supabase.co` |
 | Vercel | ✅ `proy-dashboard` desplegado |
-| .env.local | ⚠️ Keys expuestas, falta `.gitignore` local |
+| .env.local | ✅ Nunca trackeado, `.gitignore` local con `.env*` |
 | Auth Google | ⚠️ Configurado en Supabase + Google Cloud, falta probar en producción |
 | Pendientes | Ver `README.md` — módulos sin implementar |
 
@@ -179,7 +177,7 @@ done
 | Git | ✅ `github.com/rrhb0911/vitaldent-web.git` — branch `main` |
 | Supabase | ✅ `vqjrjndgaribzxwqudkm.supabase.co` |
 | Vercel | ✅ `vitaldent-web` desplegado |
-| .env.local | ⚠️ Keys expuestas |
+| .env.local | ✅ Nunca trackeado, `.gitignore` local con `.env*` |
 | Cron | ✅ `vercel.json` con cron `/api/resumen-diario` |
 | Pendientes | Apps Script necesita mejoras en POS — ver `../scripts-automatizacion/vitaldent/PENDIENTES-VITALDENT-GAS.md` |
 
@@ -189,15 +187,15 @@ done
 | Git | ✅ `github.com/rrhb0911/zammy-portal.git` — branch `master` |
 | Supabase | ✅ `wnkcovmqwkunbnaezchy.supabase.co` |
 | Vercel | ✅ `zammy-portal` desplegado |
-| .env.local | 🔴 **SERVICE_ROLE_KEY expuesta** |
+| .env.local | ✅ Nunca trackeado, `.gitignore` local con `.env*` (verificado 2026-07-02) |
 | Duplicado | ⚠️ Existe copia en `ZammyDeportes/zammy-portal/` — mantener sincronizado |
 | Pendientes | Producción activa, varias migraciones sin aplicar |
 
 ### 4. Zammy Portal (copia `ZammyDeportes/`)
 | Aspecto | Estado |
 |---------|--------|
-| Git | ✅ Mismo remote, mismo proyecto Vercel |
-| .env.local | 🔴 **Misma SERVICE_ROLE_KEY expuesta** |
+| Git | ✅ Mismo remote (`github.com/rrhb0911/zammy-portal.git`), mismo proyecto Vercel |
+| .env.local | ✅ Nunca trackeado, `.gitignore` local con `.env*` (verificado 2026-07-02) |
 | Riesgo | Copia duplicada puede divergir del original |
 
 ### 5. LabDent — Dra. Angela (`sitios-web/dra-angela-ramirez/Labdent/`)
@@ -213,8 +211,8 @@ done
 |---------|--------|
 | Git | 🔴 **Sin control de versiones** |
 | Hosting | Hostinger VPS (`212.85.28.100:65002`) |
-| SSH | 🔴 **Credenciales en texto plano (`SSH.txt`)** — eliminar YA |
-| Acción | Inicializar git, eliminar SSH.txt, mover creds a gestor de contraseñas |
+| SSH | 🔴 **Credenciales en texto plano (`SSH.txt`, `SSH Hostinger.md`)** — no están en git, pero sí en OneDrive |
+| Acción | Inicializar git; mover creds a gestor de contraseñas; el usuario pidió NO borrar los archivos aún (2026-07-02) |
 
 ### 7. VitalDent Apps Script (`scripts-automatizacion/vitaldent/`)
 | Aspecto | Estado |
@@ -338,9 +336,9 @@ proyectos:
 
 | Prioridad | Tarea | Proyecto |
 |-----------|-------|----------|
-| 🔴 P0 | Rotar SERVICE_ROLE_KEY + eliminar de git | zammy-portal |
-| 🔴 P0 | Eliminar SSH.txt con credenciales | Consultorio |
-| 🔴 P0 | Agregar .env.local a .gitignore en subproyectos | frontend, vitaldent-web, zammy-portal |
+| 🔴 P0 | Mover SSH.txt/SSH Hostinger.md a gestor de contraseñas (borrado pendiente de confirmación del usuario) | Consultorio |
+| ✅ Resuelto | ~~Rotar SERVICE_ROLE_KEY + eliminar de git~~ — verificado 2026-07-02, nunca se commiteó | zammy-portal |
+| ✅ Resuelto | ~~Agregar .env.local a .gitignore en subproyectos~~ — verificado 2026-07-02, ya estaba | frontend, vitaldent-web, zammy-portal |
 | 🟡 P1 | Inicializar git para sitios estáticos | Labdent, Consultorio |
 | 🟡 P1 | Inicializar git para scripts GAS | vitaldent scripts |
 | 🟢 P2 | Sincronizar copias duplicadas de zammy-portal | ZammyDeportes vs PROY |
