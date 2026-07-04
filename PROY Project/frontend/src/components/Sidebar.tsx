@@ -7,6 +7,7 @@ import { useAuth } from './AuthProvider'
 const links = [
   { href: '/', label: 'Panel', icon: '▦' },
   { href: '/projects', label: 'Proyectos', icon: '📁' },
+  { href: '/finanzas', label: 'Finanzas', icon: '💰' },
 ]
 
 export default function Sidebar() {

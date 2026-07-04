@@ -38,3 +38,67 @@ export interface ProjectTask {
   created_at: string
   completed_at: string | null
 }
+
+export interface FinanzasIngreso {
+  id: number
+  fuente: string
+  monto: number
+  periodo: string
+  quincena: 1 | 2 | null
+  notas: string | null
+  created_at: string
+}
+
+export interface FinanzasCategoriaGasto {
+  id: number
+  nombre: string
+  color: string
+}
+
+export interface FinanzasGastoVariable {
+  id: number
+  categoria_id: number
+  concepto: string
+  monto: number
+  periodo: string
+  quincena: 1 | 2 | null
+  pagado: boolean
+  notas: string | null
+  created_at: string
+  categoria?: FinanzasCategoriaGasto | null
+}
+
+export interface FinanzasGastoFijo {
+  id: number
+  nombre: string
+  monto: number
+  tipo: 'cuota' | 'indefinido'
+  cuotas_totales: number | null
+  cuotas_pagadas: number
+  activo: boolean
+  created_at: string
+  updated_at: string
+}
+
+export interface FinanzasPagoFijo {
+  id: number
+  gasto_fijo_id: number
+  periodo: string
+  quincena: 1 | 2 | null
+  monto: number
+  pagado: boolean
+  created_at: string
+  gasto_fijo?: { nombre: string } | null
+}
+
+export interface FinanzasDeuda {
+  id: number
+  persona: string
+  concepto: string
+  monto_original: number | null
+  saldo_actual: number
+  pago_mensual: number | null
+  activa: boolean
+  created_at: string
+  updated_at: string
+}

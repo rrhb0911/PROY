@@ -141,6 +141,7 @@ create table finanzas_gastos_variables (
   monto decimal(12,2) not null,
   periodo date not null,
   quincena integer check (quincena in (1, 2)),   -- null si el gasto es mensual, no por ciclo
+  pagado boolean not null default false,
   notas text,
   created_at timestamptz not null default now()
 );
@@ -171,6 +172,19 @@ create table finanzas_deudas (
   updated_at timestamptz not null default now()
 );
 
+-- Instancia mensual de un gasto fijo, para poder marcarlo pagado/pendiente
+-- por periodo sin perder el catálogo base en finanzas_gastos_fijos.
+create table finanzas_pagos_fijos (
+  id bigint generated always as identity primary key,
+  gasto_fijo_id bigint not null references finanzas_gastos_fijos(id) on delete cascade,
+  periodo date not null,
+  quincena integer check (quincena in (1, 2)),
+  monto decimal(12,2) not null,
+  pagado boolean not null default false,
+  created_at timestamptz not null default now(),
+  unique (gasto_fijo_id, periodo)
+);
+
 create trigger finanzas_gastos_fijos_updated_at
   before update on finanzas_gastos_fijos
   for each row execute function update_updated_at();
@@ -184,12 +198,14 @@ alter table finanzas_categorias_gasto enable row level security;
 alter table finanzas_gastos_variables enable row level security;
 alter table finanzas_gastos_fijos enable row level security;
 alter table finanzas_deudas enable row level security;
+alter table finanzas_pagos_fijos enable row level security;
 
 create policy "Full access to authenticated users" on finanzas_ingresos for all using (true) with check (true);
 create policy "Full access to authenticated users" on finanzas_categorias_gasto for all using (true) with check (true);
 create policy "Full access to authenticated users" on finanzas_gastos_variables for all using (true) with check (true);
 create policy "Full access to authenticated users" on finanzas_gastos_fijos for all using (true) with check (true);
 create policy "Full access to authenticated users" on finanzas_deudas for all using (true) with check (true);
+create policy "Full access to authenticated users" on finanzas_pagos_fijos for all using (true) with check (true);
 
 insert into finanzas_categorias_gasto (nombre, color) values
   ('Servicios', '#3b82f6'),
