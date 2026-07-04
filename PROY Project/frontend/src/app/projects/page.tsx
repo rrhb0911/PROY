@@ -3,20 +3,29 @@
 import { useState, useEffect } from 'react'
 import ProjectCard from '@/components/ProjectCard'
 import ProjectForm from '@/components/ProjectForm'
-import { getProjects, createProject } from '@/lib/db'
-import type { Project } from '@/lib/types'
+import { getProjects, createProject, getCategories } from '@/lib/db'
+import type { Project, ProjectCategory } from '@/lib/types'
 
 export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([])
+  const [categories, setCategories] = useState<ProjectCategory[]>([])
+  const [categoryFilter, setCategoryFilter] = useState<number | null>(null)
   const [loading, setLoading] = useState(true)
   const [showForm, setShowForm] = useState(false)
 
   useEffect(() => {
-    getProjects()
-      .then(setProjects)
+    Promise.all([getProjects(), getCategories()])
+      .then(([projects, categories]) => {
+        setProjects(projects)
+        setCategories(categories)
+      })
       .catch(console.error)
       .finally(() => setLoading(false))
   }, [])
+
+  const filteredProjects = categoryFilter
+    ? projects.filter((p) => p.category_id === categoryFilter)
+    : projects
 
   async function handleSave(data: Partial<Project>) {
     try {
@@ -49,18 +58,47 @@ export default function ProjectsPage() {
         </div>
       )}
 
+      {categories.length > 0 && (
+        <div className="flex flex-wrap gap-2 mb-4">
+          <button
+            onClick={() => setCategoryFilter(null)}
+            className={`px-3 py-1 text-sm rounded-full border transition-colors ${
+              categoryFilter === null
+                ? 'bg-blue-600 text-white border-blue-600'
+                : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+            }`}
+          >
+            Todas
+          </button>
+          {categories.map((c) => (
+            <button
+              key={c.id}
+              onClick={() => setCategoryFilter(c.id)}
+              className={`px-3 py-1 text-sm rounded-full border transition-colors ${
+                categoryFilter === c.id
+                  ? 'text-white border-transparent'
+                  : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+              }`}
+              style={categoryFilter === c.id ? { backgroundColor: c.color } : undefined}
+            >
+              {c.name}
+            </button>
+          ))}
+        </div>
+      )}
+
       {loading ? (
         <div className="bg-white rounded-lg border border-gray-200 p-8 text-center text-gray-500">
           Cargando proyectos...
         </div>
-      ) : projects.length === 0 ? (
+      ) : filteredProjects.length === 0 ? (
         <div className="bg-white rounded-lg border border-gray-200 p-8 text-center text-gray-500">
-          <p>No hay proyectos todavía.</p>
-          <p className="text-sm mt-1">Crea tu primer proyecto para empezar.</p>
+          <p>No hay proyectos {categoryFilter ? 'en esta categoría' : 'todavía'}.</p>
+          {!categoryFilter && <p className="text-sm mt-1">Crea tu primer proyecto para empezar.</p>}
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {projects.map((project) => (
+          {filteredProjects.map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}
         </div>

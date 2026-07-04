@@ -16,6 +16,7 @@ export interface Project {
   notes: string | null
   created_at: string
   updated_at: string
+  category?: ProjectCategory | null
 }
 
 export interface ProjectCategory {

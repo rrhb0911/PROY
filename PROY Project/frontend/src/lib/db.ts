@@ -6,16 +6,18 @@ const supabase = createClient()
 export async function getProjects(): Promise<Project[]> {
   const { data, error } = await supabase
     .from('projects')
-    .select('*')
+    .select(PROJECT_SELECT)
     .order('updated_at', { ascending: false })
   if (error) throw error
   return data || []
 }
 
+const PROJECT_SELECT = '*, category:project_categories(id,name,color,icon)'
+
 export async function getProject(id: number): Promise<Project | null> {
   const { data, error } = await supabase
     .from('projects')
-    .select('*')
+    .select(PROJECT_SELECT)
     .eq('id', id)
     .single()
   if (error) throw error
@@ -26,7 +28,7 @@ export async function createProject(project: Partial<Project>): Promise<Project>
   const { data, error } = await supabase
     .from('projects')
     .insert([project])
-    .select()
+    .select(PROJECT_SELECT)
     .single()
   if (error) throw error
   return data
@@ -37,7 +39,7 @@ export async function updateProject(id: number, updates: Partial<Project>): Prom
     .from('projects')
     .update(updates)
     .eq('id', id)
-    .select()
+    .select(PROJECT_SELECT)
     .single()
   if (error) throw error
   return data
@@ -98,9 +100,10 @@ export async function getStats() {
   const active = projects.filter(p => p.status === 'active').length
   const paused = projects.filter(p => p.status === 'paused').length
   const completed = projects.filter(p => p.status === 'completed').length
+  const cancelled = projects.filter(p => p.status === 'cancelled').length
   const avgProgress = total > 0
     ? Math.round(projects.reduce((acc, p) => acc + (p.progress || 0), 0) / total)
     : 0
 
-  return { total, active, paused, completed, avgProgress }
+  return { total, active, paused, completed, cancelled, avgProgress }
 }

@@ -7,7 +7,7 @@ import type { Project } from '@/lib/types'
 
 export default function Home() {
   const [projects, setProjects] = useState<Project[]>([])
-  const [stats, setStats] = useState({ total: 0, active: 0, paused: 0, completed: 0, avgProgress: 0 })
+  const [stats, setStats] = useState({ total: 0, active: 0, paused: 0, completed: 0, cancelled: 0, avgProgress: 0 })
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -28,8 +28,8 @@ export default function Home() {
       </header>
 
       {loading ? (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          {[1,2,3,4].map(i => (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-6">
+          {[1,2,3,4,5].map(i => (
             <div key={i} className="bg-white rounded-lg border border-gray-200 p-4 animate-pulse">
               <div className="h-4 bg-gray-200 rounded w-24 mb-2" />
               <div className="h-8 bg-gray-200 rounded w-16" />
@@ -37,10 +37,11 @@ export default function Home() {
           ))}
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-6">
           <StatCard label="Proyectos Activos" value={String(stats.active)} color="text-green-600" />
           <StatCard label="En Pausa" value={String(stats.paused)} color="text-yellow-600" />
           <StatCard label="Completados" value={String(stats.completed)} color="text-blue-600" />
+          <StatCard label="Cancelados" value={String(stats.cancelled)} color="text-red-600" />
           <StatCard label="Progreso Promedio" value={`${stats.avgProgress}%`} color="text-gray-600" />
         </div>
       )}

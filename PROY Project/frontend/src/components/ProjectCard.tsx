@@ -21,6 +21,14 @@ export default function ProjectCard({ project }: Props) {
         <h3 className="font-semibold text-gray-900">{project.name}</h3>
         <StatusBadge status={project.status} />
       </div>
+      {project.category && (
+        <span
+          className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium text-white mb-2"
+          style={{ backgroundColor: project.category.color }}
+        >
+          {project.category.name}
+        </span>
+      )}
       {project.description && (
         <p className="text-sm text-gray-600 mb-3 line-clamp-2">{project.description}</p>
       )}

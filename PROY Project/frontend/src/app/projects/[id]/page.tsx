@@ -5,7 +5,10 @@ import { useParams, useRouter } from 'next/navigation'
 import { getProject, getTasks, updateProject, updateTask, createTask } from '@/lib/db'
 import StatusBadge from '@/components/StatusBadge'
 import Thermometer from '@/components/Thermometer'
+import ProjectForm from '@/components/ProjectForm'
 import type { Project, ProjectTask } from '@/lib/types'
+
+const currency = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 })
 
 export default function ProjectDetailPage() {
   const { id } = useParams<{ id: string }>()
@@ -14,6 +17,7 @@ export default function ProjectDetailPage() {
   const [tasks, setTasks] = useState<ProjectTask[]>([])
   const [loading, setLoading] = useState(true)
   const [newTaskTitle, setNewTaskTitle] = useState('')
+  const [editing, setEditing] = useState(false)
 
   useEffect(() => {
     const projectId = Number(id)
@@ -37,6 +41,13 @@ export default function ProjectDetailPage() {
     if (!project) return
     setProject({ ...project, status })
     await updateProject(project.id, { status }).catch(console.error)
+  }
+
+  async function handleUpdate(data: Partial<Project>) {
+    if (!project) return
+    const updated = await updateProject(project.id, data)
+    setProject(updated)
+    setEditing(false)
   }
 
   async function handleAddTask(e: React.FormEvent) {
@@ -79,64 +90,88 @@ export default function ProjectDetailPage() {
       </button>
 
       <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
-        <div className="flex items-start justify-between mb-4">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900">{project.name}</h1>
-            {project.description && <p className="text-gray-600 mt-1">{project.description}</p>}
-          </div>
-          <StatusBadge status={project.status} />
-        </div>
+        {editing ? (
+          <ProjectForm initial={project} onSave={handleUpdate} onCancel={() => setEditing(false)} />
+        ) : (
+          <>
+            <div className="flex items-start justify-between mb-4">
+              <div>
+                <h1 className="text-2xl font-bold text-gray-900">{project.name}</h1>
+                {project.description && <p className="text-gray-600 mt-1">{project.description}</p>}
+              </div>
+              <div className="flex items-center gap-3">
+                <StatusBadge status={project.status} />
+                <button
+                  onClick={() => setEditing(true)}
+                  className="px-3 py-1 text-sm text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50"
+                >
+                  Editar
+                </button>
+              </div>
+            </div>
 
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Progreso</label>
-          <Thermometer progress={project.progress} size="lg" />
-          <input
-            type="range"
-            min={0}
-            max={100}
-            value={project.progress}
-            onChange={handleProgressChange}
-            className="w-full mt-2"
-          />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Estado</label>
-          <div className="flex gap-2">
-            {statuses.map((s) => (
-              <button
-                key={s}
-                onClick={() => handleStatusChange(s)}
-                className={`px-3 py-1 text-sm rounded-full border transition-colors ${
-                  project.status === s
-                    ? 'bg-blue-600 text-white border-blue-600'
-                    : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
-                }`}
+            {project.category && (
+              <span
+                className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium text-white mb-4"
+                style={{ backgroundColor: project.category.color }}
               >
-                {s === 'active' ? 'Activo' : s === 'paused' ? 'Pausado' : s === 'completed' ? 'Completado' : 'Cancelado'}
-              </button>
-            ))}
-          </div>
-        </div>
+                {project.category.name}
+              </span>
+            )}
 
-        {project.url_repo && (
-          <p className="text-sm">
-            <span className="text-gray-500">Repo:</span>{' '}
-            <a href={project.url_repo} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-              {project.url_repo}
-            </a>
-          </p>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-1">Progreso</label>
+              <Thermometer progress={project.progress} size="lg" />
+              <input
+                type="range"
+                min={0}
+                max={100}
+                value={project.progress}
+                onChange={handleProgressChange}
+                className="w-full mt-2"
+              />
+            </div>
+
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-1">Estado</label>
+              <div className="flex gap-2">
+                {statuses.map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => handleStatusChange(s)}
+                    className={`px-3 py-1 text-sm rounded-full border transition-colors ${
+                      project.status === s
+                        ? 'bg-blue-600 text-white border-blue-600'
+                        : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                    }`}
+                  >
+                    {s === 'active' ? 'Activo' : s === 'paused' ? 'Pausado' : s === 'completed' ? 'Completado' : 'Cancelado'}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {project.url_repo && (
+              <p className="text-sm">
+                <span className="text-gray-500">Repo:</span>{' '}
+                <a href={project.url_repo} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                  {project.url_repo}
+                </a>
+              </p>
+            )}
+            {project.url_deploy && (
+              <p className="text-sm">
+                <span className="text-gray-500">Deploy:</span>{' '}
+                <a href={project.url_deploy} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                  {project.url_deploy}
+                </a>
+              </p>
+            )}
+            {project.client_name && <p className="text-sm text-gray-500 mt-1">Cliente: {project.client_name}</p>}
+            {!!project.budget && <p className="text-sm text-gray-500">Presupuesto: {currency.format(project.budget)}</p>}
+            {project.target_date && <p className="text-sm text-gray-500">Fecha meta: {project.target_date}</p>}
+          </>
         )}
-        {project.url_deploy && (
-          <p className="text-sm">
-            <span className="text-gray-500">Deploy:</span>{' '}
-            <a href={project.url_deploy} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-              {project.url_deploy}
-            </a>
-          </p>
-        )}
-        {project.client_name && <p className="text-sm text-gray-500 mt-1">Cliente: {project.client_name}</p>}
-        {project.target_date && <p className="text-sm text-gray-500">Fecha meta: {project.target_date}</p>}
       </div>
 
       <div className="bg-white rounded-lg border border-gray-200 p-6">
