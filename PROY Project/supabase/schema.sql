@@ -140,6 +140,7 @@ create table finanzas_gastos_variables (
   concepto text not null,                        -- 'Luz', 'Pensión', 'Gasolina'...
   monto decimal(12,2) not null,
   periodo date not null,
+  quincena integer check (quincena in (1, 2)),   -- null si el gasto es mensual, no por ciclo
   notas text,
   created_at timestamptz not null default now()
 );
