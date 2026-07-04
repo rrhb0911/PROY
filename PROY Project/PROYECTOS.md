@@ -86,6 +86,18 @@ proyectos/
 
 ---
 
+## Sincronización de Estado desde Proyectos Externos
+
+Cada proyecto externo (VitalDent Web, Zammy Portal, VitalDent Apps Script, sitios de la Dra. Ángela) reporta su estado al dashboard vía un endpoint centralizado, sin acceso directo a Supabase:
+
+```
+proyecto externo → POST /api/project-status (token compartido) → upsert en projects/project_tasks (service role)
+```
+
+- El endpoint identifica cada proyecto por `slug` (columna añadida en `supabase/migrations/0001_add_project_slug.sql`), no por `id` ni `name`.
+- Detalle técnico e implementación: `frontend/PENDIENTES-FRONTEND.md` → "Sincronización de estado entre proyectos".
+- Pendiente: conectar cada proyecto externo para que realmente llame al endpoint (hoy solo existe el endpoint, ningún proyecto lo está usando todavía).
+
 ## Integración con Finanzas
 
 Cada proyecto alimenta automáticamente:

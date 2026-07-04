@@ -1,6 +1,7 @@
 export interface Project {
   id: number
   name: string
+  slug: string | null
   description: string | null
   category_id: number | null
   status: 'active' | 'paused' | 'completed' | 'cancelled'

@@ -5,6 +5,14 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 
 export async function proxy(request: NextRequest) {
+  const { pathname } = request.nextUrl
+
+  // Rutas de API con su propia autenticación (ej. token bearer) —
+  // no deben requerir sesión de Supabase ni redirigir a /login.
+  if (pathname.startsWith('/api/')) {
+    return NextResponse.next({ request })
+  }
+
   let supabaseResponse = NextResponse.next({ request })
 
   const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
@@ -21,7 +29,6 @@ export async function proxy(request: NextRequest) {
   })
 
   const { data: { user } } = await supabase.auth.getUser()
-  const { pathname } = request.nextUrl
 
   if (!user && !pathname.startsWith('/login') && !pathname.startsWith('/auth')) {
     return NextResponse.redirect(new URL('/login', request.url))

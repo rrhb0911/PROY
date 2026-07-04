@@ -15,6 +15,7 @@ create table project_categories (
 create table projects (
   id bigint generated always as identity primary key,
   name text not null,
+  slug text unique,
   description text,
   category_id bigint references project_categories(id),
   status text not null default 'active' check (status in ('active', 'paused', 'completed', 'cancelled')),
