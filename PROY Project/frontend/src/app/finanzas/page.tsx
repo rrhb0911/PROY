@@ -104,18 +104,19 @@ function StatCard({ label, value, color = 'text-gray-900' }: { label: string; va
 function ResumenTab({ mes }: { mes: string }) {
   const [ingresos, setIngresos] = useState<FinanzasIngreso[]>([])
   const [gastosVariables, setGastosVariables] = useState<FinanzasGastoVariable[]>([])
-  const [gastosFijos, setGastosFijos] = useState<FinanzasGastoFijo[]>([])
+  const [pagosFijos, setPagosFijos] = useState<FinanzasPagoFijo[]>([])
   const [deudas, setDeudas] = useState<FinanzasDeuda[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const periodo = `${mes}-01`
     setLoading(true)
-    Promise.all([getIngresos(), getGastosVariables(periodo), getGastosFijos(), getDeudas()])
-      .then(([ing, gv, gf, d]) => {
+    ensurePagosFijos(periodo)
+      .then(() => Promise.all([getIngresos(), getGastosVariables(periodo), getPagosFijos(periodo), getDeudas()]))
+      .then(([ing, gv, pf, d]) => {
         setIngresos(ing.filter((i) => i.periodo === periodo))
         setGastosVariables(gv)
-        setGastosFijos(gf)
+        setPagosFijos(pf)
         setDeudas(d)
       })
       .catch(console.error)
@@ -128,12 +129,16 @@ function ResumenTab({ mes }: { mes: string }) {
 
   const totalIngresos = ingresos.reduce((a, i) => a + Number(i.monto), 0)
   const totalGastosVariables = gastosVariables.reduce((a, g) => a + Number(g.monto), 0)
-  const fijosActivos = gastosFijos.filter((f) => f.activo)
-  const totalGastosFijos = fijosActivos.reduce((a, f) => a + Number(f.monto), 0)
+  const totalGastosFijos = pagosFijos.reduce((a, p) => a + Number(p.monto), 0)
   const totalEgresos = totalGastosVariables + totalGastosFijos
   const neto = totalIngresos - totalEgresos
   const deudasActivas = deudas.filter((d) => d.activa)
   const totalDeuda = deudasActivas.reduce((a, d) => a + Number(d.saldo_actual), 0)
+
+  const pagado =
+    gastosVariables.filter((g) => g.pagado).reduce((a, g) => a + Number(g.monto), 0) +
+    pagosFijos.filter((p) => p.pagado).reduce((a, p) => a + Number(p.monto), 0)
+  const pendiente = totalEgresos - pagado
 
   const porCategoria = new Map<string, number>()
   for (const g of gastosVariables) {
@@ -143,11 +148,16 @@ function ResumenTab({ mes }: { mes: string }) {
 
   return (
     <div>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
         <StatCard label="Ingresos del mes" value={currency.format(totalIngresos)} color="text-green-600" />
         <StatCard label="Egresos del mes" value={currency.format(totalEgresos)} color="text-red-600" />
         <StatCard label="Neto" value={currency.format(neto)} color={neto >= 0 ? 'text-green-600' : 'text-red-600'} />
         <StatCard label="Deuda pendiente" value={currency.format(totalDeuda)} color="text-yellow-600" />
+      </div>
+
+      <div className="grid grid-cols-2 gap-4 mb-6">
+        <StatCard label="Pagado" value={currency.format(pagado)} color="text-green-600" />
+        <StatCard label="Pendiente de pago" value={currency.format(pendiente)} color="text-amber-600" />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -168,15 +178,18 @@ function ResumenTab({ mes }: { mes: string }) {
         </div>
 
         <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Gastos fijos activos</h2>
-          {fijosActivos.length === 0 ? (
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Gastos fijos de este mes</h2>
+          {pagosFijos.length === 0 ? (
             <p className="text-gray-500 text-sm">No hay gastos fijos activos.</p>
           ) : (
             <ul className="space-y-2">
-              {fijosActivos.map((f) => (
-                <li key={f.id} className="flex justify-between text-sm">
-                  <span className="text-gray-700">{f.nombre}</span>
-                  <span className="font-medium text-gray-900">{currency.format(f.monto)}</span>
+              {pagosFijos.map((p) => (
+                <li key={p.id} className="flex justify-between text-sm">
+                  <span className="text-gray-700">
+                    {p.gasto_fijo?.nombre ?? '—'}{' '}
+                    {p.pagado && <span className="text-xs text-green-600">(pagado)</span>}
+                  </span>
+                  <span className="font-medium text-gray-900">{currency.format(p.monto)}</span>
                 </li>
               ))}
             </ul>
