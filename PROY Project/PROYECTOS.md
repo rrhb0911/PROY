@@ -15,6 +15,7 @@ Gestión de proyectos de desarrollo web. Termómetro visual del estado de cada p
 | **Zammy Portal** | Zammy Deportes SAS | Producción | — | — | Next.js + Supabase |
 | **LabDent Site** | Dra. Angela Ramirez | Publicado | — | — | Hostinger |
 | **Consultorio Site** | Dra. Angela Ramirez | Publicado | — | — | Hostinger |
+| **Dental RX (Radiología)** | Dra. Angela Ramirez | Publicado | — | — | Hostinger |
 | **PROY Dashboard** | Personal | En desarrollo | — | — | Next.js + Supabase |
 
 ---
@@ -28,7 +29,10 @@ Zammy Portal ──────────────────────�
 VitalDent Apps Script ──────────────────────── 95% ███████████████████
 LabDent Site ───────────────────────────────── 100% ███████████████████
 Consultorio Site ───────────────────────────── 100% ███████████████████
+Dental RX (Radiología) ─────────────────────── 100% ███████████████████
 ```
+
+Estos valores ya se alimentan en vivo vía el endpoint `/api/project-status` (ver sección de abajo) — este bloque queda como referencia rápida, la fuente real es la tabla `projects` en Supabase.
 
 ---
 
