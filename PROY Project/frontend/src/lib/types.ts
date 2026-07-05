@@ -102,3 +102,63 @@ export interface FinanzasDeuda {
   created_at: string
   updated_at: string
 }
+
+export type Mercado = 'forex' | 'crypto'
+
+export interface TradingCuenta {
+  id: number
+  nombre: string
+  mercado: Mercado
+  broker: string | null
+  balance_actual: number
+  moneda: string
+  activa: boolean
+  created_at: string
+  updated_at: string
+}
+
+export interface TradingEstrategia {
+  id: number
+  nombre: string
+  descripcion: string | null
+  activa: boolean
+  created_at: string
+}
+
+export interface TradingBot {
+  id: number
+  nombre: string
+  estrategia_id: number | null
+  cuenta_id: number
+  activo: boolean
+  created_at: string
+  updated_at: string
+  estrategia?: { nombre: string } | null
+  cuenta?: { nombre: string } | null
+}
+
+export interface TradingOperacion {
+  id: number
+  cuenta_id: number
+  mercado: Mercado
+  estrategia_id: number | null
+  bot_id: number | null
+  par: string
+  tipo: 'compra' | 'venta'
+  resultado: number
+  fecha: string
+  notas: string | null
+  created_at: string
+  cuenta?: { nombre: string } | null
+  estrategia?: { nombre: string } | null
+  bot?: { nombre: string } | null
+}
+
+export interface TradingAnalisis {
+  id: number
+  mercado: Mercado | null
+  titulo: string
+  contenido: string | null
+  fecha: string
+  created_at: string
+}
