@@ -1,3 +1,4 @@
 supabase/.temp/
 supabase/scripts/.env
 supabase/scripts/node_modules/
+supabase/.access-token
