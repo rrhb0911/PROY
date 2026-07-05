@@ -1,6 +1,10 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import FullCalendar from '@fullcalendar/react'
+import dayGridPlugin from '@fullcalendar/daygrid'
+import interactionPlugin from '@fullcalendar/interaction'
+import type { EventClickArg } from '@fullcalendar/core'
 import {
   getMesociclos,
   createMesociclo,
@@ -12,6 +16,7 @@ import {
 import type { CiclismoMesociclo, CiclismoSemana, CiclismoEntreno } from '@/lib/types'
 
 const TABS = [
+  { id: 'calendario', label: 'Calendario' },
   { id: 'resumen', label: 'Resumen' },
   { id: 'semanas', label: 'Evolución Semanal' },
   { id: 'entrenos', label: 'Entrenos' },
@@ -21,7 +26,7 @@ const TABS = [
 type TabId = (typeof TABS)[number]['id']
 
 export default function CiclismoPage() {
-  const [tab, setTab] = useState<TabId>('resumen')
+  const [tab, setTab] = useState<TabId>('calendario')
 
   return (
     <div>
@@ -46,10 +51,138 @@ export default function CiclismoPage() {
         ))}
       </div>
 
+      {tab === 'calendario' && <CalendarioTab />}
       {tab === 'resumen' && <ResumenTab />}
       {tab === 'semanas' && <SemanasTab />}
       {tab === 'entrenos' && <EntrenosTab />}
       {tab === 'mesociclos' && <MesociclosTab />}
+    </div>
+  )
+}
+
+function tssColor(tss: number | null): string {
+  if (tss === null) return '#6b7280'
+  if (tss >= 100) return '#dc2626'
+  if (tss >= 60) return '#f59e0b'
+  return '#16a34a'
+}
+
+function CalendarioTab() {
+  const [entrenos, setEntrenos] = useState<CiclismoEntreno[]>([])
+  const [semanas, setSemanas] = useState<CiclismoSemana[]>([])
+  const [loading, setLoading] = useState(true)
+  const [seleccionado, setSeleccionado] = useState<CiclismoEntreno | null>(null)
+
+  useEffect(() => {
+    Promise.all([getEntrenos(), getSemanas()])
+      .then(([e, s]) => {
+        setEntrenos(e)
+        setSemanas(s)
+      })
+      .catch(console.error)
+      .finally(() => setLoading(false))
+  }, [])
+
+  const ultimaSemana = semanas[0]
+
+  const events = entrenos.map((e) => ({
+    id: String(e.id),
+    title: e.tipo ?? 'Entreno',
+    date: e.fecha,
+    backgroundColor: tssColor(e.tss),
+    borderColor: tssColor(e.tss),
+    extendedProps: { entreno: e },
+  }))
+
+  function handleEventClick(arg: EventClickArg) {
+    setSeleccionado(arg.event.extendedProps.entreno as CiclismoEntreno)
+  }
+
+  if (loading) {
+    return <div className="bg-white rounded-lg border border-gray-200 p-8 text-center text-gray-500">Cargando...</div>
+  }
+
+  return (
+    <div>
+      {ultimaSemana && (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+          <StatCard label="CTL (forma)" value={ultimaSemana.ctl?.toString() ?? '—'} color="text-blue-600" />
+          <StatCard label="ATL (fatiga)" value={ultimaSemana.atl?.toString() ?? '—'} color="text-red-600" />
+          <StatCard
+            label="TSB (frescura)"
+            value={ultimaSemana.tsb?.toString() ?? '—'}
+            color={(ultimaSemana.tsb ?? 0) >= 0 ? 'text-green-600' : 'text-amber-600'}
+          />
+          <StatCard label="FTP" value={ultimaSemana.ftp ? `${ultimaSemana.ftp} W` : '—'} color="text-purple-600" />
+        </div>
+      )}
+
+      <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <FullCalendar
+          plugins={[dayGridPlugin, interactionPlugin]}
+          initialView="dayGridMonth"
+          locale="es"
+          height="auto"
+          events={events}
+          eventClick={handleEventClick}
+        />
+      </div>
+
+      {seleccionado && (
+        <div
+          className="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+          onClick={() => setSeleccionado(null)}
+        >
+          <div
+            className="bg-white rounded-lg border border-gray-200 p-6 w-full max-w-md"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-bold text-gray-900">{seleccionado.tipo ?? 'Entreno'}</h3>
+              <button onClick={() => setSeleccionado(null)} className="text-gray-400 hover:text-gray-600">
+                ✕
+              </button>
+            </div>
+            <p className="text-sm text-gray-500 mb-4">{seleccionado.fecha}</p>
+            <div className="grid grid-cols-2 gap-4 text-sm">
+              <div>
+                <p className="text-gray-500">Duración</p>
+                <p className="font-medium text-gray-900">{seleccionado.duracion_min ? `${seleccionado.duracion_min} min` : '—'}</p>
+              </div>
+              <div>
+                <p className="text-gray-500">TSS</p>
+                <p className="font-medium text-gray-900">{seleccionado.tss ?? '—'}</p>
+              </div>
+              <div>
+                <p className="text-gray-500">IF</p>
+                <p className="font-medium text-gray-900">{seleccionado.intensity_factor ?? '—'}</p>
+              </div>
+              <div>
+                <p className="text-gray-500">RPE</p>
+                <p className="font-medium text-gray-900">{seleccionado.rpe ?? '—'}</p>
+              </div>
+              <div>
+                <p className="text-gray-500">Potencia prom.</p>
+                <p className="font-medium text-gray-900">{seleccionado.potencia_promedio ? `${seleccionado.potencia_promedio} W` : '—'}</p>
+              </div>
+              <div>
+                <p className="text-gray-500">HR prom.</p>
+                <p className="font-medium text-gray-900">{seleccionado.hr_promedio ?? '—'}</p>
+              </div>
+              <div>
+                <p className="text-gray-500">kJ</p>
+                <p className="font-medium text-gray-900">{seleccionado.kj ?? '—'}</p>
+              </div>
+            </div>
+            {seleccionado.notas && (
+              <div className="mt-4 pt-4 border-t border-gray-100">
+                <p className="text-gray-500 text-sm mb-1">Notas</p>
+                <p className="text-sm text-gray-700">{seleccionado.notas}</p>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
