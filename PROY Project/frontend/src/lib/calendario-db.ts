@@ -17,3 +17,9 @@ export async function createEvento(evento: Partial<CalendarioEvento>): Promise<C
   if (error) throw error
   return data
 }
+
+export async function updateEvento(id: number, updates: Partial<CalendarioEvento>): Promise<CalendarioEvento> {
+  const { data, error } = await supabase.from('calendario_eventos').update(updates).eq('id', id).select().single()
+  if (error) throw error
+  return data
+}

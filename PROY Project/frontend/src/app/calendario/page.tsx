@@ -1,9 +1,13 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { getProjects } from '@/lib/db'
-import { getDocumentos } from '@/lib/documentos-db'
-import { getEventos, createEvento } from '@/lib/calendario-db'
+import FullCalendar from '@fullcalendar/react'
+import dayGridPlugin from '@fullcalendar/daygrid'
+import interactionPlugin from '@fullcalendar/interaction'
+import type { EventDropArg } from '@fullcalendar/core'
+import { getProjects, updateProject } from '@/lib/db'
+import { getDocumentos, updateDocumento } from '@/lib/documentos-db'
+import { getEventos, createEvento, updateEvento } from '@/lib/calendario-db'
 import type { CalendarioEvento } from '@/lib/types'
 
 const TABS = [
@@ -16,15 +20,16 @@ type TabId = (typeof TABS)[number]['id']
 interface ItemCalendario {
   id: string
   tipo: 'proyecto' | 'documento' | 'evento'
+  origenId: number
   titulo: string
   fecha: string
   badge: string
 }
 
 const TIPO_META = {
-  proyecto: { label: 'Proyecto', color: 'bg-red-100 text-red-800' },
-  documento: { label: 'Documento', color: 'bg-orange-100 text-orange-800' },
-  evento: { label: 'Evento', color: 'bg-purple-100 text-purple-800' },
+  proyecto: { label: 'Proyecto', color: 'bg-red-100 text-red-800', hex: '#dc2626' },
+  documento: { label: 'Documento', color: 'bg-orange-100 text-orange-800', hex: '#f97316' },
+  evento: { label: 'Evento', color: 'bg-purple-100 text-purple-800', hex: '#9333ea' },
 }
 
 export default function CalendarioPage() {
@@ -59,11 +64,18 @@ export default function CalendarioPage() {
   )
 }
 
+interface PendingDrop {
+  item: ItemCalendario
+  nuevaFecha: string
+  revert: () => void
+}
+
 function ProximosTab() {
   const [items, setItems] = useState<ItemCalendario[]>([])
   const [loading, setLoading] = useState(true)
   const [syncing, setSyncing] = useState(true)
   const [connected, setConnected] = useState(true)
+  const [pendingDrop, setPendingDrop] = useState<PendingDrop | null>(null)
 
   useEffect(() => {
     fetch('/api/calendar-sync', { method: 'POST' })
@@ -72,23 +84,44 @@ function ProximosTab() {
       .catch(console.error)
       .finally(() => {
         setSyncing(false)
-        Promise.all([getProjects(), getDocumentos(), getEventos()])
-          .then(([proyectos, documentos, eventos]) => {
-            const unificado: ItemCalendario[] = [
-              ...proyectos
-                .filter((p) => p.target_date)
-                .map((p) => ({ id: `proyecto-${p.id}`, tipo: 'proyecto' as const, titulo: p.name, fecha: p.target_date!, badge: 'Entrega' })),
-              ...documentos
-                .filter((d) => d.fecha_vencimiento)
-                .map((d) => ({ id: `documento-${d.id}`, tipo: 'documento' as const, titulo: d.nombre, fecha: d.fecha_vencimiento!, badge: 'Vence' })),
-              ...eventos.map((e) => ({ id: `evento-${e.id}`, tipo: 'evento' as const, titulo: e.titulo, fecha: e.fecha, badge: e.categoria === 'recordatorio' ? 'Recordatorio' : 'Personal' })),
-            ].sort((a, b) => a.fecha.localeCompare(b.fecha))
-            setItems(unificado)
-          })
-          .catch(console.error)
-          .finally(() => setLoading(false))
+        cargarItems().finally(() => setLoading(false))
       })
   }, [])
+
+  async function cargarItems() {
+    const [proyectos, documentos, eventos] = await Promise.all([getProjects(), getDocumentos(), getEventos()])
+    const unificado: ItemCalendario[] = [
+      ...proyectos
+        .filter((p) => p.target_date)
+        .map((p) => ({ id: `proyecto-${p.id}`, tipo: 'proyecto' as const, origenId: p.id, titulo: p.name, fecha: p.target_date!, badge: 'Entrega' })),
+      ...documentos
+        .filter((d) => d.fecha_vencimiento)
+        .map((d) => ({ id: `documento-${d.id}`, tipo: 'documento' as const, origenId: d.id, titulo: d.nombre, fecha: d.fecha_vencimiento!, badge: 'Vence' })),
+      ...eventos.map((e) => ({ id: `evento-${e.id}`, tipo: 'evento' as const, origenId: e.id, titulo: e.titulo, fecha: e.fecha, badge: e.categoria === 'recordatorio' ? 'Recordatorio' : 'Personal' })),
+    ].sort((a, b) => a.fecha.localeCompare(b.fecha))
+    setItems(unificado)
+  }
+
+  function handleEventDrop(info: EventDropArg) {
+    const item = items.find((i) => i.id === info.event.id)
+    if (!item) return
+    setPendingDrop({ item, nuevaFecha: info.event.startStr, revert: info.revert })
+  }
+
+  async function confirmarMovimiento() {
+    if (!pendingDrop) return
+    const { item, nuevaFecha } = pendingDrop
+    if (item.tipo === 'proyecto') await updateProject(item.origenId, { target_date: nuevaFecha })
+    else if (item.tipo === 'documento') await updateDocumento(item.origenId, { fecha_vencimiento: nuevaFecha })
+    else await updateEvento(item.origenId, { fecha: nuevaFecha })
+    setItems((prev) => prev.map((i) => (i.id === item.id ? { ...i, fecha: nuevaFecha } : i)))
+    setPendingDrop(null)
+  }
+
+  function cancelarMovimiento() {
+    pendingDrop?.revert()
+    setPendingDrop(null)
+  }
 
   if (loading) {
     return (
@@ -110,44 +143,61 @@ function ProximosTab() {
     )
   }
 
-  if (items.length === 0) {
-    return (
-      <div className="bg-white rounded-lg border border-gray-200 p-8 text-center text-gray-500">
-        No hay entregas, vencimientos ni eventos registrados todavía.
-      </div>
-    )
-  }
-
-  const hoy = new Date().toISOString().slice(0, 10)
+  const events = items.map((item) => ({
+    id: item.id,
+    title: item.titulo,
+    date: item.fecha,
+    backgroundColor: TIPO_META[item.tipo].hex,
+    borderColor: TIPO_META[item.tipo].hex,
+  }))
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-      <table className="w-full text-sm">
-        <thead className="bg-gray-50 text-left text-gray-500">
-          <tr>
-            <th className="px-4 py-2">Fecha</th>
-            <th className="px-4 py-2">Título</th>
-            <th className="px-4 py-2">Origen</th>
-            <th className="px-4 py-2 text-right">Estado</th>
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-gray-100">
-          {items.map((item) => {
-            const meta = TIPO_META[item.tipo]
-            const pasado = item.fecha < hoy
-            return (
-              <tr key={item.id} className={pasado ? 'opacity-50' : ''}>
-                <td className="px-4 py-2 text-gray-500">{item.fecha}</td>
-                <td className="px-4 py-2 text-gray-900">{item.titulo}</td>
-                <td className="px-4 py-2">
-                  <span className={`px-2 py-0.5 text-xs rounded-full font-medium ${meta.color}`}>{item.badge}</span>
-                </td>
-                <td className="px-4 py-2 text-right text-xs text-gray-500">{pasado ? 'Pasado' : 'Próximo'}</td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+    <div>
+      <div className="flex gap-3 mb-4 text-xs text-gray-500">
+        {(Object.keys(TIPO_META) as (keyof typeof TIPO_META)[]).map((tipo) => (
+          <span key={tipo} className="flex items-center gap-1.5">
+            <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: TIPO_META[tipo].hex }} />
+            {TIPO_META[tipo].label}
+          </span>
+        ))}
+      </div>
+
+      <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <FullCalendar
+          plugins={[dayGridPlugin, interactionPlugin]}
+          initialView="dayGridMonth"
+          locale="es"
+          height="auto"
+          editable={true}
+          events={events}
+          eventDrop={handleEventDrop}
+        />
+      </div>
+
+      {pendingDrop && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50" onClick={cancelarMovimiento}>
+          <div className="bg-white rounded-lg border border-gray-200 p-6 w-full max-w-sm" onClick={(e) => e.stopPropagation()}>
+            <h3 className="text-lg font-bold text-gray-900 mb-2">¿Mover este item?</h3>
+            <p className="text-sm text-gray-600 mb-6">
+              &quot;{pendingDrop.item.titulo}&quot; se moverá a <strong>{pendingDrop.nuevaFecha}</strong>.
+            </p>
+            <div className="flex justify-end gap-2">
+              <button
+                onClick={cancelarMovimiento}
+                className="px-4 py-2 text-sm text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={confirmarMovimiento}
+                className="px-4 py-2 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700"
+              >
+                Confirmar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
