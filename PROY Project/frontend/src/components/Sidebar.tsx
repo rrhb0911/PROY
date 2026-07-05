@@ -9,6 +9,7 @@ const links = [
   { href: '/projects', label: 'Proyectos', icon: '📁' },
   { href: '/finanzas', label: 'Finanzas', icon: '💰' },
   { href: '/trading', label: 'Trading', icon: '📈' },
+  { href: '/ciclismo', label: 'Ciclismo', icon: '🚴' },
 ]
 
 export default function Sidebar() {

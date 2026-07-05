@@ -162,3 +162,47 @@ export interface TradingAnalisis {
   fecha: string
   created_at: string
 }
+
+export interface CiclismoMesociclo {
+  id: number
+  nombre: string
+  fecha_inicio: string
+  fecha_fin: string | null
+  enfoque: string | null
+  metrica_objetivo: string | null
+  created_at: string
+}
+
+export interface CiclismoSemana {
+  id: number
+  semana_inicio: string
+  mesociclo_id: number | null
+  ctl: number | null
+  atl: number | null
+  tsb: number | null
+  tte_min: number | null
+  ftp: number | null
+  eftp: number | null
+  frc: number | null
+  peso: number | null
+  kj: number | null
+  horas: number | null
+  notas: string | null
+  created_at: string
+  mesociclo?: { nombre: string } | null
+}
+
+export interface CiclismoEntreno {
+  id: number
+  fecha: string
+  tipo: string | null
+  duracion_min: number | null
+  tss: number | null
+  intensity_factor: number | null
+  potencia_promedio: number | null
+  hr_promedio: number | null
+  kj: number | null
+  rpe: number | null
+  notas: string | null
+  created_at: string
+}
