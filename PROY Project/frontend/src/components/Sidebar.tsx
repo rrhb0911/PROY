@@ -11,6 +11,7 @@ const links = [
   { href: '/trading', label: 'Trading', icon: '📈' },
   { href: '/ciclismo', label: 'Ciclismo', icon: '🚴' },
   { href: '/documentos', label: 'Documentos', icon: '📄' },
+  { href: '/calendario', label: 'Calendario', icon: '📅' },
 ]
 
 export default function Sidebar() {

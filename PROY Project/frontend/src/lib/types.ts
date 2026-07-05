@@ -231,3 +231,13 @@ export interface Documento {
   created_at: string
   updated_at: string
 }
+
+export interface CalendarioEvento {
+  id: number
+  titulo: string
+  fecha: string
+  hora: string | null
+  categoria: 'personal' | 'recordatorio'
+  notas: string | null
+  created_at: string
+}
