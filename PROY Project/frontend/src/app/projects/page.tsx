@@ -5,8 +5,8 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import ProjectListItem from '@/components/ProjectListItem'
 import ProjectDetailPanel from '@/components/ProjectDetailPanel'
 import ProjectForm from '@/components/ProjectForm'
-import { getProjects, createProject, getCategories } from '@/lib/db'
-import type { Project, ProjectCategory } from '@/lib/types'
+import { getProjects, createProject } from '@/lib/db'
+import type { Project } from '@/lib/types'
 
 function ProjectsPageInner() {
   const router = useRouter()
@@ -14,23 +14,23 @@ function ProjectsPageInner() {
   const selectedId = searchParams.get('id') ? Number(searchParams.get('id')) : null
 
   const [projects, setProjects] = useState<Project[]>([])
-  const [categories, setCategories] = useState<ProjectCategory[]>([])
-  const [categoryFilter, setCategoryFilter] = useState<number | null>(null)
+  const [clientFilter, setClientFilter] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const [showForm, setShowForm] = useState(false)
 
   useEffect(() => {
-    Promise.all([getProjects(), getCategories()])
-      .then(([projects, categories]) => {
-        setProjects(projects)
-        setCategories(categories)
-      })
+    getProjects()
+      .then(setProjects)
       .catch(console.error)
       .finally(() => setLoading(false))
   }, [])
 
-  const filteredProjects = categoryFilter
-    ? projects.filter((p) => p.category_id === categoryFilter)
+  const clients = Array.from(
+    new Set(projects.map((p) => p.client_name).filter((c): c is string => !!c))
+  ).sort()
+
+  const filteredProjects = clientFilter
+    ? projects.filter((p) => p.client_name === clientFilter)
     : projects
 
   function selectProject(id: number) {
@@ -84,38 +84,37 @@ function ProjectsPageInner() {
         </div>
       ) : (
         <div className="flex gap-6 items-start">
-          <div className="w-80 flex-shrink-0 bg-white rounded-lg border border-gray-200 overflow-hidden">
-            {categories.length > 0 && (
+          <div className="w-64 flex-shrink-0 bg-white rounded-lg border border-gray-200 overflow-hidden">
+            {clients.length > 0 && (
               <div className="flex flex-wrap gap-2 p-3 border-b border-gray-100">
                 <button
-                  onClick={() => setCategoryFilter(null)}
+                  onClick={() => setClientFilter(null)}
                   className={`px-2.5 py-1 text-xs rounded-full border transition-colors ${
-                    categoryFilter === null
+                    clientFilter === null
                       ? 'bg-blue-600 text-white border-blue-600'
                       : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
                   }`}
                 >
-                  Todas
+                  Todos
                 </button>
-                {categories.map((c) => (
+                {clients.map((client) => (
                   <button
-                    key={c.id}
-                    onClick={() => setCategoryFilter(c.id)}
+                    key={client}
+                    onClick={() => setClientFilter(client)}
                     className={`px-2.5 py-1 text-xs rounded-full border transition-colors ${
-                      categoryFilter === c.id
-                        ? 'text-white border-transparent'
+                      clientFilter === client
+                        ? 'bg-blue-600 text-white border-blue-600'
                         : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
                     }`}
-                    style={categoryFilter === c.id ? { backgroundColor: c.color } : undefined}
                   >
-                    {c.name}
+                    {client}
                   </button>
                 ))}
               </div>
             )}
             <div className="max-h-[70vh] overflow-y-auto">
               {filteredProjects.length === 0 ? (
-                <p className="p-4 text-sm text-gray-500 text-center">Ningún proyecto en esta categoría.</p>
+                <p className="p-4 text-sm text-gray-500 text-center">Ningún proyecto para este cliente.</p>
               ) : (
                 filteredProjects.map((project) => (
                   <ProjectListItem
