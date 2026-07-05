@@ -16,7 +16,7 @@ const priorityColors: Record<string, string> = {
 
 export default function ProjectCard({ project }: Props) {
   return (
-    <Link href={`/projects/${project.id}`} className={`block bg-white rounded-lg shadow-sm border border-gray-200 border-l-4 ${priorityColors[project.priority]} p-4 hover:shadow-md transition-shadow`}>
+    <Link href={`/projects?id=${project.id}`} className={`block bg-white rounded-lg shadow-sm border border-gray-200 border-l-4 ${priorityColors[project.priority]} p-4 hover:shadow-md transition-shadow`}>
       <div className="flex items-start justify-between mb-2">
         <h3 className="font-semibold text-gray-900">{project.name}</h3>
         <StatusBadge status={project.status} />
