@@ -62,27 +62,52 @@ export default function CalendarioPage() {
 function ProximosTab() {
   const [items, setItems] = useState<ItemCalendario[]>([])
   const [loading, setLoading] = useState(true)
+  const [syncing, setSyncing] = useState(true)
+  const [connected, setConnected] = useState(true)
 
   useEffect(() => {
-    Promise.all([getProjects(), getDocumentos(), getEventos()])
-      .then(([proyectos, documentos, eventos]) => {
-        const unificado: ItemCalendario[] = [
-          ...proyectos
-            .filter((p) => p.target_date)
-            .map((p) => ({ id: `proyecto-${p.id}`, tipo: 'proyecto' as const, titulo: p.name, fecha: p.target_date! , badge: 'Entrega' })),
-          ...documentos
-            .filter((d) => d.fecha_vencimiento)
-            .map((d) => ({ id: `documento-${d.id}`, tipo: 'documento' as const, titulo: d.nombre, fecha: d.fecha_vencimiento!, badge: 'Vence' })),
-          ...eventos.map((e) => ({ id: `evento-${e.id}`, tipo: 'evento' as const, titulo: e.titulo, fecha: e.fecha, badge: e.categoria === 'recordatorio' ? 'Recordatorio' : 'Personal' })),
-        ].sort((a, b) => a.fecha.localeCompare(b.fecha))
-        setItems(unificado)
-      })
+    fetch('/api/calendar-sync', { method: 'POST' })
+      .then((res) => res.json())
+      .then((result) => setConnected(result.connected))
       .catch(console.error)
-      .finally(() => setLoading(false))
+      .finally(() => {
+        setSyncing(false)
+        Promise.all([getProjects(), getDocumentos(), getEventos()])
+          .then(([proyectos, documentos, eventos]) => {
+            const unificado: ItemCalendario[] = [
+              ...proyectos
+                .filter((p) => p.target_date)
+                .map((p) => ({ id: `proyecto-${p.id}`, tipo: 'proyecto' as const, titulo: p.name, fecha: p.target_date!, badge: 'Entrega' })),
+              ...documentos
+                .filter((d) => d.fecha_vencimiento)
+                .map((d) => ({ id: `documento-${d.id}`, tipo: 'documento' as const, titulo: d.nombre, fecha: d.fecha_vencimiento!, badge: 'Vence' })),
+              ...eventos.map((e) => ({ id: `evento-${e.id}`, tipo: 'evento' as const, titulo: e.titulo, fecha: e.fecha, badge: e.categoria === 'recordatorio' ? 'Recordatorio' : 'Personal' })),
+            ].sort((a, b) => a.fecha.localeCompare(b.fecha))
+            setItems(unificado)
+          })
+          .catch(console.error)
+          .finally(() => setLoading(false))
+      })
   }, [])
 
   if (loading) {
-    return <div className="bg-white rounded-lg border border-gray-200 p-8 text-center text-gray-500">Cargando...</div>
+    return (
+      <div className="bg-white rounded-lg border border-gray-200 p-8 text-center text-gray-500">
+        {syncing ? 'Sincronizando con Google Calendar...' : 'Cargando...'}
+      </div>
+    )
+  }
+
+  if (!connected) {
+    return (
+      <div className="bg-white rounded-lg border border-gray-200 p-8 text-center text-gray-500">
+        <p>Tu cuenta de Google todavía no tiene permiso de Calendario.</p>
+        <p className="text-sm mt-1">
+          Cierra sesión y vuelve a entrar con Google para conectar tu calendario —{' '}
+          <a href="/login" className="text-blue-600 hover:underline">ir a login</a>.
+        </p>
+      </div>
+    )
   }
 
   if (items.length === 0) {

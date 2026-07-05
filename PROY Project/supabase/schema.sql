@@ -399,3 +399,39 @@ create index idx_calendario_eventos_fecha on calendario_eventos(fecha);
 
 alter table calendario_eventos enable row level security;
 create policy "Full access to authenticated users" on calendario_eventos for all using (true) with check (true);
+
+-- =====================================================
+-- ESQUEMA: Integración Google Calendar
+-- =====================================================
+
+create table google_calendar_tokens (
+  id bigint generated always as identity primary key,
+  access_token text not null,
+  refresh_token text,
+  expires_at timestamptz not null,
+  updated_at timestamptz not null default now()
+);
+
+create table google_calendar_sync (
+  id bigint generated always as identity primary key,
+  origen text not null check (origen in ('evento', 'proyecto', 'documento')),
+  origen_id bigint not null,
+  google_event_id text not null,
+  synced_at timestamptz not null default now(),
+  unique (origen, origen_id)
+);
+
+alter table google_calendar_tokens enable row level security;
+alter table google_calendar_sync enable row level security;
+
+create policy "Full access to authenticated users" on google_calendar_tokens for all using (true) with check (true);
+create policy "Full access to authenticated users" on google_calendar_sync for all using (true) with check (true);
+
+-- Distingue mapeos creados por el dashboard (se pueden actualizar en Google al editarlos)
+-- de los importados directo de Google (cumpleaños, fuera de oficina, etc. - nunca se sobreescriben).
+alter table google_calendar_sync
+  add column created_by text not null default 'dashboard' check (created_by in ('dashboard', 'google'));
+
+-- Id del calendario dedicado "PROY" dentro de Google Calendar del usuario,
+-- donde se empujan Eventos/Proyectos/Documentos del dashboard (no se mezclan con el calendario personal).
+alter table google_calendar_tokens add column proy_calendar_id text;
