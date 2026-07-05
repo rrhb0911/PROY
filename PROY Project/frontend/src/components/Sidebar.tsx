@@ -12,6 +12,7 @@ const links = [
   { href: '/ciclismo', label: 'Ciclismo', icon: '🚴' },
   { href: '/documentos', label: 'Documentos', icon: '📄' },
   { href: '/calendario', label: 'Calendario', icon: '📅' },
+  { href: '/estudios', label: 'Estudios', icon: '📚' },
 ]
 
 export default function Sidebar() {

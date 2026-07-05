@@ -241,3 +241,26 @@ export interface CalendarioEvento {
   notas: string | null
   created_at: string
 }
+
+export type AreaEstudio = 'programacion' | 'trading' | 'ciclismo' | 'finanzas' | 'data_science' | 'ingles'
+export type EstadoEstudio = 'pendiente' | 'en_progreso' | 'completado'
+
+export interface EstudioRecurso {
+  id: number
+  tipo: 'libro' | 'curso' | 'articulo' | 'herramienta'
+  area: AreaEstudio
+  titulo: string
+  estado: EstadoEstudio
+  link: string | null
+  notas: string | null
+  created_at: string
+}
+
+export interface EstudioMeta {
+  id: number
+  trimestre: string
+  meta: string
+  estado: EstadoEstudio
+  notas: string | null
+  created_at: string
+}
