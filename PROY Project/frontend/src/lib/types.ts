@@ -206,3 +206,28 @@ export interface CiclismoEntreno {
   notas: string | null
   created_at: string
 }
+
+export type CategoriaDocumento =
+  | 'identificacion'
+  | 'vehicular'
+  | 'financiero'
+  | 'contractual'
+  | 'garantia'
+  | 'salud'
+  | 'vivienda'
+
+export interface Documento {
+  id: number
+  categoria: CategoriaDocumento
+  nombre: string
+  numero_referencia: string | null
+  emisor: string | null
+  fecha_emision: string | null
+  fecha_vencimiento: string | null
+  dias_alerta: number
+  ubicacion_fisica: string | null
+  link_digital: string | null
+  notas: string | null
+  created_at: string
+  updated_at: string
+}
