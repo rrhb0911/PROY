@@ -2,3 +2,4 @@ supabase/.temp/
 supabase/scripts/.env
 supabase/scripts/node_modules/
 supabase/.access-token
+trading/config/fix-api.md

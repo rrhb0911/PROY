@@ -1,5 +1,11 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "mcpServers": {
+    "ctrader": {
+      "type": "http",
+      "url": "http://127.0.0.1:9876/mcp/"
+    }
+  },
   "permission": {
     "edit": {
       "*.md": "allow",

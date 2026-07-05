@@ -2,92 +2,88 @@
 
 ## Visión General
 
-Sistema de trading unificado que conecta **cTrader** (forex/CFDs) y **Binance** (crypto) para operar en línea, generar estrategias, analizar tendencias y ejecutar órdenes asistido por IA a través de Claude Code + MCP.
+Sistema de trading unificado que conecta **cTrader** (forex/CFDs) vía MCP + FIX API y **Binance** (crypto) para operar, ejecutar estrategias y analizar mercados asistido por IA.
 
 ---
 
-## Conexiones
+## Conexiones Disponibles
 
-### cTrader (Forex / CFDs)
+### 1. Local MCP — cTrader Desktop ✅ (ya configurado)
+`opencode.jsonc` → `http://127.0.0.1:9876/mcp/`
 
-cTrader expone **MCP servers oficiales** (cTrader AI Agent Connect) que permiten a Claude Code conectarse directamente a la plataforma:
+| Aspecto | Detalle |
+|---------|---------|
+| **Requiere** | cTrader Desktop abierto |
+| **Alcance** | Trading, cuentas, charts, indicadores, plugins, UI, alertas |
+| **Ideal para** | Análisis con IA, órdenes rápido, control total del escritorio |
 
-| Tipo | Conexión | Alcance |
-|------|----------|---------|
-| **Remote MCP** | cTrader Web | Cuenta, órdenes, market data, velas históricas |
-| **Local MCP** | cTrader Desktop (Windows) | Todo lo anterior + charts, indicadores, plugins, alertas, workspaces |
+### 2. Remote MCP — cTrader Web
+```json
+{
+  "mcpServers": {
+    "ctrader-remote": {
+      "command": "npx",
+      "args": ["-y", "@ctrader/mcp-server"],
+      "env": { "CTRADER_TOKEN": "tu-token" }
+    }
+  }
+}
+```
+**Alcance:** Trading, cuentas, market data (sin charts ni indicadores)
 
-**Setup:**
-1. **Remote MCP**: cTrader Web → Settings → Remote MCP → copiar token → configurar en `~/.claude.json`
-2. **Local MCP**: cTrader Desktop → Settings → MCP Server → habilitar → conectar con Claude Code
+### 3. FIX API — Conexión Directa al Broker ✅ (credenciales listas)
+Conexión institucional directa a FxPro sin intermediarios.
 
-**Capacidades vía MCP:**
-- Balance, equity, margen, P&L
-- Órdenes market, limit, stop
-- Modificar SL/TP, cerrar posiciones
-- Velas OHLCV en cualquier timeframe
-- Indicadores técnicos (RSI, MACD, BB, EMA, etc.)
-- Trade history y análisis de portafolio
+| Conexión | Puerto SSL | Propósito |
+|----------|-----------|-----------|
+| **QUOTE** (SenderSubID: QUOTE) | 5211 | Market data en vivo |
+| **TRADE** (SenderSubID: TRADE) | 5212 | Ejecución de órdenes |
 
-### Binance (Crypto)
+**Host:** `live-uk-eqx-01.p.c-trader.com`
+**Account:** 8176757 | **SenderCompID:** `live.fxpro.8176757` | **TargetCompID:** `cServer`
 
-API REST + WebSocket para datos en tiempo real de spot y futures.
-
-**Capacidades:**
-- Precios en tiempo real (WebSocket streams)
-- Velas históricas (OHLCV)
-- Order book, depth
-- Cuenta (balance, órdenes abiertas)
-- Ejecución de órdenes spot y futures
+### 4. Binance API — Crypto (pendiente)
+API REST + WebSocket para spot y futures.
 
 ---
 
-## Arquitectura
+## Arquitectura Completa
 
 ```
-┌─────────────────────────────────────────────────────┐
-│                   Claude Code                        │
-│  (razonamiento, estrategias, análisis, decisiones)   │
-└────────┬───────────────────────────────┬────────────┘
-         │ MCP                            │ REST + WS
-         ▼                                ▼
-┌─────────────────┐           ┌──────────────────────┐
-│  cTrader MCP     │           │  Binance API          │
-│  (Local/Remote)  │           │  (spot + futures)     │
-├─────────────────┤           ├──────────────────────┤
-│ • Forex + CFDs   │           │ • Crypto spot         │
-│ • Ejecución      │           │ • Crypto futures      │
-│ • Charts         │           │ • WebSocket streams   │
-│ • Indicadores    │           │ • Order book          │
-└─────────────────┘           └──────────────────────┘
+┌──────────────────────────────────────────────────────────┐
+│                    Claude Code (AI Layer)                 │
+│  (razonamiento, análisis, decisiones, lenguaje natural)   │
+└──────┬──────────────┬──────────────────┬─────────────────┘
+       │ MCP (HTTP)    │ FIX (TCP/SSL)    │ REST + WS
+       ▼               ▼                  ▼
+┌──────────────┐ ┌──────────────┐ ┌──────────────────┐
+│ cTrader MCP  │ │ cTrader FIX  │ │ Binance API      │
+│ (Local/Rem)  │ │ (FxPro)      │ │ (spot+futures)   │
+├──────────────┤ ├──────────────┤ ├──────────────────┤
+│ • Trading    │ │ • Precios    │ │ • Crypto spot    │
+│ • Charts     │ │ • Órdenes    │ │ • Futures        │
+│ • Indicadores│ │ • HFT        │ │ • WebSocket      │
+│ • UI/Plugins │ │ • Multi-brk  │ │ • Order book     │
+└──────────────┘ └──────────────┘ └──────────────────┘
+       │
+       ▼
+┌──────────────────────────────────────────────────────────┐
+│              cTrader Algo (cBots en C#)                   │
+│  Estrategias: SuperTrend HTF/LTF + FRAMA + ICT + Fib     │
+│  + RSI Trendlines + Volumen                              │
+└──────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Estrategias
+## Estrategias (desde TradingView Pine Script)
 
-### 1. Análisis de Mercado
-- Escanear múltiples símbolos en busca de tendencias
-- Identificar soportes/resistencias clave
-- Detectar patrones de velas
-- Análisis multi-timeframe
+Archivos en `trading/strategies/`:
 
-### 2. Estrategias Direccionales
-- **Trend Following**: EMA crossover, MACD, confirmación de volumen
-- **Breakout**: Ruptura de soporte/resistencia con filtro RSI
-- **Reversión**: RSI sobrecompra/sobreventa con confirmación de precio
-- **Martingala / Grid**: Para mercados laterales controlados
-
-### 3. Risk Management
-- Tamaño de posición basado en % de cuenta (riesgo por operación)
-- Stop Loss dinámico (ATR, trailing)
-- Take Profit escalonado
-- Ratio riesgo/recompensa mínimo configurable
-
-### 4. Señales Multi-mercado
-- Correlación forex + crypto
-- Contexto global (índices, commodities) vía cTrader
-- Noticias y sentimiento
+| Estrategia | Componentes | Estado |
+|-----------|-------------|--------|
+| **ST 4H + EMA 200 + Fib [RRHB]** (800 líneas) | SuperTrend HTF (11 MAs), FRAMA Channel, ICT Sessions, Fibonacci, RSI+Volumen | Pine listo → convertir a C# |
+| **RSI & Volumen [RRHB]** (116 líneas) | RSI + Trendlines + Volumen normalizado | Pine listo → convertir a C# |
 
 ---
 
@@ -96,50 +92,67 @@ API REST + WebSocket para datos en tiempo real de spot y futures.
 ```
 trading/
 ├── config/
-│   ├── ctrader.json          # Conexión MCP cTrader
-│   └── binance.json          # API keys Binance
-├── strategies/               # Estrategias implementadas
-│   ├── trend-following.md
-│   ├── breakout.md
-│   └── martingale.md
+│   ├── fix-api.md           # Credenciales FIX (QUOTE + TRADE)
+│   ├── mcp-local.md         # Config Local MCP
+│   └── binance.md           # Binance API (pendiente)
+├── strategies/
+│   ├── ST 4H + EMA 200 + Fib [RRHB].md    # Pine Script original
+│   └── RSI & Volumen [RRHB].md             # Pine Script original
+├── cBots/                   # Aquí irán los cBots convertidos a C#
+├── indicators/              # Aquí irán los indicadores en C#
 ├── scripts/
-│   ├── sync-prices.py        # Sincronización de precios
-│   └── signals.py            # Generador de señales
-├── backtests/                # Resultados de backtests
-└── logs/                     # Historial de operaciones
+├── backtests/
+└── logs/
 ```
 
 ---
 
-## Setup Inicial
+## C# vs Python para cTrader — ¿Cuál elegir?
 
-### cTrader Remote MCP (para Claude Code)
-```json
-{
-  "mcpServers": {
-    "ctrader": {
-      "command": "npx",
-      "args": ["-y", "@ctrader/mcp-server"],
-      "env": {
-        "CTRADER_TOKEN": "tu-token-desde-ctrader-web"
-      }
-    }
-  }
-}
-```
+| Aspecto | C# (.NET 6.0) | Python |
+|---------|---------------|--------|
+| **Soporte nativo cTrader** | ✅ Completo (cBots, indicadores, plugins) | ✅ Soporte oficial (más nuevo) |
+| **FIX API** | ✅ SDK oficial (QuickFIXn) | ⚠️ No hay SDK oficial, toca con wrappers |
+| **Rendimiento** | 🚀 Más rápido (compilado) | 🐢 Interpretado, más lento |
+| **Documentación** | 📚 Extensa, 10+ años de ejemplos | 📖 Creciente, menos ejemplos |
+| **Librerías** | Sistema.IO, Math, LINQ potente | pandas, numpy, scipy |
+| **Pine → Conversión** | 🔄 Más directa (mismos conceptos OOP) | ⚠️ Requiere adaptación |
+| **Algoritmos complejos** | ✅ Mejor para HFT y lógica pesada | ✅ Bueno para data science |
+| **Debugging** | ✅ IDE completo (VS/Rider) | ✅ Cualquier editor |
 
-### Binance API
-```env
-BINANCE_API_KEY=tu-api-key
-BINANCE_SECRET_KEY=tu-secret
-```
+### ✅ Recomendación: C#
+
+**Motivos:**
+1. La FIX API tiene SDK oficial solo en **.NET (QuickFIXn)**
+2. Los cBots de cTrader tienen 10+ años de ejemplos y comunidad en C#
+3. La conversión del Pine Script es más directa a C# (estructuras de control, tipos, eventos `OnStart`/`OnTick`)
+4. Mejor rendimiento para estrategias en vivo
+5. Si después quieres algo en Python, el cBot en C# puede llamar scripts Python para análisis
+
+### Cuándo usar Python
+- **Análisis offline**: backtesting, data science, machine learning
+- **Scripts auxiliares**: sincronización de datos, reportes
+- **Binance**: la API REST/WS de Binance tiene SDKs excelentes en Python
+
+---
+
+## Referencia Rápida
+
+| Archivo | Propósito |
+|---------|-----------|
+| `trading/CHECKLIST-TRADING.md` | Double check paso a paso para Claude Code |
+| `trading/config/fix-api.md` | Credenciales FIX API |
+| `trading/config/mcp-local.md` | Config Local MCP |
+| `trading/config/binance.md` | Binance API (pendiente) |
+| `trading/strategies/` | Pine Scripts originales (no modificar) |
 
 ---
 
 ## Próximos Pasos
 
-1. Configurar cuenta demo en cTrader
-2. Probar conexión MCP con Claude Code
-3. Sincronizar mercados de interés (forex + crypto)
-4. Backtestear primera estrategia
-5. Operar en demo con supervisión manual
+1. ✅ Configurar Local MCP en opencode.jsonc
+2. ✅ Documentar credenciales FIX API
+3. Pendiente: convertir estrategia Pine → cBot C#
+4. Pendiente: probar conexión FIX con QuickFIXn
+5. Pendiente: configurar Binance API
+6. Pendiente: backtest de la estrategia convertida

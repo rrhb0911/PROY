@@ -2,37 +2,134 @@
 
 ## Visión General
 
-Sistema integral de entrenamiento ciclista que unifica datos de **smart trainer**, **Strava**, **TrainingPeaks** y **WKO5** en una bitácora central para analizar evolución, planificar entrenamientos por zonas, y optimizar rendimiento con métricas avanzadas.
+Sistema integral de entrenamiento ciclista que unifica datos de **Strava**, **GoldenCheetah**, **TrainingPeaks** y **WKO5** para analizar evolución, planificar entrenamientos por zonas y optimizar rendimiento con métricas avanzadas. El objetivo es tener un sistema propio que calcule las mismas métricas que WKO5 sin depender de software de terceros.
 
 ---
 
-## Conexiones
+## Fuentes de Datos
 
-### Smart Trainer
-- **Protocolo**: ANT+ / Bluetooth FTMS
-- **Dispositivos compatibles**: Wahoo, Tacx, Garmin, Elite, Zwift Hub
-- **Datos en tiempo real**: potencia (watts), cadencia (rpm), velocidad, frecuencia cardíaca (HR)
+### 1. Strava API v3 — Actividades y Streams
 
-### Strava (API v3)
-| Recurso | Endpoint | Propósito |
-|---------|----------|-----------|
-| Subir actividades | `POST /uploads` | Subir .fit/.tcx desde el trainer |
-| Leer actividades | `GET /athlete/activities` | Sincronizar entrenos completados |
-| Obtener streams | `GET /activities/{id}/streams` | Potencia, HR, cadencia, altitud |
-| Stats del atleta | `GET /athletes/{id}/stats` | Resumen de métricas |
+**Autenticación:** OAuth 2.0, scopes `activity:read_all`, `read`, `activity:write`
 
-### TrainingPeaks (Partners API v2)
-| Recurso | Endpoint | Propósito |
-|---------|----------|-----------|
-| Planificar entrenos | `POST /v2/workouts/plan` | Crear workouts estructurados |
-| Subir archivos | `POST /v3/file` | Upload de .fit finalizado |
-| Obtener métricas | `GET /v2/metrics/{start}/{end}` | Peso, HRV, sueño, estrés |
-| Zonas del atleta | `GET /v1/athlete/zones` | FTP, HR zones |
+| Endpoint | Devuelve |
+|----------|----------|
+| `GET /athlete/activities` | Lista de actividades (paginado, filtro fecha) |
+| `GET /activities/{id}` | Detalle completo: distancia, potencia, HR, cadencia, elevación, calorías, gear, segmentos |
+| `GET /activities/{id}/streams` | Datos segundo a segundo (watts, HR, cadencia, altitud, velocidad, temperatura, GPS) |
+| `GET /activities/{id}/laps` | Parciales por vuelta |
+| `GET /activities/{id}/zones` | Tiempo en zonas HR y potencia |
+| `GET /athletes/{id}/stats` | Totales: rides, distance, ytd, recent |
+| `GET /athlete/zones` | Zonas FC y potencia configuradas |
+| `GET /gear/{id}` | Bici: nombre, distancia total |
+| `POST /uploads` | Subir .fit/.tcx/.gpx |
 
-### WKO5
-- Software de análisis (independiente, no tiene API pública)
-- Las métricas se consultan desde la app y se referencian en esta bitácora
-- **Vinculación**: TrainingPeaks → WKO5 (sincronización automática)
+**Streams disponibles (segundo a segundo):**
+`time`, `distance`, `latlng`, `altitude`, `heartrate`, `cadence`, `watts`, `temp`, `velocity_smooth`, `grade_smooth`, `moving`
+
+**Rate limits:** 100 req/15min, 1000 req/día. SDK recomendado: `stravalib` (Python).
+
+### 2. GoldenCheetah — Open Source (GPL v2)
+
+Repositorio: https://github.com/GoldenCheetah/GoldenCheetah
+
+GoldenCheetah es un **WKO5 gratuito** con todo el código disponible. Tiene implementado:
+
+| Modelo | Descripción |
+|--------|-------------|
+| **Critical Power (CP)** | Modelo Monod-Scherrer para curva potencia-duración |
+| **W' y W'bal** | Trabajo anaeróbico disponible y en tiempo real |
+| **PMC** (Performance Manager) | CTL / ATL / TSB |
+| **TSS / NP / IF** | Fórmulas estándar Coggan-Allen |
+| **BikeStress / TRIMP** | Métricas alternativas de carga |
+| **Scripting** | Python + R integrados para métricas propias |
+| **Strava sync** | Subida y bajada de actividades |
+
+**Podemos usar su código** para calcular métricas sin depender de WKO5.
+
+### 3. WKO5 — Software de Análisis (Propietario, $169)
+
+- Se sincroniza automáticamente con TrainingPeaks
+- NO tiene API pública
+- NO podemos replicar legalmente: `mFTP`, `eFTP`, `TIS`, `dFRC`, `Phenotyping`
+
+### 4. TrainingPeaks Partners API v2 — Planificación
+
+| Endpoint | Propósito |
+|----------|-----------|
+| `POST /v2/workouts/plan` | Crear workouts estructurados |
+| `POST /v3/file` | Upload de .fit finalizado |
+| `GET /v2/metrics/{start}/{end}` | Peso, HRV, sueño, estrés |
+
+---
+
+## Arquitectura Propuesta
+
+```
+Strava API
+    │
+    ▼
+Python script ───→ Descarga actividades + streams
+    │
+    ├──→ GoldenCheetah algorithms (CP, W', PMC)
+    │
+    ▼
+Cálculo de métricas propias:
+    ├── PDC (curva potencia-duración)
+    ├── FTP (mejor 20min × 0.95)
+    ├── CP (Critical Power desde modelo 3 parámetros)
+    ├── W' (trabajo anaeróbico)
+    ├── NP, IF, TSS, kJ
+    ├── CTL, ATL, TSB (PMC)
+    ├── Zonas Z1-Z6
+    ├── VI, AWC, FRC
+    │
+    ▼
+Base de datos local (SQLite)
+    │
+    ▼
+Dashboard con:
+    ├── Power Duration Curve
+    ├── Performance Manager Chart (CTL/ATL/TSB)
+    ├── Tabla evolución semanal
+    └── Análisis post-entreno
+```
+
+---
+
+## Métricas — Qué Podemos Calcular vs Qué es Propietario
+
+### ✅ Replicable (código público o ciencia abierta)
+
+| Métrica | Fórmula / Fuente |
+|---------|-----------------|
+| **FTP** | Mejor media 20min × 0.95 (Coggan-Allen) |
+| **CP** (Critical Power) | Modelo Monod-Scherrer: `P = W'/t + CP` |
+| **W'** (anaerobic work) | Integral de (potencia - CP) sobre tiempo |
+| **PDC** | Mejor potencia media para cada duración: 1s, 5s, 30s, 1min, 3min, 5min, 10min, 20min, 60min |
+| **NP** (Normalized Power) | Media móvil 30s → ^4 → media → ^0.25 |
+| **IF** (Intensity Factor) | `NP / FTP` |
+| **TSS** (Training Stress Score) | `(seg × NP × IF) / (FTP × 3600) × 100` |
+| **kJ** | `potencia media × seg / 1000` |
+| **CTL** (fitness) | EMA 42 días del TSS diario |
+| **ATL** (fatiga) | EMA 7 días del TSS diario |
+| **TSB** (forma) | `CTL - ATL` |
+| **VI** (variabilidad) | `NP / AP` |
+| **TTE** | Mejor duración sostenida a ~FTP |
+| **AWC** | Trabajo total > FTP en sprints < 30s |
+| **FRC** | Trabajo total > FTP en esfuerzos 30s-15min |
+| **Zonas** | Z1 <55%, Z2 56-75%, Z3 76-90%, Z4 91-105%, Z5 106-120%, Z6 >120% |
+
+### ❌ Propietario de WKO5 (no replicable)
+
+| Métrica | Alternativa |
+|---------|-------------|
+| **mFTP** (modeled FTP) | Usar CP o mejor 20min×0.95 |
+| **eFTP** (extended FTP) | Estimación desde PDC en duraciones largas |
+| **TIS** (Training Impact Score) | Usar TSS + PMC |
+| **dFRC** (dynamic FRC) | Usar W'bal de GoldenCheetah |
+| **Phenotyping** | No replicable (datos de miles de atletas) |
+| **VLamax** | Modelo público de Kolie Moore (implementable) |
 
 ---
 
@@ -41,8 +138,8 @@ Sistema integral de entrenamiento ciclista que unifica datos de **smart trainer*
 ```
 ciclismo/
 ├── config/
-│   ├── strava.json             # API tokens Strava
-│   ├── trainingpeaks.json      # OAuth credentials TP
+│   ├── strava.json             # API tokens Strava (pendiente)
+│   ├── trainingpeaks.json      # OAuth credentials TP (pendiente)
 │   └── trainer.json            # Configuración del trainer
 ├── atleta/
 │   ├── perfil.md               # FTP, peso, zonas, umbrales
@@ -51,54 +148,64 @@ ciclismo/
 │   ├── periodo-actual.md       # Mesociclo en curso
 │   └── temporada.md            # Plan anual
 ├── entrenos/
-│   ├── sesiones/               # Workouts planificados (.fit o estructurados)
+│   ├── sesiones/               # Workouts planificados (.fit estructurados)
 │   ├── completados/            # Archivos .fit subidos
 │   └── library/                # Biblioteca de intervalos y workouts
 ├── metricas/
 │   ├── power-curve.md          # Curva potencia-duración
-│   ├── wko5-metrics.md         # Métricas WKO5 referenciadas
-│   └── evolucion.md            # Progresión semanal/mensual
+│   ├── evolucion.md            # Progresión semanal/mensual
+│   └── wko5-metrics.md         # Referencia de métricas
 ├── analisis/
 │   ├── oportunidades.md        # Debilidades y áreas de mejora
 │   └── estrategias.md          # Decisiones de entrenamiento
 ├── scripts/
 │   ├── sync-strava.py          # Sincronización con Strava
-│   ├── upload-tp.py            # Subir entrenos a TrainingPeaks
+│   ├── calcula-metricas.py     # Cálculo de PDC, CP, W', NP, TSS, CTL/ATL/TSB
+│   ├── genera-workout.py       # Generador de .fit estructurados
 │   └── analyze-workout.py      # Análisis post-entreno
-└── logs/
-    ├── diario.md               # Bitácora diaria
-    └── semanal.md              # Resumen semanal
+├── logs/
+│   ├── diario.md               # Bitácora diaria
+│   └── semanal.md              # Resumen semanal
+└── research/                   # Investigación de algoritmos
+    ├── goldencheetah-algos.md  # Algoritmos extraídos de GoldenCheetah
+    ├── fit-format.md           # Especificación FIT para generar workouts
+    └── ciclocomputadores.md    # Cómo subir workouts a dispositivos
 ```
 
 ---
 
-## Métricas Clave (WKO5)
+## Planificación de Entrenos
 
-### Power Duration Curve (PDC)
-| Rango | Duración | Sistema Energético | Objetivo de Entreno |
-|-------|----------|--------------------|---------------------|
-| **AWC** | 1s–30s | Anaeróbico / Neuromuscular | Sprint, arranques |
-| **FRC** | 30s–15min | Anaeróbico láctico | VO2max, ataques |
-| **mFTP** | 15–70min | Umbral funcional | FTP, tempo |
-| **eFTP** | 70min–4h+ | Resistencia aeróbica | Fondo, resistencia |
+### Formato Workout Estructurado (TrainingPeaks API)
+```json
+{
+  "WorkoutDay": "2026-07-01",
+  "WorkoutType": "bike",
+  "Title": "VO2max: 5x3min @ 115%",
+  "TotalTimePlanned": 1.5,
+  "TSSPlanned": 95,
+  "IFPlanned": 0.92,
+  "Structure": [
+    { "IntensityClass": "WarmUp", "Length": { "Unit": "Second", "Value": 900 }, "Type": "Step", "IntensityTarget": { "Unit": "PercentOfThresholdFtp", "Value": 55 } },
+    { "Type": "Repetition", "Length": { "Unit": "Repetition", "Value": 5 }, "Steps": [
+      { "IntensityClass": "Active", "Length": { "Unit": "Second", "Value": 180 }, "Type": "Step", "IntensityTarget": { "Unit": "PercentOfThresholdFtp", "Value": 115 } },
+      { "IntensityClass": "Rest", "Length": { "Unit": "Second", "Value": 180 }, "Type": "Step", "IntensityTarget": { "Unit": "PercentOfThresholdFtp", "Value": 50 } }
+    ]},
+    { "IntensityClass": "CoolDown", "Length": { "Unit": "Second", "Value": 600 }, "Type": "Step", "IntensityTarget": { "Unit": "PercentOfThresholdFtp", "Value": 50 } }
+  ]
+}
+```
 
-### Métricas de Rendimiento
-| Métrica | Descripción | Cómo se usa |
-|---------|-------------|-------------|
-| **FTP** | Functional Threshold Power | Base de todas las zonas |
-| **mFTP** | Modeled FTP (WKO5) | FTP estimado por modelo PDC |
-| **eFTP** | Extended FTP | Potencia sostenible > 70 min |
-| **FRC** | Functional Reserve Capacity | Capacidad de trabajo supra-umbral |
-| **AWC** | Anaerobic Work Capacity | Trabajo anaeróbico total |
-| **TTE** | Time to Exhaustion @ FTP | Tiempo máximo sostenible a FTP |
-| **PDC** | Power Duration Curve | Curva completa potencia-tiempo |
-| **TIS** | Training Impact Score | Impacto del entreno en fatiga |
-| **dFRC** | Dynamic FRC | FRC disponible en tiempo real |
-| **CTL** | Chronic Training Load | Carga de entrenamiento crónica (forma) |
-| **ATL** | Acute Training Load | Carga aguda (fatiga) |
-| **TSB** | Training Stress Balance | Frescura (CTL - ATL) |
+### Subida a Ciclocomputador / Entrenador
+1. **TrainingPeaks** → "Enviar a dispositivo" (Wahoo ELEMNT, Garmin Edge, Karoo)
+2. **Exportar .fit estructurado** → cargar manualmente al dispositivo
+3. **Zwift / TrainerRoad** → importar .zwo o .erg desde el calendario TP
+4. **Formato FIT nativo**: generar archivos .fit con estructura de intervalos (FIT SDK)
 
-### Zonas de Entrenamiento (basadas en FTP)
+---
+
+## Zonas de Entrenamiento
+
 | Zona | % FTP | Descripción | TTE |
 |------|-------|-------------|-----|
 | Z1 | <55% | Recuperación activa | ∞ |
@@ -118,23 +225,23 @@ ciclismo/
 FASE 1: SUBIR EL TECHO (VO2max)
 ├── Objetivo: Aumentar la potencia a VO2max (Z5)
 ├── Trabajo: 3–5min @ 106–120% FTP, descansos 1:1 o 2:1
-├── Duración: 4–6 semanas de bloque
+├── Duración: 4–6 semanas
 └── Indicador: PDC en rango 3–8 min mejora
 
 FASE 2: EMPUJAR FTP
-├── Objetivo: Traducir el techo alto en FTP sostenible
+├── Objetivo: Traducir techo alto en FTP sostenible
 ├── Trabajo: 8–20min @ 91–105% FTP, descansos 1:0.5
-├── Duración: 4–6 semanas de bloque
+├── Duración: 4–6 semanas
 └── Indicador: TTE @ FTP aumenta
 
 FASE 3: EXTENSIÓN
-├── Objetivo: Sostener el nuevo FTP por más tiempo
-├── Trabajo: 2–4 series de 20–40min @ 90–100% FTP
-├── Duración: 3–5 semanas de bloque
+├── Objetivo: Sostener FTP por más tiempo
+├── Trabajo: 2–4 series 20–40min @ 90–100% FTP
+├── Duración: 3–5 semanas
 └── Indicador: TTE @ FTP → 70min+
 ```
 
-### Mesociclos
+### Mesociclos y Periodización Anual
 
 | Mesociclo | Duración | Enfoque | Métrica Objetivo |
 |-----------|----------|---------|-------------------|
@@ -143,98 +250,119 @@ FASE 3: EXTENSIÓN
 | **Construcción I** | 4–6 sem | VO2max, push techo | PDC 3–8min |
 | **Construcción II** | 4–6 sem | FTP, push umbral | TTE @ FTP |
 | **Extensión** | 3–5 sem | Resistencia a FTP | TTE @ FTP > 70min |
-| **Pico** | 2–3 sem | Volumen reducido, intensidad alta | frescura + rendimiento |
+| **Pico** | 2–3 sem | Vol. reducido, intensidad alta | frescura + rendimiento |
 | **Transición** | 1–2 sem | Descanso activo | recuperación |
 
-### Periodización Anual
 ```
-ENE FEB MAR ABR MAY JUN JUL AGO SEP OCT NOV DIC
+ENE  FEB  MAR  ABR  MAY  JUN  JUL  AGO  SEP  OCT  NOV  DIC
 [--Base I--][--Base II--][--Const I--][--Const II--][--Ext--][Pico][Trans]
 ```
 
 ---
 
-## Planificación de Entrenos
-
-### Formato de Workout Estructurado (TrainingPeaks API)
-```json
-{
-  "WorkoutDay": "2026-07-01",
-  "WorkoutType": "bike",
-  "Title": "VO2max: 5x3min @ 115%",
-  "TotalTimePlanned": 1.5,
-  "TSSPlanned": 95,
-  "IFPlanned": 0.92,
-  "Structure": [
-    { "IntensityClass": "WarmUp", "Length": { "Unit": "Second", "Value": 900 }, "Type": "Step", "IntensityTarget": { "Unit": "PercentOfThresholdFtp", "Value": 55, "MinValue": 50, "MaxValue": 60 } },
-    { "IntensityClass": "Active", "Length": { "Unit": "Second", "Value": 180 }, "Type": "Step", "IntensityTarget": { "Unit": "PercentOfThresholdFtp", "Value": 75 } },
-    { "Type": "Repetition", "Length": { "Unit": "Repetition", "Value": 5 }, "Steps": [
-      { "IntensityClass": "Active", "Name": "VO2 Interval", "Length": { "Unit": "Second", "Value": 180 }, "Type": "Step", "IntensityTarget": { "Unit": "PercentOfThresholdFtp", "Value": 115 } },
-      { "IntensityClass": "Rest", "Name": "Recovery", "Length": { "Unit": "Second", "Value": 180 }, "Type": "Step", "IntensityTarget": { "Unit": "PercentOfThresholdFtp", "Value": 50 } }
-    ]},
-    { "IntensityClass": "CoolDown", "Length": { "Unit": "Second", "Value": 600 }, "Type": "Step", "IntensityTarget": { "Unit": "PercentOfThresholdFtp", "Value": 50 }, "OpenDuration": true }
-  ]
-}
-```
-
-### Subida a Ciclocomputador / Entrenador
-1. **TrainingPeaks** → "Enviar a dispositivo" (Wahoo ELEMNT, Garmin Edge, Karoo)
-2. **Exportar .fit estructurado** → cargar manualmente al dispositivo
-3. **Zwift / TrainerRoad** → importar .zwo o .erg desde el calendario TP
-
----
-
 ## Dashboard PROY (Tabla de Evolución)
 
-| Semana | CTL | ATL | TSB | TTE | FTP | eFTP | FRC | Peso | kJ | Horas | Notas |
-|--------|-----|-----|-----|-----|-----|------|-----|------|-----|-------|-------|
-| S1     | 45  | 55  | -10 | 30  | 240 | 210  | 12  | 72   | 850 | 5     | Base I inicio |
-| S2     | 48  | 60  | -12 | 32  | 240 | 212  | 12  | 71.5 | 920 | 5.5   | Volumen OK |
-| S3     | 52  | 68  | -16 | 35  | 242 | 215  | 13  | 71.5 | 1050| 6     | Semana fuerte |
-| ...    | ... | ...  | ...  | ...  | ...  | ...  | ...  | ...  | ...  | ...   | ... |
+| Semana | CTL | ATL | TSB | TTE | FTP | PDC_20 | FRC | Peso | kJ | Horas | Notas |
+|--------|-----|-----|-----|-----|-----|--------|-----|------|-----|-------|-------|
+| S1     | 45  | 55  | -10 | 30  | 240 | 228   | 12  | 72   | 850 | 5     | Base I inicio |
 
 ---
 
 ## Estrategias de Nutrición
 
-| Situación | kJ requeridos | Carga por hora | Notas |
-|-----------|---------------|----------------|-------|
-| Z2 < 2h | Agua + electrolitos | ~300 kcal | Sin carga extra |
-| Z2 > 3h | 300–400 kcal/h | 60–90g CHO | Geles, bebida isotónica |
-| Z4+ intenso | 200–300 kcal/h | 60–90g CHO + cafeína | Geles cada 20–30 min |
-| Post-entreno | Reposición total | 1.0–1.2g CHO/kg + proteína | Ventana 30–60 min |
+| Situación | kJ requeridos | Carga por hora |
+|-----------|---------------|----------------|
+| Z2 < 2h | Agua + electrolitos | ~300 kcal |
+| Z2 > 3h | 300–400 kcal/h | 60–90g CHO |
+| Z4+ intenso | 200–300 kcal/h | 60–90g CHO + cafeína |
+| Post-entreno | Reposición total | 1.0–1.2g CHO/kg + proteína |
 
----
-
-## Carga en Kilojulios (kJ) y Nutrición
-
-- **1 kJ ≈ 1 kcal** gastada (eficiencia ~24%)
-- **kJ totales del entreno** → referencia directa para reponer
-- **Ejemplo**: 1500 kJ gastados → ~1500 kcal a reponer en el día
-- **Ratio**: kJ/h → indicador de intensidad promedio
+- 1 kJ ≈ 1 kcal gastada
+- kJ totales → referencia directa para reponer
 
 ---
 
 ## Análisis Post-Entreno
 
-### Preguntas Guía
-1. ¿Cumplí los objetivos de potencia/zona?
-2. ¿La cadencia se mantuvo en rango óptimo?
-3. ¿Cómo estuvo la percepción de esfuerzo (RPE) vs datos?
-4. ¿Qué dice la variabilidad de frecuencia cardíaca (HRV)?
-5. ¿El TSS planeado coincide con el real?
-6. ¿Hubo algún factor externo (sueño, estrés, alimentación)?
+**Preguntas:** ¿Cumplí objetivos? ¿Cadencia óptima? ¿RPE vs datos? ¿HRV? ¿TSS planeado vs real? ¿Factores externos?
 
-### Oportunidades de Mejora
-- **RPM bajas en Z2**: trabajar técnica de pedaleo a 85–95 rpm
-- **TTE estancado**: ajustar sesiones de extensión
-- **Pico de potencia bajo**: añadir trabajo neuromuscular 1x/sem
-- **FRC limitante**: priorizar intervalos de 1–3 min
+**Oportunidades:** RPM bajas en Z2 → técnica 85-95rpm. TTE estancado → ajustar extensión. Pico bajo → neuromuscular 1x/sem. FRC limitante → intervalos 1-3min.
 
 ---
 
+## CHECKLIST para Claude Code
+
+Usa esto cuando arranques cada fase:
+
+### Fase 1 — Strava API
+- [ ] Crear app en https://www.strava.com/settings/api
+- [ ] Obtener Client ID + Client Secret
+- [ ] Completar OAuth 2.0 (scopes: activity:read_all, read, activity:write)
+- [ ] Probar: `GET /athlete` → perfil
+- [ ] Probar: `GET /athlete/activities?per_page=3` → actividades
+
+### Fase 2 — Sincronización
+- [ ] Descargar últimas actividades desde Strava
+- [ ] Para cada actividad: calcular NP, IF, TSS, kJ
+- [ ] Acumular CTL/ATL/TSB diario
+- [ ] Generar tabla de evolución semanal
+
+### Fase 3 — Métricas Avanzadas
+- [ ] Calcular PDC desde streams de potencia
+- [ ] Estimar FTP (mejor 20min × 0.95)
+- [ ] Calcular CP + W' (modelo Critical Power)
+- [ ] Extraer algoritmos de GoldenCheetah (CP, W'bal, PMC)
+
+### Fase 4 — Workouts
+- [ ] Investigar formato FIT SDK para generar entrenos estructurados
+- [ ] Probar generación de .fit con intervalos
+- [ ] Probar subida a ciclocomputador (Wahoo/Garmin)
+
+---
+
+## 📚 TAREAS PENDIENTES DE INVESTIGACIÓN
+
+### Para Claude Code — Investigar y documentar:
+
+1. **Extraer algoritmos de GoldenCheetah:**
+   - Revisar el código fuente en GitHub (C++)
+   - Identificar la implementación de: Critical Power, W'bal, PMC, TSS, NP
+   - Documentar las fórmulas exactas en `research/goldencheetah-algos.md`
+
+2. **Formato FIT para generación de workouts:**
+   - Investigar FIT SDK (https://github.com/therunninghub/FIT-SDK)
+   - Cómo crear archivos .fit con estructura de intervalos (course points, lap messages)
+   - Documentar en `research/fit-format.md`
+
+3. **Subida a ciclocomputadores:**
+   - Investigar protocolos de Wahoo ELEMNT, Garmin Edge, Karoo
+   - Cómo subir .fit estructurados a cada dispositivo
+   - ¿API de Garmin Connect? ¿Wahoo API?
+   - Documentar en `research/ciclocomputadores.md`
+
+4. **Unificar WKO5 + GoldenCheetah:**
+   - Comparar métricas de ambos (qué calcula cada uno)
+   - Identificar qué algoritmos de GoldenCheetah podemos reutilizar
+   - Identificar qué métricas WKO5 NO tienen equivalente open source
+   - Proponer la mejor combinación para nuestro sistema propio
+
+5. **Modelo VLamax (público):**
+   - Investigar el modelo de Kolie Moore para estimar VLamax desde potencia
+   - Evaluar si vale la pena implementarlo
+
+---
+
+## Seguridad
+
+- No subir strava.json con tokens a git
+- Usar refresh tokens auto-renovables
+- Rate limits: max 100 requests/15min
+- Cuidado con coordenadas GPS (datos personales)
+
 ## Referencias
-- **WKO5 Guide**: ayuda.trainingpeaks.com
-- **TrainingPeaks API**: github.com/TrainingPeaks/PartnersAPI
 - **Strava API**: developers.strava.com
-- **Google Drive**: documentación de entrenamiento y planes guardados
+- **GoldenCheetah**: github.com/GoldenCheetah/GoldenCheetah
+- **TrainingPeaks API**: github.com/TrainingPeaks/PartnersAPI
+- **WKO5 Guide**: help.trainingpeaks.com
+- **FIT SDK**: github.com/therunninghub/FIT-SDK
+- **Libro**: Training and Racing with a Power Meter (Allen & Coggan)
