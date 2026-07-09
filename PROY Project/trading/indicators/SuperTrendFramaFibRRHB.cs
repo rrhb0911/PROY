@@ -225,9 +225,9 @@ namespace cAlgo.Indicators
             SuperTrendDownOutput[index] = trend == -1 ? dn : double.NaN;
 
             if (buySignal)
-                ChartObjects.DrawText($"st-buy-{index}", "▲", index, up, upColor);
+                Chart.DrawText($"st-buy-{index}", "▲", index, up, color: upColor);
             if (sellSignal)
-                ChartObjects.DrawText($"st-sell-{index}", "▼", index, dn, downColor);
+                Chart.DrawText($"st-sell-{index}", "▼", index, dn, color: downColor);
         }
 
         private double AverageTrueRange(int index, int periods)
@@ -517,13 +517,13 @@ namespace cAlgo.Indicators
             {
                 double price = CalcFibPrice(level);
                 string name = $"fib-{level:0.0}";
-                var line = ChartObjects.DrawTrendLine(name, _impulseStartBar, price, index, price, Color.White, 1, LineStyle.Solid);
+                var line = Chart.DrawTrendLine(name, _impulseStartBar, price, index, price, Color.White, 1, LineStyle.Solid);
                 if (extend) line.ExtendToInfinity = true;
-                ChartObjects.DrawText($"{name}-label", $"{level:0.0}% — {price:0.#####}", index, price, Color.White);
+                Chart.DrawText($"{name}-label", $"{level:0.0}% — {price:0.#####}", index, price, color: Color.White);
             }
 
             string impulseLineName = "fib-impulse-line";
-            ChartObjects.DrawTrendLine(impulseLineName, _impulseStartBar, _impulseStartPrice, _impulseEndBar, _impulseEndPrice,
+            Chart.DrawTrendLine(impulseLineName, _impulseStartBar, _impulseStartPrice, _impulseEndBar, _impulseEndPrice,
                 _isBullishImpulse ? Color.Green : Color.Red, 2, LineStyle.Dots);
         }
 
@@ -540,9 +540,9 @@ namespace cAlgo.Indicators
             bool inLondon = InSession(hour, LondonSessionStartHour, LondonSessionEndHour);
             bool inAsia = InSession(hour, AsiaSessionStartHour, AsiaSessionEndHour);
 
-            if (inNy) ChartObjects.DrawRectangle($"sess-ny-{index}", index, Bars.HighPrices[index], index, Bars.LowPrices[index], Color.FromArgb(15, 96, 252, 244), 0);
-            if (inLondon) ChartObjects.DrawRectangle($"sess-ldn-{index}", index, Bars.HighPrices[index], index, Bars.LowPrices[index], Color.FromArgb(15, 250, 122, 239), 0);
-            if (inAsia) ChartObjects.DrawRectangle($"sess-asia-{index}", index, Bars.HighPrices[index], index, Bars.LowPrices[index], Color.FromArgb(50, 0, 0, 0), 0);
+            if (inNy) Chart.DrawRectangle($"sess-ny-{index}", index, Bars.HighPrices[index], index, Bars.LowPrices[index], Color.FromArgb(15, 96, 252, 244), 1);
+            if (inLondon) Chart.DrawRectangle($"sess-ldn-{index}", index, Bars.HighPrices[index], index, Bars.LowPrices[index], Color.FromArgb(15, 250, 122, 239), 1);
+            if (inAsia) Chart.DrawRectangle($"sess-asia-{index}", index, Bars.HighPrices[index], index, Bars.LowPrices[index], Color.FromArgb(50, 0, 0, 0), 1);
         }
 
         private bool InSession(int hour, int start, int end)

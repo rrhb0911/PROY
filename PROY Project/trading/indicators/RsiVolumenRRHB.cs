@@ -79,9 +79,9 @@ namespace cAlgo.Indicators
             _rsi = Indicators.RelativeStrengthIndex(RsiSource, RsiLength);
             _volumeMa = Indicators.MovingAverage(Bars.TickVolumes, VolumeMaLength, MovingAverageType.Simple);
 
-            ChartObjects.DrawHorizontalLine("rsi-70", 70, Color.FromHex("#9c27b0"), 1, LineStyle.Dots);
-            ChartObjects.DrawHorizontalLine("rsi-50", 50, Color.White, 1, LineStyle.Dots);
-            ChartObjects.DrawHorizontalLine("rsi-30", 30, Color.FromHex("#00bcd4"), 1, LineStyle.Dots);
+            Chart.DrawHorizontalLine("rsi-70", 70, Color.FromHex("#9c27b0"), 1, LineStyle.Dots);
+            Chart.DrawHorizontalLine("rsi-50", 50, Color.White, 1, LineStyle.Dots);
+            Chart.DrawHorizontalLine("rsi-30", 30, Color.FromHex("#00bcd4"), 1, LineStyle.Dots);
         }
 
         public override void Calculate(int index)
@@ -163,7 +163,7 @@ namespace cAlgo.Indicators
                 {
                     var color = isLow ? PivotLowColor : PivotHighColor;
                     string lineName = $"rsi-trend-{(isLow ? "low" : "high")}-{state.PivotBarIndex}";
-                    ChartObjects.DrawTrendLine(lineName, state.PrevPivotBarIndex, state.PrevPivotValue, state.PivotBarIndex, state.PivotValue, color, 2, LineStyle.Dots);
+                    Chart.DrawTrendLine(lineName, state.PrevPivotBarIndex, state.PrevPivotValue, state.PivotBarIndex, state.PivotValue, color, 2, LineStyle.Dots);
                 }
             }
         }
@@ -184,7 +184,7 @@ namespace cAlgo.Indicators
                 state.HasCrossed = true;
                 var color = isLow ? PivotLowColor : PivotHighColor;
                 string labelName = $"rsi-break-{(isLow ? "low" : "high")}-{index}";
-                ChartObjects.DrawText(labelName, "Br", index, isLow ? state.PivotValue - 5 : state.PivotValue + 5, color);
+                Chart.DrawText(labelName, "Br", index, isLow ? state.PivotValue - 5 : state.PivotValue + 5, color: color);
             }
         }
     }
