@@ -1,15 +1,17 @@
 # Propuesta — overlay de lógica de estrategias en el gráfico de Live
 
-Estado: **v1 construida y pusheada (09 sep 2026)** — selector Ninguno/Time-Based
-Entry/Continuation/Last Quarter en Live, marca la vela H1 de referencia de
-cada hora operativa de hoy (`tower/src/lib/trading/wsOverlay.ts`). **Todavía
-NO marca la entrada/salida real detectada** — eso necesita velas M1 de hoy
-(no se traen todavía, ver sección "Qué falta" al final). Las cajas
-semitransparentes de zonas (entrada/gestión) tampoco están — se dibujaron
-solo las dos rayas horizontales (alto/bajo de la vela de referencia), no un
-rectángulo relleno, porque `lightweight-charts` no soporta líneas
-verticales/rellenos sin escribir un plugin de canvas propio (evaluado, no
-se hizo por tiempo — ver "Qué falta").
+Estado (09 sep 2026): **v1 + v2 construidas y pusheadas.**
+- Selector Ninguno/Time-Based Entry/Continuation/Last Quarter en Live.
+- Vela H1 de referencia de cada hora operativa de hoy, como caja RELLENA de
+  verdad (`BaselineSeries` con `baseValue`, no un plugin de canvas propio —
+  más simple y menos riesgoso de tirar sin poder verlo en el navegador).
+- **Time-Based Entry ya marca la entrada/SL/TP REAL detectada** (barrido +
+  confirmación sobre velas M1 de hoy, portado de
+  `backtest-time-based-entry.mjs`) — verificado corriendo contra datos
+  reales antes de pushear. Continuation/Last Quarter siguen solo con la
+  vela de referencia — portar su detección real necesita un estado que se
+  arrastra hora a hora (dirección del día, DOL, posición abierta), más
+  grande que Time-Based Entry — pendiente, ver "Qué falta".
 
 Resto de este documento: la propuesta original completa, como referencia.
 
@@ -110,15 +112,10 @@ se dibuja cada zona. Sigue sin construirse.
 
 ## Qué falta (siguiente paso, no construido todavía)
 
-1. **Velas M1 de hoy**: hace falta para detectar el barrido/confirmación real
-   y marcar la entrada, no solo la vela de referencia. Requiere una llamada
-   MCP nueva en `compute-sentiment.mjs` (solo NAS100/DAX) + guardar
-   `bars_m1_today` en `trading_market_snapshot` (migración nueva).
-2. **Módulo de detección compartido**: extraer el barrido/confirmación/SL/TP
-   de `scripts/backtest-*.mjs` (hoy triplicado) a algo reusable — o portarlo
-   directo a TypeScript en `wsOverlay.ts` una vez haya M1.
-3. **Cajas rellenas de verdad**: dibujar un rectángulo semitransparente (no
-   solo dos rayas horizontales) necesita un plugin/primitive de
-   `lightweight-charts` (dibuja directo en canvas) — la librería no lo
-   soporta con las series normales. Evaluado, no se hizo por tiempo en esta
-   ronda.
+1. **Continuation y Last Quarter con entrada real**: a diferencia de Time-Based
+   Entry (autocontenido por hora), estos dos necesitan arrastrar estado
+   entre horas dentro del mismo día — dirección fijada por la primera señal,
+   DOL del día, si ya hay posición abierta, si ya se tocó el DOL. Es
+   portable (mismo criterio que `backtest-continuation.mjs`/
+   `backtest-last-quarter.mjs`), pero es un módulo más grande que
+   `detectTbeSetupsToday`.
