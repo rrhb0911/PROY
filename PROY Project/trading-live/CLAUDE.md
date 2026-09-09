@@ -103,10 +103,14 @@ entradas en zona media/retroceso.
       (≈NYSE)/US30/DAX/BTC/EURUSD — si Rafa quiere cobertura de forex más
       allá de EURUSD (resto de majors) como apoyo, eso es una extensión
       pendiente de `compute-sentiment.mjs`, no hecha todavía.
-- [ ] Riesgo máximo diario/semanal (circuit breaker) — sigue sin definir.
-- [ ] Sesiones horarias habilitadas (Londres/NY/Asia — central para los
-      modelos WS, no opcional) — sigue sin definir.
-- [ ] Máximo de operaciones simultáneas — sigue sin definir.
+- [x] **Circuit breaker diario/semanal** (09 sep 2026): **sin circuit breaker
+      por ahora** — cada setup se evalúa solo, sin tope acumulado de pérdidas.
+      Revisar esto una vez que haya datos reales de demo.
+- [x] **Sesiones horarias habilitadas** (09 sep 2026): **las 3** que ya usan
+      los modelos WS — Londres, London Lunch y NY — sin restricción adicional,
+      igual que los backtests v1.
+- [x] **Máximo de operaciones simultáneas** (09 sep 2026): **1** — nunca dos
+      posiciones abiertas a la vez (entre NAS100 y DAX combinados).
 
 ## Pendiente de definir (no asumir)
 
@@ -161,16 +165,24 @@ entradas en zona media/retroceso.
 
 ## Conexión con Tower
 
-**Parcialmente hecho** (09 sep 2026) — dos cosas separadas:
+**Parcialmente hecho** (09 sep 2026) — varias cosas separadas:
 
 1. **Contenido de referencia** (`trading_glossary`, `trading_strategies`,
    `trading_backtests`, migraciones `0005`/`0006`/`0007` en
    `tower/supabase/migrations/`): glosario SMC/ICT/CRT/WS, los 3 modelos
-   documentados con diagrama de flujo (`@xyflow/react`), y los resultados
-   de los backtests de arriba — todo visible en Tower, pestaña Trading.
+   documentados con diagrama de flujo interactivo (`@xyflow/react`, se puede
+   expandir y tocar cada paso para ver el detalle), y los resultados de los
+   backtests de arriba — todo visible en Tower, pestaña Estrategias/Resultados.
 2. **Sentimiento de mercado** (`trading_sentiment` + `trading_sentiment_refresh`):
-   descrito en la sección de arriba — visible en Tower (pestaña Sentimiento
-   + card en Home), con botón "Actualizar" real.
+   descrito en la sección de arriba — visible en Tower, dentro de la pestaña
+   Live (ya no es pestaña propia) + card en Home, con botón "Actualizar" real.
+3. **Snapshot de mercado** (`trading_market_snapshot`, migración `0008`,
+   09 sep 2026): precio actual, OHLC del día (calendario NY), soporte/
+   resistencia (swings H1 cercanos) y últimas ~80 velas H1 para graficar —
+   6 símbolos, mismo criterio que sentimiento (NAS100/DAX operables, el
+   resto es apoyo). Calculado en `compute-sentiment.mjs` (misma corrida que
+   el sentimiento, sin llamadas MCP extra más que el fetch de H1) y visible
+   en Tower, pestaña Live, con gráfico de velas real (`lightweight-charts`).
 
 **Todavía NO está hecho:** lo que describía este párrafo originalmente —
 `trading_setups`/`trading_positions` (schema ya existe desde antes, migración

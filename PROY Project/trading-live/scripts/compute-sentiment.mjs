@@ -18,6 +18,7 @@
 //
 // SOLO LECTURA de mercado: no llama ninguna tool de ejecución de órdenes.
 import { initSession, getBalance, getTrendbarsRange } from './ctrader-client.mjs';
+import { isUsDst } from './dst.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -241,6 +242,61 @@ function groupC(bars) {
   return { score: signals.reduce((a, b) => a + b, 0) / signals.length, available: signals.length };
 }
 
+// ---------------------------------------------------------------------------
+// Snapshot de mercado (Live): precio actual, OHLC del día (calendario NY,
+// consistente con la zona horaria confirmada por Rafa para las sesiones de
+// los modelos WS), soportes/resistencias cercanos, y velas H1 para graficar.
+// ---------------------------------------------------------------------------
+function nyDayStartUTC(now) {
+  const offsetH = isUsDst(now) ? -4 : -5; // EDT (-4) o EST (-5)
+  const shifted = new Date(now.getTime() + offsetH * 3600000);
+  const midnightShifted = Date.UTC(shifted.getUTCFullYear(), shifted.getUTCMonth(), shifted.getUTCDate(), 0, 0, 0);
+  return new Date(midnightShifted - offsetH * 3600000);
+}
+
+function nearestLevels(bars, lastPrice, fractal = 3, maxLevels = 3) {
+  const highs = findSwings(bars.slice(0, -1), 'high', fractal).map((s) => s.bar.high);
+  const lows = findSwings(bars.slice(0, -1), 'low', fractal).map((s) => s.bar.low);
+  const resistance = [...new Set(highs)].filter((p) => p > lastPrice).sort((a, b) => a - b).slice(0, maxLevels);
+  const support = [...new Set(lows)].filter((p) => p < lastPrice).sort((a, b) => b - a).slice(0, maxLevels);
+  return { support, resistance };
+}
+
+async function computeMarketSnapshot(sid, symKey, ctraderSymbol, now) {
+  const fromISO = new Date(now.getTime() - 10 * 86400000).toISOString();
+  let bars;
+  try {
+    bars = await getTrendbarsRange(sid, ctraderSymbol, 'h1', fromISO, now.toISOString());
+  } catch (e) {
+    console.log(`${symKey}/snapshot: ERROR MCP — ${e.message}`);
+    return null;
+  }
+  if (bars.length < 20) {
+    console.log(`${symKey}/snapshot: solo ${bars.length} velas H1, insuficiente — se omite`);
+    return null;
+  }
+
+  const lastPrice = bars[bars.length - 1].close;
+  const dayStart = nyDayStartUTC(now).getTime();
+  const todayBars = bars.filter((b) => new Date(b.timestamp).getTime() >= dayStart);
+  const prevBars = bars.filter((b) => new Date(b.timestamp).getTime() < dayStart);
+
+  const { support, resistance } = nearestLevels(bars, lastPrice);
+
+  return {
+    symbol: symKey,
+    ctrader_symbol: ctraderSymbol,
+    last_price: lastPrice,
+    day_open: todayBars.length ? todayBars[0].open : null,
+    day_high: todayBars.length ? Math.max(...todayBars.map((b) => b.high)) : null,
+    day_low: todayBars.length ? Math.min(...todayBars.map((b) => b.low)) : null,
+    prev_day_close: prevBars.length ? prevBars[prevBars.length - 1].close : null,
+    support, resistance,
+    bars_h1: bars.slice(-80).map((b) => ({ t: b.timestamp, o: b.open, h: b.high, l: b.low, c: b.close })),
+    generated_at: new Date().toISOString(),
+  };
+}
+
 function zoneFor(score) {
   if (score < -0.5) return { label: 'Venta fuerte', color: '#FF6B5E' };
   if (score < -0.1) return { label: 'Venta', color: '#FF8F80' };
@@ -302,6 +358,21 @@ export async function runOnce() {
     if (error) throw new Error(`trading_sentiment/${row.symbol}/${row.timeframe}: ${error.message}`);
   }
   console.log(`\n${results.length} filas escritas en trading_sentiment.`);
+
+  const snapshots = [];
+  for (const [symKey, ctraderSymbol] of Object.entries(SYMBOLS)) {
+    const snap = await computeMarketSnapshot(sid, symKey, ctraderSymbol, now);
+    if (snap) {
+      snapshots.push(snap);
+      console.log(`${symKey}/snapshot: last ${snap.last_price} · día ${snap.day_low}-${snap.day_high} · soporte ${snap.support[0] ?? '—'} · resistencia ${snap.resistance[0] ?? '—'}`);
+    }
+  }
+  for (const row of snapshots) {
+    const { error } = await supabase.from('trading_market_snapshot').upsert(row, { onConflict: 'symbol' });
+    if (error) throw new Error(`trading_market_snapshot/${row.symbol}: ${error.message}`);
+  }
+  console.log(`${snapshots.length} filas escritas en trading_market_snapshot.`);
+
   return results.length;
 }
 
@@ -323,3 +394,10 @@ if (process.argv[1] && process.argv[1].endsWith('compute-sentiment.mjs')) {
 //    H4, D1 usa velas D1) — a diferencia de como se describió en el mockup
 //    visual ("H1/H4/D1" mezclados), que era una simplificación de texto, no
 //    una regla real todavía implementada.
+// 5. Snapshot de mercado (trading_market_snapshot): "día" se calcula con
+//    calendario NY (00:00 hora de Nueva York, DST-aware vía isUsDst), igual
+//    convención que las sesiones de los modelos WS. Soporte/resistencia:
+//    swings H1 (fractal=3, más exigente que el fractal=2 del Grupo C) más
+//    cercanos al precio actual, hasta 3 de cada lado — no reusa la lógica de
+//    "DOL" real de los backtests de los modelos WS, es una heurística más
+//    simple a propósito (mismo criterio que el Grupo C).
