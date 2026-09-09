@@ -48,6 +48,11 @@ const SYMBOLS = {
   BITCOIN: 'BITCOIN',
   EURUSD: 'EURUSD',
 };
+// Únicos habilitados para proponer entradas (ver trading-live/CLAUDE.md) —
+// solo estos traen velas M1 de hoy (overlay de estrategia en Live necesita
+// esa granularidad para detectar barrido/confirmación; el resto es solo
+// análisis de apoyo, no corre el overlay).
+const TRADABLE_SYMBOLS = new Set(['NAS100', 'GER40']);
 const TIMEFRAMES = ['h1', 'h4', 'd1'];
 const LOOKBACK_DAYS = { h1: 20, h4: 120, d1: 500 }; // suficiente para intentar SMA/EMA200; si no hay tanta historia, se omite esa media
 
@@ -314,6 +319,18 @@ async function computeMarketSnapshot(sid, symKey, ctraderSymbol, now, barsH1, ba
 
   const { support, resistance } = nearestLevels(bars, lastPrice, now);
 
+  // M1 de hoy (00:00 NY -> ahora), solo para los símbolos operables — hace
+  // falta esa granularidad para el overlay de estrategia (barrido/
+  // confirmación real, no solo la vela H1 de referencia).
+  let barsM1Today = [];
+  if (TRADABLE_SYMBOLS.has(symKey)) {
+    try {
+      barsM1Today = await getTrendbarsRange(sid, ctraderSymbol, 'm1', new Date(dayStart).toISOString(), now.toISOString());
+    } catch (e) {
+      console.log(`${symKey}/snapshot: ERROR MCP al traer M1 de hoy — ${e.message}`);
+    }
+  }
+
   const dayHighBar = todayBars.length ? todayBars.reduce((a, b) => (b.high > a.high ? b : a)) : null;
   const dayLowBar = todayBars.length ? todayBars.reduce((a, b) => (b.low < a.low ? b : a)) : null;
   // PDH/PDL (Previous Day High/Low, concepto estándar ICT/SMC): a diferencia
@@ -345,6 +362,7 @@ async function computeMarketSnapshot(sid, symKey, ctraderSymbol, now, barsH1, ba
     bars_h1: toCompactBars(bars, CHART_BARS_LIMIT),
     bars_h4: toCompactBars(barsH4 ?? [], CHART_BARS_LIMIT),
     bars_d1: toCompactBars(barsD1 ?? [], CHART_BARS_LIMIT),
+    bars_m1_today: toCompactBars(barsM1Today, 1440), // techo real: un día completo de M1
     generated_at: new Date().toISOString(),
   };
 }
