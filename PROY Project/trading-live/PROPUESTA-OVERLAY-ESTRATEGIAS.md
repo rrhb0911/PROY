@@ -1,6 +1,21 @@
 # Propuesta — overlay de lógica de estrategias en el gráfico de Live
 
-Estado: **propuesta, no implementada**. Pedida por Rafa el 09 sep 2026 para
+Estado: **v1 construida y pusheada (09 sep 2026)** — selector Ninguno/Time-Based
+Entry/Continuation/Last Quarter en Live, marca la vela H1 de referencia de
+cada hora operativa de hoy (`tower/src/lib/trading/wsOverlay.ts`). **Todavía
+NO marca la entrada/salida real detectada** — eso necesita velas M1 de hoy
+(no se traen todavía, ver sección "Qué falta" al final). Las cajas
+semitransparentes de zonas (entrada/gestión) tampoco están — se dibujaron
+solo las dos rayas horizontales (alto/bajo de la vela de referencia), no un
+rectángulo relleno, porque `lightweight-charts` no soporta líneas
+verticales/rellenos sin escribir un plugin de canvas propio (evaluado, no
+se hizo por tiempo — ver "Qué falta").
+
+Resto de este documento: la propuesta original completa, como referencia.
+
+---
+
+Pedida por Rafa el 09 sep 2026 para
 decidir el enfoque antes de construir. Es visualización de la lógica ya
 backtesteada (`trading-live/backtest-results/*.md`) — no propone ni ejecuta
 operaciones, no toca los guardrails de `CLAUDE.md`.
@@ -87,14 +102,23 @@ Esto no cambia la propuesta de fondo (sigue siendo solo visualización, solo
 sesión de hoy, mismo módulo compartido de detección) — solo enriquece CÓMO
 se dibuja cada zona. Sigue sin construirse.
 
-## Qué decisión falta antes de construirlo
+## Decisiones ya cerradas (09 sep 2026)
 
-- Confirmar que el alcance (dibujar, no proponer/ejecutar) es el correcto —
-  parece serlo por cómo lo pediste, pero lo dejo explícito.
-- Si el overlay debe convivir con los niveles de soporte/resistencia
-  (mostrar ambos) o reemplazarlos mientras está activo — para no saturar el
-  gráfico visualmente.
+- Convive con soporte/resistencia/máximo-mínimo — no los reemplaza. Esos ya
+  tienen sus propios checks de "Capas" para apagarlos si satura.
+- Es solo visualización, no propone ni ejecuta — confirmado.
 
-Avisame cuándo lo construyo — con la propuesta aprobada es un cambio acotado
-(un módulo de lógica + un selector + series adicionales en el chart ya
-armado), no requiere nueva infraestructura.
+## Qué falta (siguiente paso, no construido todavía)
+
+1. **Velas M1 de hoy**: hace falta para detectar el barrido/confirmación real
+   y marcar la entrada, no solo la vela de referencia. Requiere una llamada
+   MCP nueva en `compute-sentiment.mjs` (solo NAS100/DAX) + guardar
+   `bars_m1_today` en `trading_market_snapshot` (migración nueva).
+2. **Módulo de detección compartido**: extraer el barrido/confirmación/SL/TP
+   de `scripts/backtest-*.mjs` (hoy triplicado) a algo reusable — o portarlo
+   directo a TypeScript en `wsOverlay.ts` una vez haya M1.
+3. **Cajas rellenas de verdad**: dibujar un rectángulo semitransparente (no
+   solo dos rayas horizontales) necesita un plugin/primitive de
+   `lightweight-charts` (dibuja directo en canvas) — la librería no lo
+   soporta con las series normales. Evaluado, no se hizo por tiempo en esta
+   ronda.
