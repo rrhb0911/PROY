@@ -48,8 +48,8 @@ const SYMBOLS = {
   BITCOIN: 'BITCOIN',
   EURUSD: 'EURUSD',
 };
-const TIMEFRAMES = ['h4', 'd1'];
-const LOOKBACK_DAYS = { h4: 120, d1: 500 }; // suficiente para intentar SMA/EMA200; si no hay tanta historia, se omite esa media
+const TIMEFRAMES = ['h1', 'h4', 'd1'];
+const LOOKBACK_DAYS = { h1: 20, h4: 120, d1: 500 }; // suficiente para intentar SMA/EMA200; si no hay tanta historia, se omite esa media
 
 const GROUP_META = [
   { name: 'Medias móviles', weight: 35, detail: 'SMA/EMA 20·50·100·200 sobre el mismo timeframe evaluado.' },
@@ -287,16 +287,18 @@ function nearestLevels(bars, lastPrice, now, fractal = 3, maxLevels = 3) {
 
 const CHART_BARS_LIMIT = 300; // cuántas velas se guardan por timeframe para el gráfico de Live (más = más contexto al maximizar)
 
-async function computeMarketSnapshot(sid, symKey, ctraderSymbol, now, barsH4, barsD1) {
-  // 20 días de margen para poder guardar hasta CHART_BARS_LIMIT velas H1
-  // (20d × 24h = 480 posibles, de sobra para las 300 que se guardan).
-  const fromISO = new Date(now.getTime() - 20 * 86400000).toISOString();
-  let bars;
-  try {
-    bars = await getTrendbarsRange(sid, ctraderSymbol, 'h1', fromISO, now.toISOString());
-  } catch (e) {
-    console.log(`${symKey}/snapshot: ERROR MCP — ${e.message}`);
-    return null;
+async function computeMarketSnapshot(sid, symKey, ctraderSymbol, now, barsH1, barsH4, barsD1) {
+  // barsH1 ya viene del loop de sentimiento (mismo símbolo, mismo momento,
+  // mismo lookback de 20 días) — evita una segunda llamada MCP redundante.
+  let bars = barsH1;
+  if (!bars) {
+    const fromISO = new Date(now.getTime() - 20 * 86400000).toISOString();
+    try {
+      bars = await getTrendbarsRange(sid, ctraderSymbol, 'h1', fromISO, now.toISOString());
+    } catch (e) {
+      console.log(`${symKey}/snapshot: ERROR MCP — ${e.message}`);
+      return null;
+    }
   }
   if (bars.length < 20) {
     console.log(`${symKey}/snapshot: solo ${bars.length} velas H1, insuficiente — se omite`);
@@ -413,7 +415,7 @@ export async function runOnce() {
 
   const snapshots = [];
   for (const [symKey, ctraderSymbol] of Object.entries(SYMBOLS)) {
-    const snap = await computeMarketSnapshot(sid, symKey, ctraderSymbol, now, barsByTf[symKey]?.h4, barsByTf[symKey]?.d1);
+    const snap = await computeMarketSnapshot(sid, symKey, ctraderSymbol, now, barsByTf[symKey]?.h1, barsByTf[symKey]?.h4, barsByTf[symKey]?.d1);
     if (snap) {
       snapshots.push(snap);
       console.log(`${symKey}/snapshot: last ${snap.last_price} · día ${snap.day_low}-${snap.day_high} · soporte ${snap.support[0]?.price ?? '—'} · resistencia ${snap.resistance[0]?.price ?? '—'}`);
