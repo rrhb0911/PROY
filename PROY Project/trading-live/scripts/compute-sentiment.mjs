@@ -267,13 +267,21 @@ function toCompactBars(bars, limit) {
   return bars.slice(-limit).map((b) => ({ t: b.timestamp, o: b.open, h: b.high, l: b.low, c: b.close }));
 }
 
-function nearestLevels(bars, lastPrice, fractal = 3, maxLevels = 3) {
+// Soporte/resistencia NO son "del día" — son swings recientes (buscados sobre
+// varios días de historia) que siguen VIVOS: nacen en la vela que los marcó y
+// mueren a las 12:00 NY del día siguiente (misma regla que pidió Rafa para
+// todos los niveles). Un swing de hace una semana que por casualidad queda
+// cerca del precio actual YA MURIÓ — no se muestra, aunque esté "cerca" en
+// precio. Esto es lo que hace que la lista se sienta "de los últimos días",
+// no una foto fija de niveles viejos.
+function nearestLevels(bars, lastPrice, now, fractal = 3, maxLevels = 3) {
   const highs = findSwings(bars.slice(0, -1), 'high', fractal).map((s) => ({ price: s.bar.high, time: s.bar.timestamp }));
   const lows = findSwings(bars.slice(0, -1), 'low', fractal).map((s) => ({ price: s.bar.low, time: s.bar.timestamp }));
   const dedupe = (levels) => { const seen = new Set(); return levels.filter((l) => (seen.has(l.price) ? false : (seen.add(l.price), true))); };
   const withDiesAt = (l) => ({ ...l, dies_at: nyNoonNextDayUTC(new Date(l.time)).toISOString() });
-  const resistance = dedupe(highs).filter((l) => l.price > lastPrice).sort((a, b) => a.price - b.price).slice(0, maxLevels).map(withDiesAt);
-  const support = dedupe(lows).filter((l) => l.price < lastPrice).sort((a, b) => b.price - a.price).slice(0, maxLevels).map(withDiesAt);
+  const stillAlive = (l) => new Date(l.dies_at).getTime() > now.getTime();
+  const resistance = dedupe(highs).map(withDiesAt).filter((l) => l.price > lastPrice && stillAlive(l)).sort((a, b) => a.price - b.price).slice(0, maxLevels);
+  const support = dedupe(lows).map(withDiesAt).filter((l) => l.price < lastPrice && stillAlive(l)).sort((a, b) => b.price - a.price).slice(0, maxLevels);
   return { support, resistance };
 }
 
@@ -293,13 +301,21 @@ async function computeMarketSnapshot(sid, symKey, ctraderSymbol, now, barsH4, ba
 
   const lastPrice = bars[bars.length - 1].close;
   const dayStart = nyDayStartUTC(now).getTime();
+  const prevDayStart = dayStart - 24 * 3600000;
   const todayBars = bars.filter((b) => new Date(b.timestamp).getTime() >= dayStart);
-  const prevBars = bars.filter((b) => new Date(b.timestamp).getTime() < dayStart);
+  const prevBars = bars.filter((b) => new Date(b.timestamp).getTime() < dayStart); // todo lo anterior a hoy (para prev_day_close)
+  const prevDayOnlyBars = bars.filter((b) => { const t = new Date(b.timestamp).getTime(); return t >= prevDayStart && t < dayStart; }); // SOLO ayer (para PDH/PDL)
 
-  const { support, resistance } = nearestLevels(bars, lastPrice);
+  const { support, resistance } = nearestLevels(bars, lastPrice, now);
 
   const dayHighBar = todayBars.length ? todayBars.reduce((a, b) => (b.high > a.high ? b : a)) : null;
   const dayLowBar = todayBars.length ? todayBars.reduce((a, b) => (b.low < a.low ? b : a)) : null;
+  // PDH/PDL (Previous Day High/Low, concepto estándar ICT/SMC): a diferencia
+  // del resto de los niveles, mueren a las 12:00 NY del día ACTUAL (no +36h
+  // desde que se marcaron) — son referencia para la primera mitad de hoy.
+  const todayNoon = new Date(dayStart + 12 * 3600000).toISOString();
+  const prevDayHighBar = prevDayOnlyBars.length ? prevDayOnlyBars.reduce((a, b) => (b.high > a.high ? b : a)) : null;
+  const prevDayLowBar = prevDayOnlyBars.length ? prevDayOnlyBars.reduce((a, b) => (b.low < a.low ? b : a)) : null;
 
   return {
     symbol: symKey,
@@ -312,6 +328,12 @@ async function computeMarketSnapshot(sid, symKey, ctraderSymbol, now, barsH4, ba
     day_low: dayLowBar ? dayLowBar.low : null,
     day_low_time: dayLowBar ? dayLowBar.timestamp : null,
     day_low_dies_at: dayLowBar ? nyNoonNextDayUTC(new Date(dayLowBar.timestamp)).toISOString() : null,
+    prev_day_high: prevDayHighBar ? prevDayHighBar.high : null,
+    prev_day_high_time: prevDayHighBar ? prevDayHighBar.timestamp : null,
+    prev_day_high_dies_at: prevDayHighBar ? todayNoon : null,
+    prev_day_low: prevDayLowBar ? prevDayLowBar.low : null,
+    prev_day_low_time: prevDayLowBar ? prevDayLowBar.timestamp : null,
+    prev_day_low_dies_at: prevDayLowBar ? todayNoon : null,
     prev_day_close: prevBars.length ? prevBars[prevBars.length - 1].close : null,
     support, resistance,
     bars_h1: toCompactBars(bars, 80),
