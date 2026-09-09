@@ -254,15 +254,30 @@ function nyDayStartUTC(now) {
   return new Date(midnightShifted - offsetH * 3600000);
 }
 
+// Instante en el que "muere" un nivel dibujado en el gráfico de Live: 12:00
+// hora de Nueva York del día siguiente al de la vela que lo marcó — no un
+// número mágico, es lo que pidió Rafa para poder ver visualmente dónde nace
+// y dónde muere cada línea, en vez de una raya infinita cruzando el gráfico.
+function nyNoonNextDayUTC(originDate) {
+  const dayStart = nyDayStartUTC(originDate).getTime();
+  return new Date(dayStart + 36 * 3600000); // +24h (día siguiente) +12h (mediodía)
+}
+
+function toCompactBars(bars, limit) {
+  return bars.slice(-limit).map((b) => ({ t: b.timestamp, o: b.open, h: b.high, l: b.low, c: b.close }));
+}
+
 function nearestLevels(bars, lastPrice, fractal = 3, maxLevels = 3) {
-  const highs = findSwings(bars.slice(0, -1), 'high', fractal).map((s) => s.bar.high);
-  const lows = findSwings(bars.slice(0, -1), 'low', fractal).map((s) => s.bar.low);
-  const resistance = [...new Set(highs)].filter((p) => p > lastPrice).sort((a, b) => a - b).slice(0, maxLevels);
-  const support = [...new Set(lows)].filter((p) => p < lastPrice).sort((a, b) => b - a).slice(0, maxLevels);
+  const highs = findSwings(bars.slice(0, -1), 'high', fractal).map((s) => ({ price: s.bar.high, time: s.bar.timestamp }));
+  const lows = findSwings(bars.slice(0, -1), 'low', fractal).map((s) => ({ price: s.bar.low, time: s.bar.timestamp }));
+  const dedupe = (levels) => { const seen = new Set(); return levels.filter((l) => (seen.has(l.price) ? false : (seen.add(l.price), true))); };
+  const withDiesAt = (l) => ({ ...l, dies_at: nyNoonNextDayUTC(new Date(l.time)).toISOString() });
+  const resistance = dedupe(highs).filter((l) => l.price > lastPrice).sort((a, b) => a.price - b.price).slice(0, maxLevels).map(withDiesAt);
+  const support = dedupe(lows).filter((l) => l.price < lastPrice).sort((a, b) => b.price - a.price).slice(0, maxLevels).map(withDiesAt);
   return { support, resistance };
 }
 
-async function computeMarketSnapshot(sid, symKey, ctraderSymbol, now) {
+async function computeMarketSnapshot(sid, symKey, ctraderSymbol, now, barsH4, barsD1) {
   const fromISO = new Date(now.getTime() - 10 * 86400000).toISOString();
   let bars;
   try {
@@ -283,16 +298,25 @@ async function computeMarketSnapshot(sid, symKey, ctraderSymbol, now) {
 
   const { support, resistance } = nearestLevels(bars, lastPrice);
 
+  const dayHighBar = todayBars.length ? todayBars.reduce((a, b) => (b.high > a.high ? b : a)) : null;
+  const dayLowBar = todayBars.length ? todayBars.reduce((a, b) => (b.low < a.low ? b : a)) : null;
+
   return {
     symbol: symKey,
     ctrader_symbol: ctraderSymbol,
     last_price: lastPrice,
     day_open: todayBars.length ? todayBars[0].open : null,
-    day_high: todayBars.length ? Math.max(...todayBars.map((b) => b.high)) : null,
-    day_low: todayBars.length ? Math.min(...todayBars.map((b) => b.low)) : null,
+    day_high: dayHighBar ? dayHighBar.high : null,
+    day_high_time: dayHighBar ? dayHighBar.timestamp : null,
+    day_high_dies_at: dayHighBar ? nyNoonNextDayUTC(new Date(dayHighBar.timestamp)).toISOString() : null,
+    day_low: dayLowBar ? dayLowBar.low : null,
+    day_low_time: dayLowBar ? dayLowBar.timestamp : null,
+    day_low_dies_at: dayLowBar ? nyNoonNextDayUTC(new Date(dayLowBar.timestamp)).toISOString() : null,
     prev_day_close: prevBars.length ? prevBars[prevBars.length - 1].close : null,
     support, resistance,
-    bars_h1: bars.slice(-80).map((b) => ({ t: b.timestamp, o: b.open, h: b.high, l: b.low, c: b.close })),
+    bars_h1: toCompactBars(bars, 80),
+    bars_h4: toCompactBars(barsH4 ?? [], 80),
+    bars_d1: toCompactBars(barsD1 ?? [], 80),
     generated_at: new Date().toISOString(),
   };
 }
@@ -317,6 +341,7 @@ export async function runOnce() {
 
   const now = new Date();
   const results = [];
+  const barsByTf = {}; // symKey -> { h4: bars, d1: bars } — reusadas por el snapshot de mercado, sin refetch
 
   for (const [symKey, ctraderSymbol] of Object.entries(SYMBOLS)) {
     for (const tf of TIMEFRAMES) {
@@ -332,6 +357,7 @@ export async function runOnce() {
         console.log(`${symKey}/${tf}: solo ${bars.length} velas, insuficiente — se omite`);
         continue;
       }
+      (barsByTf[symKey] ??= {})[tf] = bars;
 
       const a = groupA(bars), b = groupB(bars), c = groupC(bars);
       const weighted = a.score * 0.35 + b.score * 0.35 + c.score * 0.30;
@@ -361,10 +387,10 @@ export async function runOnce() {
 
   const snapshots = [];
   for (const [symKey, ctraderSymbol] of Object.entries(SYMBOLS)) {
-    const snap = await computeMarketSnapshot(sid, symKey, ctraderSymbol, now);
+    const snap = await computeMarketSnapshot(sid, symKey, ctraderSymbol, now, barsByTf[symKey]?.h4, barsByTf[symKey]?.d1);
     if (snap) {
       snapshots.push(snap);
-      console.log(`${symKey}/snapshot: last ${snap.last_price} · día ${snap.day_low}-${snap.day_high} · soporte ${snap.support[0] ?? '—'} · resistencia ${snap.resistance[0] ?? '—'}`);
+      console.log(`${symKey}/snapshot: last ${snap.last_price} · día ${snap.day_low}-${snap.day_high} · soporte ${snap.support[0]?.price ?? '—'} · resistencia ${snap.resistance[0]?.price ?? '—'}`);
     }
   }
   for (const row of snapshots) {
@@ -401,3 +427,9 @@ if (process.argv[1] && process.argv[1].endsWith('compute-sentiment.mjs')) {
 //    cercanos al precio actual, hasta 3 de cada lado — no reusa la lógica de
 //    "DOL" real de los backtests de los modelos WS, es una heurística más
 //    simple a propósito (mismo criterio que el Grupo C).
+// 6. "Muerte" de un nivel en el gráfico de Live: 12:00 hora de Nueva York del
+//    día siguiente al de la vela que lo marcó (soporte/resistencia/máximo/
+//    mínimo) — pedido explícito de Rafa para que la línea sea un segmento con
+//    nacimiento y muerte visibles, no una raya infinita. bars_h4/bars_d1 del
+//    snapshot reusan las mismas velas que ya se piden para el sentimiento
+//    (mismo símbolo, mismo momento) — no hay llamadas MCP extra por esto.

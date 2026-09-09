@@ -33,7 +33,15 @@ async function processRefresh(reason) {
     console.log(`[${new Date().toISOString()}] OK — ${count} filas actualizadas.\n`);
   } catch (e) {
     console.error(`[${new Date().toISOString()}] ERROR:`, e.message || e);
-    await supabase.from('trading_sentiment_refresh').upsert({ id: 'default', status: 'error', completed_at: new Date().toISOString(), error: String(e.message || e) }).catch(() => {});
+    // try/catch en vez de .catch() encadenado: el query builder de supabase-js
+    // es "thenable" (implementa .then) pero no siempre expone .catch/.finally
+    // como una Promise real — encadenar .catch() directo tiraba
+    // "TypeError: ...upsert(...).catch is not a function" y tumbaba el watcher entero.
+    try {
+      await supabase.from('trading_sentiment_refresh').upsert({ id: 'default', status: 'error', completed_at: new Date().toISOString(), error: String(e.message || e) });
+    } catch {
+      // si esto también falla, no hay mucho más que hacer — ya se logueó el error real arriba.
+    }
   } finally {
     running = false;
   }
