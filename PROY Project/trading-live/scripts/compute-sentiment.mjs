@@ -285,8 +285,12 @@ function nearestLevels(bars, lastPrice, now, fractal = 3, maxLevels = 3) {
   return { support, resistance };
 }
 
+const CHART_BARS_LIMIT = 300; // cuántas velas se guardan por timeframe para el gráfico de Live (más = más contexto al maximizar)
+
 async function computeMarketSnapshot(sid, symKey, ctraderSymbol, now, barsH4, barsD1) {
-  const fromISO = new Date(now.getTime() - 10 * 86400000).toISOString();
+  // 20 días de margen para poder guardar hasta CHART_BARS_LIMIT velas H1
+  // (20d × 24h = 480 posibles, de sobra para las 300 que se guardan).
+  const fromISO = new Date(now.getTime() - 20 * 86400000).toISOString();
   let bars;
   try {
     bars = await getTrendbarsRange(sid, ctraderSymbol, 'h1', fromISO, now.toISOString());
@@ -336,9 +340,9 @@ async function computeMarketSnapshot(sid, symKey, ctraderSymbol, now, barsH4, ba
     prev_day_low_dies_at: prevDayLowBar ? todayNoon : null,
     prev_day_close: prevBars.length ? prevBars[prevBars.length - 1].close : null,
     support, resistance,
-    bars_h1: toCompactBars(bars, 80),
-    bars_h4: toCompactBars(barsH4 ?? [], 80),
-    bars_d1: toCompactBars(barsD1 ?? [], 80),
+    bars_h1: toCompactBars(bars, CHART_BARS_LIMIT),
+    bars_h4: toCompactBars(barsH4 ?? [], CHART_BARS_LIMIT),
+    bars_d1: toCompactBars(barsD1 ?? [], CHART_BARS_LIMIT),
     generated_at: new Date().toISOString(),
   };
 }
