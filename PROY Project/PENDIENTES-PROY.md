@@ -4,6 +4,7 @@ Este archivo centraliza los pendientes **compartidos** del ecosistema. Cada proy
 
 | Archivo | Proyecto |
 |--------|---------|
+| `tower/PENDIENTES-TOWER.md` | Tower (Next.js, dashboard nuevo — ver `TOWER-MIGRACION.md`) |
 | `frontend/PENDIENTES-FRONTEND.md` | PROY Dashboard (Next.js) |
 | `../aplicaciones-web/vitaldent-web/PENDIENTES-VITALDENT-WEB.md` | VitalDent Web (Next.js) |
 | `../aplicaciones-web/zammy-portal/PENDIENTES-ZAMMY.md` | Zammy Portal (Next.js) |
