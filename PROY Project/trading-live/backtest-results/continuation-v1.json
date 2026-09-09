@@ -1,0 +1,716 @@
+{
+  "summary": {
+    "generatedAt": "2026-09-09T03:23:07.282Z",
+    "symbol": "#USNDAQ100",
+    "dataRangeH1": {
+      "from": "2026-08-10T04:00:00Z",
+      "to": "2026-09-09T02:00:00Z",
+      "bars": 501
+    },
+    "diasAnalizados": 27,
+    "signalsDetected": 32,
+    "winRate": 37.5,
+    "avgR": 0.125,
+    "wins": 12,
+    "losses": 20
+  },
+  "results": [
+    {
+      "date": "2026-08-10",
+      "nyHour": 2,
+      "outcome": "setup",
+      "direction": "short",
+      "refCandle": {
+        "timestamp": "2026-08-10T05:00:00Z",
+        "high": 29831.65,
+        "low": 29782.15
+      },
+      "sweepAt": "2026-08-10T06:00:00Z",
+      "entry": 29835.9,
+      "sl": 29838.114285714288,
+      "tp": 29831.47142857143,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 29838.114285714288,
+      "exitReason": "sl",
+      "exitAt": "2026-08-10T06:01:00Z",
+      "r": -1
+    },
+    {
+      "date": "2026-08-10",
+      "nyHour": 5,
+      "outcome": "setup",
+      "direction": "short",
+      "refCandle": {
+        "timestamp": "2026-08-10T08:00:00Z",
+        "high": 29882.4,
+        "low": 29841.4
+      },
+      "sweepAt": "2026-08-10T09:11:00Z",
+      "entry": 29880.15,
+      "sl": 29887.407142857144,
+      "tp": 29865.635714285716,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 29865.635714285716,
+      "exitReason": "tp",
+      "exitAt": "2026-08-10T09:19:00Z",
+      "r": 2
+    },
+    {
+      "date": "2026-08-11",
+      "nyHour": 2,
+      "outcome": "setup",
+      "direction": "long",
+      "refCandle": {
+        "timestamp": "2026-08-11T05:00:00Z",
+        "high": 29757.9,
+        "low": 29692.65
+      },
+      "sweepAt": "2026-08-11T06:00:00Z",
+      "entry": 29694.65,
+      "sl": 29688.714285714286,
+      "tp": 29706.521428571432,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 29706.521428571432,
+      "exitReason": "tp",
+      "exitAt": "2026-08-11T06:01:00Z",
+      "r": 2
+    },
+    {
+      "date": "2026-08-13",
+      "nyHour": 7,
+      "outcome": "setup",
+      "direction": "short",
+      "refCandle": {
+        "timestamp": "2026-08-13T10:00:00Z",
+        "high": 29794.9,
+        "low": 29772.9
+      },
+      "sweepAt": "2026-08-13T11:00:00Z",
+      "entry": 29798.9,
+      "sl": 29801.264285714286,
+      "tp": 29794.171428571433,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 29801.264285714286,
+      "exitReason": "sl_y_tp_misma_vela_asume_sl",
+      "exitAt": "2026-08-13T11:01:00Z",
+      "r": -1
+    },
+    {
+      "date": "2026-08-13",
+      "nyHour": 9,
+      "outcome": "setup",
+      "direction": "short",
+      "refCandle": {
+        "timestamp": "2026-08-13T12:00:00Z",
+        "high": 29795.5,
+        "low": 29722.9
+      },
+      "sweepAt": "2026-08-13T13:00:00Z",
+      "entry": 29799.4,
+      "sl": 29805.585714285717,
+      "tp": 29787.02857142857,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 29805.585714285717,
+      "exitReason": "sl",
+      "exitAt": "2026-08-13T13:02:00Z",
+      "r": -1
+    },
+    {
+      "date": "2026-08-13",
+      "nyHour": 10,
+      "outcome": "setup",
+      "direction": "short",
+      "refCandle": {
+        "timestamp": "2026-08-13T13:00:00Z",
+        "high": 30087.4,
+        "low": 29774.15
+      },
+      "sweepAt": "2026-08-13T14:00:00Z",
+      "entry": 30089.4,
+      "sl": 30099.492000000002,
+      "tp": 30069.216,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 30069.216,
+      "exitReason": "tp",
+      "exitAt": "2026-08-13T14:01:00Z",
+      "r": 2
+    },
+    {
+      "date": "2026-08-14",
+      "nyHour": 11,
+      "outcome": "setup",
+      "direction": "long",
+      "refCandle": {
+        "timestamp": "2026-08-14T14:00:00Z",
+        "high": 30180.95,
+        "low": 30032.65
+      },
+      "sweepAt": "2026-08-14T15:00:00Z",
+      "entry": 30045.7,
+      "sl": 30026.259142857143,
+      "tp": 30084.581714285716,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 30026.259142857143,
+      "exitReason": "sl",
+      "exitAt": "2026-08-14T15:03:00Z",
+      "r": -1
+    },
+    {
+      "date": "2026-08-16",
+      "outcome": "sin_datos_m1",
+      "reason": "solo 0 velas M1"
+    },
+    {
+      "date": "2026-08-17",
+      "nyHour": 3,
+      "outcome": "setup",
+      "direction": "short",
+      "refCandle": {
+        "timestamp": "2026-08-17T06:00:00Z",
+        "high": 30249.35,
+        "low": 30190.6
+      },
+      "sweepAt": "2026-08-17T07:01:00Z",
+      "entry": 30249.35,
+      "sl": 30256.142857142855,
+      "tp": 30235.764285714286,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 30235.764285714286,
+      "exitReason": "tp",
+      "exitAt": "2026-08-17T07:03:00Z",
+      "r": 2
+    },
+    {
+      "date": "2026-08-18",
+      "nyHour": 4,
+      "outcome": "setup",
+      "direction": "long",
+      "refCandle": {
+        "timestamp": "2026-08-18T07:00:00Z",
+        "high": 29822.4,
+        "low": 29736.15
+      },
+      "sweepAt": "2026-08-18T08:00:00Z",
+      "entry": 29718.9,
+      "sl": 29700.34285714286,
+      "tp": 29745.8,
+      "targetR": 1.4495765973825494,
+      "tpTf": "H4",
+      "exit": 29700.34285714286,
+      "exitReason": "sl",
+      "exitAt": "2026-08-18T08:04:00Z",
+      "r": -1
+    },
+    {
+      "date": "2026-08-18",
+      "nyHour": 10,
+      "outcome": "setup",
+      "direction": "long",
+      "refCandle": {
+        "timestamp": "2026-08-18T13:00:00Z",
+        "high": 29699.4,
+        "low": 29536.4
+      },
+      "sweepAt": "2026-08-18T14:10:00Z",
+      "entry": 29527.4,
+      "sl": 29507.082000000002,
+      "tp": 29568.036,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 29507.082000000002,
+      "exitReason": "sl",
+      "exitAt": "2026-08-18T14:12:00Z",
+      "r": -1
+    },
+    {
+      "date": "2026-08-18",
+      "nyHour": 11,
+      "outcome": "setup",
+      "direction": "long",
+      "refCandle": {
+        "timestamp": "2026-08-18T14:00:00Z",
+        "high": 29635.9,
+        "low": 29467.9
+      },
+      "sweepAt": "2026-08-18T15:00:00Z",
+      "entry": 29473.15,
+      "sl": 29458.714285714286,
+      "tp": 29502.021428571432,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 29458.714285714286,
+      "exitReason": "sl",
+      "exitAt": "2026-08-18T15:01:00Z",
+      "r": -1
+    },
+    {
+      "date": "2026-08-19",
+      "nyHour": 10,
+      "outcome": "setup",
+      "direction": "long",
+      "refCandle": {
+        "timestamp": "2026-08-19T13:00:00Z",
+        "high": 29681.2,
+        "low": 29342.7
+      },
+      "sweepAt": "2026-08-19T14:11:00Z",
+      "entry": 29325.95,
+      "sl": 29309.02142857143,
+      "tp": 29359.807142857146,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 29359.807142857146,
+      "exitReason": "tp",
+      "exitAt": "2026-08-19T14:16:00Z",
+      "r": 2
+    },
+    {
+      "date": "2026-08-20",
+      "nyHour": 4,
+      "outcome": "setup",
+      "direction": "long",
+      "refCandle": {
+        "timestamp": "2026-08-20T07:00:00Z",
+        "high": 29605.2,
+        "low": 29526.2
+      },
+      "sweepAt": "2026-08-20T08:00:00Z",
+      "entry": 29525.2,
+      "sl": 29515.65,
+      "tp": 29544.3,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 29515.65,
+      "exitReason": "sl",
+      "exitAt": "2026-08-20T08:03:00Z",
+      "r": -1
+    },
+    {
+      "date": "2026-08-20",
+      "nyHour": 8,
+      "outcome": "setup",
+      "direction": "long",
+      "refCandle": {
+        "timestamp": "2026-08-20T11:00:00Z",
+        "high": 29516.95,
+        "low": 29285.45
+      },
+      "sweepAt": "2026-08-20T12:01:00Z",
+      "entry": 29308.45,
+      "sl": 29277.43942857143,
+      "tp": 29370.471142857143,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 29277.43942857143,
+      "exitReason": "sl",
+      "exitAt": "2026-08-20T12:03:00Z",
+      "r": -1
+    },
+    {
+      "date": "2026-08-21",
+      "nyHour": 4,
+      "outcome": "setup",
+      "direction": "short",
+      "refCandle": {
+        "timestamp": "2026-08-21T07:00:00Z",
+        "high": 29389.3,
+        "low": 29314.3
+      },
+      "sweepAt": "2026-08-21T08:00:00Z",
+      "entry": 29390.55,
+      "sl": 29393.62857142857,
+      "tp": 29384.39285714286,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 29393.62857142857,
+      "exitReason": "sl_y_tp_misma_vela_asume_sl",
+      "exitAt": "2026-08-21T08:01:00Z",
+      "r": -1
+    },
+    {
+      "date": "2026-08-21",
+      "nyHour": 6,
+      "outcome": "setup",
+      "direction": "short",
+      "refCandle": {
+        "timestamp": "2026-08-21T09:00:00Z",
+        "high": 29425.55,
+        "low": 29346.05
+      },
+      "sweepAt": "2026-08-21T10:00:00Z",
+      "entry": 29434.8,
+      "sl": 29442.95,
+      "tp": 29418.499999999996,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 29442.95,
+      "exitReason": "sl",
+      "exitAt": "2026-08-21T10:02:00Z",
+      "r": -1
+    },
+    {
+      "date": "2026-08-23",
+      "outcome": "sin_datos_m1",
+      "reason": "solo 0 velas M1"
+    },
+    {
+      "date": "2026-08-24",
+      "nyHour": 2,
+      "outcome": "setup",
+      "direction": "long",
+      "refCandle": {
+        "timestamp": "2026-08-24T05:00:00Z",
+        "high": 29234.7,
+        "low": 29131.83
+      },
+      "sweepAt": "2026-08-24T06:01:00Z",
+      "entry": 29120.2,
+      "sl": 29112.125142857145,
+      "tp": 29136.349714285712,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 29112.125142857145,
+      "exitReason": "sl",
+      "exitAt": "2026-08-24T06:02:00Z",
+      "r": -1
+    },
+    {
+      "date": "2026-08-24",
+      "nyHour": 4,
+      "outcome": "setup",
+      "direction": "long",
+      "refCandle": {
+        "timestamp": "2026-08-24T07:00:00Z",
+        "high": 29150.2,
+        "low": 29070.2
+      },
+      "sweepAt": "2026-08-24T08:01:00Z",
+      "entry": 29068.45,
+      "sl": 29051.350000000002,
+      "tp": 29102.649999999998,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 29102.649999999998,
+      "exitReason": "tp",
+      "exitAt": "2026-08-24T08:06:00Z",
+      "r": 2
+    },
+    {
+      "date": "2026-08-25",
+      "nyHour": 2,
+      "outcome": "setup",
+      "direction": "short",
+      "refCandle": {
+        "timestamp": "2026-08-25T05:00:00Z",
+        "high": 29181.7,
+        "low": 29130.7
+      },
+      "sweepAt": "2026-08-25T06:00:00Z",
+      "entry": 29188.45,
+      "sl": 29195.157142857144,
+      "tp": 29175.035714285714,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 29175.035714285714,
+      "exitReason": "tp",
+      "exitAt": "2026-08-25T06:02:00Z",
+      "r": 2
+    },
+    {
+      "date": "2026-08-26",
+      "nyHour": 12,
+      "outcome": "setup",
+      "direction": "long",
+      "refCandle": {
+        "timestamp": "2026-08-26T15:00:00Z",
+        "high": 29235.65,
+        "low": 29160.4
+      },
+      "sweepAt": "2026-08-26T16:00:00Z",
+      "entry": 29145.15,
+      "sl": 29139.732285714286,
+      "tp": 29155.985428571432,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 29139.732285714286,
+      "exitReason": "sl",
+      "exitAt": "2026-08-26T16:01:00Z",
+      "r": -1
+    },
+    {
+      "date": "2026-08-27",
+      "nyHour": 2,
+      "outcome": "setup",
+      "direction": "long",
+      "refCandle": {
+        "timestamp": "2026-08-27T05:00:00Z",
+        "high": 29449.8,
+        "low": 29374.65
+      },
+      "sweepAt": "2026-08-27T06:00:00Z",
+      "entry": 29373.3,
+      "sl": 29369.412857142856,
+      "tp": 29381.074285714287,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 29369.412857142856,
+      "exitReason": "sl",
+      "exitAt": "2026-08-27T06:03:00Z",
+      "r": -1
+    },
+    {
+      "date": "2026-08-28",
+      "nyHour": 2,
+      "outcome": "setup",
+      "direction": "long",
+      "refCandle": {
+        "timestamp": "2026-08-28T05:00:00Z",
+        "high": 29592.05,
+        "low": 29545.8
+      },
+      "sweepAt": "2026-08-28T06:00:00Z",
+      "entry": 29544.3,
+      "sl": 29542.22142857143,
+      "tp": 29548.45714285714,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 29548.45714285714,
+      "exitReason": "tp",
+      "exitAt": "2026-08-28T06:01:00Z",
+      "r": 2
+    },
+    {
+      "date": "2026-08-30",
+      "outcome": "sin_datos_m1",
+      "reason": "solo 0 velas M1"
+    },
+    {
+      "date": "2026-08-31",
+      "nyHour": 2,
+      "outcome": "setup",
+      "direction": "short",
+      "refCandle": {
+        "timestamp": "2026-08-31T05:00:00Z",
+        "high": 29443.7,
+        "low": 29374.7
+      },
+      "sweepAt": "2026-08-31T06:06:00Z",
+      "entry": 29437.7,
+      "sl": 29456.84285714286,
+      "tp": 29399.414285714283,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 29456.84285714286,
+      "exitReason": "sl",
+      "exitAt": "2026-08-31T06:11:00Z",
+      "r": -1
+    },
+    {
+      "date": "2026-08-31",
+      "nyHour": 4,
+      "outcome": "setup",
+      "direction": "short",
+      "refCandle": {
+        "timestamp": "2026-08-31T07:00:00Z",
+        "high": 29488.7,
+        "low": 29460.2
+      },
+      "sweepAt": "2026-08-31T08:01:00Z",
+      "entry": 29484.95,
+      "sl": 29503.92142857143,
+      "tp": 29447.007142857143,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 29447.007142857143,
+      "exitReason": "tp",
+      "exitAt": "2026-08-31T08:43:00Z",
+      "r": 2
+    },
+    {
+      "date": "2026-09-02",
+      "nyHour": 3,
+      "outcome": "setup",
+      "direction": "short",
+      "refCandle": {
+        "timestamp": "2026-09-02T06:00:00Z",
+        "high": 29071.2,
+        "low": 28989.7
+      },
+      "sweepAt": "2026-09-02T07:02:00Z",
+      "entry": 29068.2,
+      "sl": 29078.72142857143,
+      "tp": 29047.157142857144,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 29078.72142857143,
+      "exitReason": "sl",
+      "exitAt": "2026-09-02T07:09:00Z",
+      "r": -1
+    },
+    {
+      "date": "2026-09-02",
+      "nyHour": 8,
+      "outcome": "setup",
+      "direction": "short",
+      "refCandle": {
+        "timestamp": "2026-09-02T11:00:00Z",
+        "high": 29058.95,
+        "low": 28901.95
+      },
+      "sweepAt": "2026-09-02T12:04:00Z",
+      "entry": 29060.7,
+      "sl": 29067.214285714286,
+      "tp": 29047.67142857143,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 29067.214285714286,
+      "exitReason": "sl",
+      "exitAt": "2026-09-02T12:05:00Z",
+      "r": -1
+    },
+    {
+      "date": "2026-09-02",
+      "nyHour": 10,
+      "outcome": "setup",
+      "direction": "short",
+      "refCandle": {
+        "timestamp": "2026-09-02T13:00:00Z",
+        "high": 29093.2,
+        "low": 28992.2
+      },
+      "sweepAt": "2026-09-02T14:10:00Z",
+      "entry": 29083.07,
+      "sl": 29103.655714285716,
+      "tp": 29041.898571428566,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 29103.655714285716,
+      "exitReason": "sl",
+      "exitAt": "2026-09-02T14:15:00Z",
+      "r": -1
+    },
+    {
+      "date": "2026-09-04",
+      "nyHour": 2,
+      "outcome": "setup",
+      "direction": "short",
+      "refCandle": {
+        "timestamp": "2026-09-04T05:00:00Z",
+        "high": 29612.6,
+        "low": 29561.7
+      },
+      "sweepAt": "2026-09-04T06:12:00Z",
+      "entry": 29614.2,
+      "sl": 29616.935714285715,
+      "tp": 29608.72857142857,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 29608.72857142857,
+      "exitReason": "tp",
+      "exitAt": "2026-09-04T06:13:00Z",
+      "r": 2
+    },
+    {
+      "date": "2026-09-06",
+      "outcome": "sin_datos_m1",
+      "reason": "solo 0 velas M1"
+    },
+    {
+      "date": "2026-09-07",
+      "nyHour": 2,
+      "outcome": "setup",
+      "direction": "short",
+      "refCandle": {
+        "timestamp": "2026-09-07T05:00:00Z",
+        "high": 29618.55,
+        "low": 29557.3
+      },
+      "sweepAt": "2026-09-07T06:12:00Z",
+      "entry": 29620.05,
+      "sl": 29623.264285714286,
+      "tp": 29613.621428571427,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 29613.621428571427,
+      "exitReason": "tp",
+      "exitAt": "2026-09-07T06:15:00Z",
+      "r": 2
+    },
+    {
+      "date": "2026-09-08",
+      "nyHour": 2,
+      "outcome": "setup",
+      "direction": "long",
+      "refCandle": {
+        "timestamp": "2026-09-08T05:00:00Z",
+        "high": 29720.7,
+        "low": 29592.7
+      },
+      "sweepAt": "2026-09-08T06:00:00Z",
+      "entry": 29595.45,
+      "sl": 29584.352857142858,
+      "tp": 29617.644285714287,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 29584.352857142858,
+      "exitReason": "sl",
+      "exitAt": "2026-09-08T06:02:00Z",
+      "r": -1
+    },
+    {
+      "date": "2026-09-08",
+      "nyHour": 4,
+      "outcome": "setup",
+      "direction": "long",
+      "refCandle": {
+        "timestamp": "2026-09-08T07:00:00Z",
+        "high": 29621.7,
+        "low": 29512.45
+      },
+      "sweepAt": "2026-09-08T08:00:00Z",
+      "entry": 29505.2,
+      "sl": 29492.72857142857,
+      "tp": 29530.14285714286,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 29492.72857142857,
+      "exitReason": "sl",
+      "exitAt": "2026-09-08T08:02:00Z",
+      "r": -1
+    },
+    {
+      "date": "2026-09-08",
+      "nyHour": 7,
+      "outcome": "setup",
+      "direction": "long",
+      "refCandle": {
+        "timestamp": "2026-09-08T10:00:00Z",
+        "high": 29632.1,
+        "low": 29529.45
+      },
+      "sweepAt": "2026-09-08T11:08:00Z",
+      "entry": 29524.7,
+      "sl": 29517.75,
+      "tp": 29538.600000000002,
+      "targetR": 2,
+      "tpTf": "H4",
+      "exit": 29538.600000000002,
+      "exitReason": "tp",
+      "exitAt": "2026-09-08T11:09:00Z",
+      "r": 2
+    },
+    {
+      "date": "2026-09-09",
+      "outcome": "sin_datos_m1",
+      "reason": "solo 0 velas M1"
+    }
+  ]
+}

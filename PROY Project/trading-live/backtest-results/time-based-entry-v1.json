@@ -1,0 +1,812 @@
+{
+  "summary": {
+    "generatedAt": "2026-09-07T21:06:37.266Z",
+    "symbol": "#USNDAQ100",
+    "dataRangeH1": {
+      "from": "2026-08-09T22:00:00Z",
+      "to": "2026-09-07T16:00:00Z",
+      "bars": 479
+    },
+    "sessionsAnalyzed": 52,
+    "signalsDetected": 23,
+    "winRate": 43.47826086956522,
+    "avgR": 0.161,
+    "wins": 10,
+    "losses": 13,
+    "outcomeBreakdown": {
+      "sin_datos_h1": 10,
+      "setup": 23,
+      "sin_confirmacion": 16,
+      "sin_barrido": 3
+    }
+  },
+  "results": [
+    {
+      "session": "Londres",
+      "date": "2026-08-09",
+      "windowStart": "2026-08-09T07:00:00.000Z",
+      "outcome": "sin_datos_h1",
+      "reason": "no hay vela H1 en 2026-08-09T06:00:00.000Z"
+    },
+    {
+      "session": "NY",
+      "date": "2026-08-09",
+      "windowStart": "2026-08-09T12:00:00.000Z",
+      "outcome": "sin_datos_h1",
+      "reason": "no hay vela H1 en 2026-08-09T11:00:00.000Z"
+    },
+    {
+      "session": "Londres",
+      "date": "2026-08-10",
+      "windowStart": "2026-08-10T07:00:00.000Z",
+      "outcome": "setup",
+      "direction": "long",
+      "confirmType": "rechazo_mecha",
+      "refCandle": {
+        "timestamp": "2026-08-10T06:00:00Z",
+        "high": 29863.15,
+        "low": 29807.65
+      },
+      "sweepAt": "2026-08-10T07:02:00Z",
+      "entryAt": "2026-08-10T07:02:00Z",
+      "entry": 29809.65,
+      "sl": 29804.755357142858,
+      "tp": 29824.333928571432,
+      "targetR": 3,
+      "tpTf": "H4",
+      "exit": 29804.755357142858,
+      "exitReason": "sl",
+      "exitAt": "2026-08-10T07:10:00Z",
+      "r": -1
+    },
+    {
+      "session": "NY",
+      "date": "2026-08-10",
+      "windowStart": "2026-08-10T12:00:00.000Z",
+      "outcome": "sin_confirmacion",
+      "reason": "hubo barrido pero no se confirmó cambio de carácter ni rechazo de mecha dentro de la ventana",
+      "direction": "long",
+      "sweepAt": "2026-08-10T12:14:00Z"
+    },
+    {
+      "session": "Londres",
+      "date": "2026-08-11",
+      "windowStart": "2026-08-11T07:00:00.000Z",
+      "outcome": "setup",
+      "direction": "long",
+      "confirmType": "rechazo_mecha",
+      "refCandle": {
+        "timestamp": "2026-08-11T06:00:00Z",
+        "high": 29730.9,
+        "low": 29636.4
+      },
+      "sweepAt": "2026-08-11T07:23:00Z",
+      "entryAt": "2026-08-11T07:23:00Z",
+      "entry": 29640.9,
+      "sl": 29632.23035714286,
+      "tp": 29662.7,
+      "targetR": 2.514521112255775,
+      "tpTf": "H4",
+      "exit": 29662.7,
+      "exitReason": "tp",
+      "exitAt": "2026-08-11T07:27:00Z",
+      "r": 2.515
+    },
+    {
+      "session": "NY",
+      "date": "2026-08-11",
+      "windowStart": "2026-08-11T12:00:00.000Z",
+      "outcome": "sin_barrido",
+      "reason": "precio no rompió el rango H1 de referencia dentro de la ventana"
+    },
+    {
+      "session": "Londres",
+      "date": "2026-08-12",
+      "windowStart": "2026-08-12T07:00:00.000Z",
+      "outcome": "sin_confirmacion",
+      "reason": "hubo barrido pero no se confirmó cambio de carácter ni rechazo de mecha dentro de la ventana",
+      "direction": "short",
+      "sweepAt": "2026-08-12T07:00:00Z"
+    },
+    {
+      "session": "NY",
+      "date": "2026-08-12",
+      "windowStart": "2026-08-12T12:00:00.000Z",
+      "outcome": "setup",
+      "direction": "short",
+      "confirmType": "rechazo_mecha",
+      "refCandle": {
+        "timestamp": "2026-08-12T11:00:00Z",
+        "high": 29755.6,
+        "low": 29715.1
+      },
+      "sweepAt": "2026-08-12T12:00:00Z",
+      "entryAt": "2026-08-12T12:00:00Z",
+      "entry": 29754.85,
+      "sl": 29757.330357142855,
+      "tp": 29747.40892857143,
+      "targetR": 3,
+      "tpTf": "H4",
+      "exit": 29757.330357142855,
+      "exitReason": "sl",
+      "exitAt": "2026-08-12T12:01:00Z",
+      "r": -1
+    },
+    {
+      "session": "Londres",
+      "date": "2026-08-13",
+      "windowStart": "2026-08-13T07:00:00.000Z",
+      "outcome": "sin_confirmacion",
+      "reason": "hubo barrido pero no se confirmó cambio de carácter ni rechazo de mecha dentro de la ventana",
+      "direction": "long",
+      "sweepAt": "2026-08-13T07:04:00Z"
+    },
+    {
+      "session": "NY",
+      "date": "2026-08-13",
+      "windowStart": "2026-08-13T12:00:00.000Z",
+      "outcome": "setup",
+      "direction": "long",
+      "confirmType": "cambio_caracter",
+      "refCandle": {
+        "timestamp": "2026-08-13T11:00:00Z",
+        "high": 29804.4,
+        "low": 29765.75
+      },
+      "sweepAt": "2026-08-13T12:01:00Z",
+      "entryAt": "2026-08-13T13:00:00Z",
+      "entry": 29799.4,
+      "sl": 29760.178571428572,
+      "tp": 29879.35,
+      "targetR": 2.038426516117187,
+      "tpTf": "H4",
+      "exit": 29819.65,
+      "exitReason": "tiempo_90min",
+      "exitAt": "2026-08-13T13:29:00Z",
+      "r": 0.516
+    },
+    {
+      "session": "Londres",
+      "date": "2026-08-14",
+      "windowStart": "2026-08-14T07:00:00.000Z",
+      "outcome": "sin_confirmacion",
+      "reason": "hubo barrido pero no se confirmó cambio de carácter ni rechazo de mecha dentro de la ventana",
+      "direction": "short",
+      "sweepAt": "2026-08-14T07:00:00Z"
+    },
+    {
+      "session": "NY",
+      "date": "2026-08-14",
+      "windowStart": "2026-08-14T12:00:00.000Z",
+      "outcome": "setup",
+      "direction": "short",
+      "confirmType": "rechazo_mecha",
+      "refCandle": {
+        "timestamp": "2026-08-14T11:00:00Z",
+        "high": 30177.2,
+        "low": 30147.2
+      },
+      "sweepAt": "2026-08-14T12:00:00Z",
+      "entryAt": "2026-08-14T12:00:00Z",
+      "entry": 30174.2,
+      "sl": 30178.376785714285,
+      "tp": 30161.66964285715,
+      "targetR": 3,
+      "tpTf": "H4",
+      "exit": 30178.376785714285,
+      "exitReason": "sl",
+      "exitAt": "2026-08-14T12:02:00Z",
+      "r": -1
+    },
+    {
+      "session": "Londres",
+      "date": "2026-08-16",
+      "windowStart": "2026-08-16T07:00:00.000Z",
+      "outcome": "sin_datos_h1",
+      "reason": "no hay vela H1 en 2026-08-16T06:00:00.000Z"
+    },
+    {
+      "session": "NY",
+      "date": "2026-08-16",
+      "windowStart": "2026-08-16T12:00:00.000Z",
+      "outcome": "sin_datos_h1",
+      "reason": "no hay vela H1 en 2026-08-16T11:00:00.000Z"
+    },
+    {
+      "session": "Londres",
+      "date": "2026-08-17",
+      "windowStart": "2026-08-17T07:00:00.000Z",
+      "outcome": "setup",
+      "direction": "short",
+      "confirmType": "cambio_caracter",
+      "refCandle": {
+        "timestamp": "2026-08-17T06:00:00Z",
+        "high": 30249.35,
+        "low": 30190.6
+      },
+      "sweepAt": "2026-08-17T07:01:00Z",
+      "entryAt": "2026-08-17T07:03:00Z",
+      "entry": 30231.1,
+      "sl": 30254.798214285714,
+      "tp": 30160.00535714285,
+      "targetR": 3,
+      "tpTf": "H4",
+      "exit": 30238.85,
+      "exitReason": "tiempo_90min",
+      "exitAt": "2026-08-17T08:29:00Z",
+      "r": -0.327
+    },
+    {
+      "session": "NY",
+      "date": "2026-08-17",
+      "windowStart": "2026-08-17T12:00:00.000Z",
+      "outcome": "sin_confirmacion",
+      "reason": "hubo barrido pero no se confirmó cambio de carácter ni rechazo de mecha dentro de la ventana",
+      "direction": "long",
+      "sweepAt": "2026-08-17T12:00:00Z"
+    },
+    {
+      "session": "Londres",
+      "date": "2026-08-18",
+      "windowStart": "2026-08-18T07:00:00.000Z",
+      "outcome": "setup",
+      "direction": "short",
+      "confirmType": "cambio_caracter",
+      "refCandle": {
+        "timestamp": "2026-08-18T06:00:00Z",
+        "high": 29820.9,
+        "low": 29711.65
+      },
+      "sweepAt": "2026-08-18T07:06:00Z",
+      "entryAt": "2026-08-18T07:10:00Z",
+      "entry": 29794.4,
+      "sl": 29822.60892857143,
+      "tp": 29709.773214285717,
+      "targetR": 3,
+      "tpTf": "H4",
+      "exit": 29709.773214285717,
+      "exitReason": "tp",
+      "exitAt": "2026-08-18T08:00:00Z",
+      "r": 3
+    },
+    {
+      "session": "NY",
+      "date": "2026-08-18",
+      "windowStart": "2026-08-18T12:00:00.000Z",
+      "outcome": "setup",
+      "direction": "short",
+      "confirmType": "cambio_caracter",
+      "refCandle": {
+        "timestamp": "2026-08-18T11:00:00Z",
+        "high": 29704.9,
+        "low": 29657.15
+      },
+      "sweepAt": "2026-08-18T12:04:00Z",
+      "entryAt": "2026-08-18T12:10:00Z",
+      "entry": 29663.65,
+      "sl": 29712.5,
+      "tp": 29517.100000000006,
+      "targetR": 3,
+      "tpTf": "H4",
+      "exit": 29619.9,
+      "exitReason": "tiempo_90min",
+      "exitAt": "2026-08-18T13:29:00Z",
+      "r": 0.896
+    },
+    {
+      "session": "Londres",
+      "date": "2026-08-19",
+      "windowStart": "2026-08-19T07:00:00.000Z",
+      "outcome": "setup",
+      "direction": "short",
+      "confirmType": "cambio_caracter",
+      "refCandle": {
+        "timestamp": "2026-08-19T06:00:00Z",
+        "high": 29494.95,
+        "low": 29364.45
+      },
+      "sweepAt": "2026-08-19T07:14:00Z",
+      "entryAt": "2026-08-19T07:16:00Z",
+      "entry": 29472.95,
+      "sl": 29498.125,
+      "tp": 29397.425000000003,
+      "targetR": 3,
+      "tpTf": "H4",
+      "exit": 29498.125,
+      "exitReason": "sl",
+      "exitAt": "2026-08-19T07:21:00Z",
+      "r": -1
+    },
+    {
+      "session": "NY",
+      "date": "2026-08-19",
+      "windowStart": "2026-08-19T12:00:00.000Z",
+      "outcome": "sin_confirmacion",
+      "reason": "hubo barrido pero no se confirmó cambio de carácter ni rechazo de mecha dentro de la ventana",
+      "direction": "short",
+      "sweepAt": "2026-08-19T12:27:00Z"
+    },
+    {
+      "session": "Londres",
+      "date": "2026-08-20",
+      "windowStart": "2026-08-20T07:00:00.000Z",
+      "outcome": "sin_confirmacion",
+      "reason": "hubo barrido pero no se confirmó cambio de carácter ni rechazo de mecha dentro de la ventana",
+      "direction": "long",
+      "sweepAt": "2026-08-20T07:30:00Z"
+    },
+    {
+      "session": "NY",
+      "date": "2026-08-20",
+      "windowStart": "2026-08-20T12:00:00.000Z",
+      "outcome": "setup",
+      "direction": "long",
+      "confirmType": "rechazo_mecha",
+      "refCandle": {
+        "timestamp": "2026-08-20T11:00:00Z",
+        "high": 29516.95,
+        "low": 29285.45
+      },
+      "sweepAt": "2026-08-20T12:01:00Z",
+      "entryAt": "2026-08-20T12:01:00Z",
+      "entry": 29308.45,
+      "sl": 29281.947357142857,
+      "tp": 29387.95792857143,
+      "targetR": 3,
+      "tpTf": "H4",
+      "exit": 29281.947357142857,
+      "exitReason": "sl",
+      "exitAt": "2026-08-20T12:02:00Z",
+      "r": -1
+    },
+    {
+      "session": "Londres",
+      "date": "2026-08-21",
+      "windowStart": "2026-08-21T07:00:00.000Z",
+      "outcome": "sin_confirmacion",
+      "reason": "hubo barrido pero no se confirmó cambio de carácter ni rechazo de mecha dentro de la ventana",
+      "direction": "short",
+      "sweepAt": "2026-08-21T07:03:00Z"
+    },
+    {
+      "session": "NY",
+      "date": "2026-08-21",
+      "windowStart": "2026-08-21T12:00:00.000Z",
+      "outcome": "sin_confirmacion",
+      "reason": "hubo barrido pero no se confirmó cambio de carácter ni rechazo de mecha dentro de la ventana",
+      "direction": "long",
+      "sweepAt": "2026-08-21T13:17:00Z"
+    },
+    {
+      "session": "Londres",
+      "date": "2026-08-23",
+      "windowStart": "2026-08-23T07:00:00.000Z",
+      "outcome": "sin_datos_h1",
+      "reason": "no hay vela H1 en 2026-08-23T06:00:00.000Z"
+    },
+    {
+      "session": "NY",
+      "date": "2026-08-23",
+      "windowStart": "2026-08-23T12:00:00.000Z",
+      "outcome": "sin_datos_h1",
+      "reason": "no hay vela H1 en 2026-08-23T11:00:00.000Z"
+    },
+    {
+      "session": "Londres",
+      "date": "2026-08-24",
+      "windowStart": "2026-08-24T07:00:00.000Z",
+      "outcome": "setup",
+      "direction": "long",
+      "confirmType": "rechazo_mecha",
+      "refCandle": {
+        "timestamp": "2026-08-24T06:00:00Z",
+        "high": 29156.45,
+        "low": 29063.7
+      },
+      "sweepAt": "2026-08-24T08:01:00Z",
+      "entryAt": "2026-08-24T08:01:00Z",
+      "entry": 29068.45,
+      "sl": 29054.425,
+      "tp": 29110.525000000005,
+      "targetR": 3,
+      "tpTf": "H4",
+      "exit": 29110.525000000005,
+      "exitReason": "tp",
+      "exitAt": "2026-08-24T08:07:00Z",
+      "r": 3
+    },
+    {
+      "session": "NY",
+      "date": "2026-08-24",
+      "windowStart": "2026-08-24T12:00:00.000Z",
+      "outcome": "sin_barrido",
+      "reason": "precio no rompió el rango H1 de referencia dentro de la ventana"
+    },
+    {
+      "session": "Londres",
+      "date": "2026-08-25",
+      "windowStart": "2026-08-25T07:00:00.000Z",
+      "outcome": "setup",
+      "direction": "short",
+      "confirmType": "cambio_caracter",
+      "refCandle": {
+        "timestamp": "2026-08-25T06:00:00Z",
+        "high": 29228.45,
+        "low": 29171.2
+      },
+      "sweepAt": "2026-08-25T07:04:00Z",
+      "entryAt": "2026-08-25T07:16:00Z",
+      "entry": 29176.45,
+      "sl": 29231.907142857144,
+      "tp": 29049.55,
+      "targetR": 2.288253477588872,
+      "tpTf": "H4",
+      "exit": 29231.907142857144,
+      "exitReason": "sl",
+      "exitAt": "2026-08-25T08:23:00Z",
+      "r": -1
+    },
+    {
+      "session": "NY",
+      "date": "2026-08-25",
+      "windowStart": "2026-08-25T12:00:00.000Z",
+      "outcome": "setup",
+      "direction": "short",
+      "confirmType": "cambio_caracter",
+      "refCandle": {
+        "timestamp": "2026-08-25T11:00:00Z",
+        "high": 29331.7,
+        "low": 29247.95
+      },
+      "sweepAt": "2026-08-25T12:17:00Z",
+      "entryAt": "2026-08-25T12:31:00Z",
+      "entry": 29292.95,
+      "sl": 29347.139285714286,
+      "tp": 29153.2,
+      "targetR": 2.5789230870625897,
+      "tpTf": "H4",
+      "exit": 29239.45,
+      "exitReason": "tiempo_90min",
+      "exitAt": "2026-08-25T13:29:00Z",
+      "r": 0.987
+    },
+    {
+      "session": "Londres",
+      "date": "2026-08-26",
+      "windowStart": "2026-08-26T07:00:00.000Z",
+      "outcome": "setup",
+      "direction": "long",
+      "confirmType": "rechazo_mecha",
+      "refCandle": {
+        "timestamp": "2026-08-26T06:00:00Z",
+        "high": 29220.4,
+        "low": 29147.9
+      },
+      "sweepAt": "2026-08-26T07:12:00Z",
+      "entryAt": "2026-08-26T07:12:00Z",
+      "entry": 29167.9,
+      "sl": 29144.782142857144,
+      "tp": 29237.253571428573,
+      "targetR": 3,
+      "tpTf": "H4",
+      "exit": 29144.782142857144,
+      "exitReason": "sl",
+      "exitAt": "2026-08-26T07:27:00Z",
+      "r": -1
+    },
+    {
+      "session": "NY",
+      "date": "2026-08-26",
+      "windowStart": "2026-08-26T12:00:00.000Z",
+      "outcome": "sin_confirmacion",
+      "reason": "hubo barrido pero no se confirmó cambio de carácter ni rechazo de mecha dentro de la ventana",
+      "direction": "long",
+      "sweepAt": "2026-08-26T12:31:00Z"
+    },
+    {
+      "session": "Londres",
+      "date": "2026-08-27",
+      "windowStart": "2026-08-27T07:00:00.000Z",
+      "outcome": "sin_confirmacion",
+      "reason": "hubo barrido pero no se confirmó cambio de carácter ni rechazo de mecha dentro de la ventana",
+      "direction": "short",
+      "sweepAt": "2026-08-27T07:02:00Z"
+    },
+    {
+      "session": "NY",
+      "date": "2026-08-27",
+      "windowStart": "2026-08-27T12:00:00.000Z",
+      "outcome": "sin_barrido",
+      "reason": "precio no rompió el rango H1 de referencia dentro de la ventana"
+    },
+    {
+      "session": "Londres",
+      "date": "2026-08-28",
+      "windowStart": "2026-08-28T07:00:00.000Z",
+      "outcome": "setup",
+      "direction": "short",
+      "confirmType": "rechazo_mecha",
+      "refCandle": {
+        "timestamp": "2026-08-28T06:00:00Z",
+        "high": 29593.55,
+        "low": 29542.8
+      },
+      "sweepAt": "2026-08-28T07:00:00Z",
+      "entryAt": "2026-08-28T07:00:00Z",
+      "entry": 29577.3,
+      "sl": 29601.580357142855,
+      "tp": 29504.458928571432,
+      "targetR": 3,
+      "tpTf": "H4",
+      "exit": 29546.3,
+      "exitReason": "tiempo_90min",
+      "exitAt": "2026-08-28T08:29:00Z",
+      "r": 1.277
+    },
+    {
+      "session": "NY",
+      "date": "2026-08-28",
+      "windowStart": "2026-08-28T12:00:00.000Z",
+      "outcome": "setup",
+      "direction": "short",
+      "confirmType": "rechazo_mecha",
+      "refCandle": {
+        "timestamp": "2026-08-28T11:00:00Z",
+        "high": 29588.05,
+        "low": 29546.8
+      },
+      "sweepAt": "2026-08-28T12:18:00Z",
+      "entryAt": "2026-08-28T12:18:00Z",
+      "entry": 29586.3,
+      "sl": 29594.778214285714,
+      "tp": 29560.865357142855,
+      "targetR": 3,
+      "tpTf": "H4",
+      "exit": 29594.778214285714,
+      "exitReason": "sl",
+      "exitAt": "2026-08-28T12:20:00Z",
+      "r": -1
+    },
+    {
+      "session": "Londres",
+      "date": "2026-08-30",
+      "windowStart": "2026-08-30T07:00:00.000Z",
+      "outcome": "sin_datos_h1",
+      "reason": "no hay vela H1 en 2026-08-30T06:00:00.000Z"
+    },
+    {
+      "session": "NY",
+      "date": "2026-08-30",
+      "windowStart": "2026-08-30T12:00:00.000Z",
+      "outcome": "sin_datos_h1",
+      "reason": "no hay vela H1 en 2026-08-30T11:00:00.000Z"
+    },
+    {
+      "session": "Londres",
+      "date": "2026-08-31",
+      "windowStart": "2026-08-31T07:00:00.000Z",
+      "outcome": "setup",
+      "direction": "short",
+      "confirmType": "rechazo_mecha",
+      "refCandle": {
+        "timestamp": "2026-08-31T06:00:00Z",
+        "high": 29494.95,
+        "low": 29416.2
+      },
+      "sweepAt": "2026-08-31T08:01:00Z",
+      "entryAt": "2026-08-31T08:01:00Z",
+      "entry": 29484.95,
+      "sl": 29501.880357142858,
+      "tp": 29440.45,
+      "targetR": 2.6284147241851965,
+      "tpTf": "H4",
+      "exit": 29501.880357142858,
+      "exitReason": "sl",
+      "exitAt": "2026-08-31T08:11:00Z",
+      "r": -1
+    },
+    {
+      "session": "NY",
+      "date": "2026-08-31",
+      "windowStart": "2026-08-31T12:00:00.000Z",
+      "outcome": "setup",
+      "direction": "long",
+      "confirmType": "rechazo_mecha",
+      "refCandle": {
+        "timestamp": "2026-08-31T11:00:00Z",
+        "high": 29436.95,
+        "low": 29393.45
+      },
+      "sweepAt": "2026-08-31T12:09:00Z",
+      "entryAt": "2026-08-31T12:09:00Z",
+      "entry": 29415.95,
+      "sl": 29367.40535714286,
+      "tp": 29540.8,
+      "targetR": 2.5718594813316695,
+      "tpTf": "H4",
+      "exit": 29367.40535714286,
+      "exitReason": "sl",
+      "exitAt": "2026-08-31T12:25:00Z",
+      "r": -1
+    },
+    {
+      "session": "Londres",
+      "date": "2026-09-01",
+      "windowStart": "2026-09-01T07:00:00.000Z",
+      "outcome": "setup",
+      "direction": "long",
+      "confirmType": "rechazo_mecha",
+      "refCandle": {
+        "timestamp": "2026-09-01T06:00:00Z",
+        "high": 29537.55,
+        "low": 29484.55
+      },
+      "sweepAt": "2026-09-01T07:00:00Z",
+      "entryAt": "2026-09-01T07:00:00Z",
+      "entry": 29492.8,
+      "sl": 29482.494642857142,
+      "tp": 29523.71607142857,
+      "targetR": 3,
+      "tpTf": "H4",
+      "exit": 29523.71607142857,
+      "exitReason": "tp",
+      "exitAt": "2026-09-01T07:05:00Z",
+      "r": 3
+    },
+    {
+      "session": "NY",
+      "date": "2026-09-01",
+      "windowStart": "2026-09-01T12:00:00.000Z",
+      "outcome": "sin_confirmacion",
+      "reason": "hubo barrido pero no se confirmó cambio de carácter ni rechazo de mecha dentro de la ventana",
+      "direction": "long",
+      "sweepAt": "2026-09-01T12:00:00Z"
+    },
+    {
+      "session": "Londres",
+      "date": "2026-09-02",
+      "windowStart": "2026-09-02T07:00:00.000Z",
+      "outcome": "setup",
+      "direction": "short",
+      "confirmType": "cambio_caracter",
+      "refCandle": {
+        "timestamp": "2026-09-02T06:00:00Z",
+        "high": 29071.2,
+        "low": 28989.7
+      },
+      "sweepAt": "2026-09-02T07:02:00Z",
+      "entryAt": "2026-09-02T07:45:00Z",
+      "entry": 29034.45,
+      "sl": 29076.08035714286,
+      "tp": 28909.558928571427,
+      "targetR": 3,
+      "tpTf": "H4",
+      "exit": 29025.45,
+      "exitReason": "tiempo_90min",
+      "exitAt": "2026-09-02T08:29:00Z",
+      "r": 0.216
+    },
+    {
+      "session": "NY",
+      "date": "2026-09-02",
+      "windowStart": "2026-09-02T12:00:00.000Z",
+      "outcome": "setup",
+      "direction": "short",
+      "confirmType": "cambio_caracter",
+      "refCandle": {
+        "timestamp": "2026-09-02T11:00:00Z",
+        "high": 29058.95,
+        "low": 28901.95
+      },
+      "sweepAt": "2026-09-02T12:04:00Z",
+      "entryAt": "2026-09-02T12:38:00Z",
+      "entry": 29043.95,
+      "sl": 29064.391071428574,
+      "tp": 28982.62678571428,
+      "targetR": 3,
+      "tpTf": "H4",
+      "exit": 29064.391071428574,
+      "exitReason": "sl",
+      "exitAt": "2026-09-02T13:23:00Z",
+      "r": -1
+    },
+    {
+      "session": "Londres",
+      "date": "2026-09-03",
+      "windowStart": "2026-09-03T07:00:00.000Z",
+      "outcome": "sin_confirmacion",
+      "reason": "hubo barrido pero no se confirmó cambio de carácter ni rechazo de mecha dentro de la ventana",
+      "direction": "short",
+      "sweepAt": "2026-09-03T07:04:00Z"
+    },
+    {
+      "session": "NY",
+      "date": "2026-09-03",
+      "windowStart": "2026-09-03T12:00:00.000Z",
+      "outcome": "sin_confirmacion",
+      "reason": "hubo barrido pero no se confirmó cambio de carácter ni rechazo de mecha dentro de la ventana",
+      "direction": "short",
+      "sweepAt": "2026-09-03T12:30:00Z"
+    },
+    {
+      "session": "Londres",
+      "date": "2026-09-04",
+      "windowStart": "2026-09-04T07:00:00.000Z",
+      "outcome": "sin_confirmacion",
+      "reason": "hubo barrido pero no se confirmó cambio de carácter ni rechazo de mecha dentro de la ventana",
+      "direction": "short",
+      "sweepAt": "2026-09-04T07:33:00Z"
+    },
+    {
+      "session": "NY",
+      "date": "2026-09-04",
+      "windowStart": "2026-09-04T12:00:00.000Z",
+      "outcome": "setup",
+      "direction": "long",
+      "confirmType": "cambio_caracter",
+      "refCandle": {
+        "timestamp": "2026-09-04T11:00:00Z",
+        "high": 29660.2,
+        "low": 29622.2
+      },
+      "sweepAt": "2026-09-04T12:05:00Z",
+      "entryAt": "2026-09-04T12:24:00Z",
+      "entry": 29637.95,
+      "sl": 29610.823214285716,
+      "tp": 29719.330357142855,
+      "targetR": 3,
+      "tpTf": "H4",
+      "exit": 29610.823214285716,
+      "exitReason": "sl",
+      "exitAt": "2026-09-04T12:30:00Z",
+      "r": -1
+    },
+    {
+      "session": "Londres",
+      "date": "2026-09-06",
+      "windowStart": "2026-09-06T07:00:00.000Z",
+      "outcome": "sin_datos_h1",
+      "reason": "no hay vela H1 en 2026-09-06T06:00:00.000Z"
+    },
+    {
+      "session": "NY",
+      "date": "2026-09-06",
+      "windowStart": "2026-09-06T12:00:00.000Z",
+      "outcome": "sin_datos_h1",
+      "reason": "no hay vela H1 en 2026-09-06T11:00:00.000Z"
+    },
+    {
+      "session": "Londres",
+      "date": "2026-09-07",
+      "windowStart": "2026-09-07T07:00:00.000Z",
+      "outcome": "setup",
+      "direction": "short",
+      "confirmType": "cambio_caracter",
+      "refCandle": {
+        "timestamp": "2026-09-07T06:00:00Z",
+        "high": 29660.95,
+        "low": 29588.2
+      },
+      "sweepAt": "2026-09-07T07:07:00Z",
+      "entryAt": "2026-09-07T07:10:00Z",
+      "entry": 29645.7,
+      "sl": 29663.351785714287,
+      "tp": 29592.744642857142,
+      "targetR": 3,
+      "tpTf": "H4",
+      "exit": 29634.7,
+      "exitReason": "tiempo_90min",
+      "exitAt": "2026-09-07T08:29:00Z",
+      "r": 0.623
+    },
+    {
+      "session": "NY",
+      "date": "2026-09-07",
+      "windowStart": "2026-09-07T12:00:00.000Z",
+      "outcome": "sin_confirmacion",
+      "reason": "hubo barrido pero no se confirmó cambio de carácter ni rechazo de mecha dentro de la ventana",
+      "direction": "short",
+      "sweepAt": "2026-09-07T12:53:00Z"
+    }
+  ]
+}
