@@ -98,6 +98,7 @@ metas/
 | Estudiar 1h | ✅ | ✅ | ⬜ | — | — | — | — | 2 días |
 | Registrar gastos | ✅ | ✅ | ✅ | — | — | — | — | 3 días |
 | Meditar 5min | ⬜ | ✅ | ⬜ | — | — | — | — | 1 día |
+| Core McGill (Lu/Mi/Vi) — *vigente solo mientras dure la recuperación de la fractura de Jones; se retira cuando el médico autorice volver al gimnasio* | — | — | — | — | — | — | — | 0 días |
 
 ---
 

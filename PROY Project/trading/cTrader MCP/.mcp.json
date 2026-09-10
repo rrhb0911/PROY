@@ -3,6 +3,10 @@
     "ctrader": {
       "type": "http",
       "url": "http://127.0.0.1:9876/mcp/"
+    },
+    "tradingview": {
+      "command": "C:\\Users\\ilbici\\.local\\bin\\uvx.exe",
+      "args": ["--python", "3.13", "--from", "tradingview-mcp-server", "tradingview-mcp"]
     }
   }
 }

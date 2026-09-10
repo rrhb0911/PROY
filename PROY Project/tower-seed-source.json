@@ -1,0 +1,1592 @@
+{
+  "_nota": "Snapshot COMPLETO de la base de datos real del Claude Artifact 'Tower' (https://claude.ai/code/artifact/42e47274-2d84-45f4-9f08-5264cc75e595), exportado el 2026-09-06 con read_db. Cubre las 5 colecciones/docs que el código realmente usa (grep de db.collection(/db.doc( en torre-control-app.html): finanzas_config/categories, finanzas_mensual/*, estudio_materias, salud/recovery, agenda. Usar esto como semilla real al construir el proyecto nuevo (ver TOWER-MIGRACION.md) en vez de la data de ejemplo (FALLBACK) hardcodeada en torre-control-app.html.",
+  "finanzas_config": {
+    "categories": {
+      "id": "categories",
+      "data": {
+        "categories": [
+          {
+            "id": "apto_fusa",
+            "name": "Apto Fusa",
+            "items": [
+              {
+                "id": "luz",
+                "kind": "variable",
+                "name": "Luz",
+                "payDay": 1,
+                "value": 105000
+              },
+              {
+                "id": "agua",
+                "kind": "variable",
+                "name": "Agua",
+                "payDay": 16,
+                "value": 57000
+              },
+              {
+                "id": "gas",
+                "kind": "variable",
+                "name": "Gas",
+                "payDay": 16,
+                "value": 56000
+              },
+              {
+                "id": "claro_hogar",
+                "kind": "fixed",
+                "name": "Claro Hogar",
+                "payDay": 16,
+                "value": 97000
+              }
+            ]
+          },
+          {
+            "id": "sony",
+            "name": "Sony",
+            "items": [
+              {
+                "id": "cartera_finandina",
+                "kind": "fixed",
+                "name": "Cartera (Finandina)",
+                "payDay": 1,
+                "value": 420000
+              },
+              {
+                "id": "conciliacion",
+                "kind": "fixed",
+                "name": "Conciliación",
+                "payDay": 1,
+                "value": 82000
+              },
+              {
+                "id": "tdc_master",
+                "kind": "variable",
+                "name": "TDC Master",
+                "payDay": 16,
+                "value": null,
+                "note": "Varía según el saldo/corte del mes — muchas compras ahí, puede estar acabándose"
+              },
+              {
+                "id": "cuotas_pendientes",
+                "kind": "irregular",
+                "name": "Cuotas pendientes",
+                "note": "Deuda pendiente a futuro, pago único — no recurrente mensual"
+              },
+              {
+                "id": "tv_streaming",
+                "kind": "fixed",
+                "name": "TV Streaming",
+                "payDay": 1,
+                "value": 22000
+              },
+              {
+                "id": "ceci",
+                "kind": "fixed",
+                "name": "Ceci",
+                "payDay": 1,
+                "value": 80000
+              },
+              {
+                "id": "gafas_ma",
+                "kind": "fixed",
+                "name": "Gafas Ma",
+                "payDay": 1,
+                "value": 21000
+              },
+              {
+                "id": "google_one",
+                "kind": "fixed",
+                "name": "Google One",
+                "payDay": 1,
+                "value": 29000
+              },
+              {
+                "id": "parqueadero",
+                "kind": "fixed",
+                "name": "Parqueadero",
+                "payDay": 1,
+                "value": 52000
+              },
+              {
+                "id": "master",
+                "kind": "variable",
+                "name": "Master",
+                "payDay": 16,
+                "value": 452000
+              },
+              {
+                "id": "credito_24",
+                "kind": "fixed",
+                "name": "Crédito 24",
+                "payDay": 16,
+                "value": 276000
+              }
+            ]
+          },
+          {
+            "id": "sarah",
+            "name": "Sarah",
+            "items": [
+              {
+                "id": "pension",
+                "kind": "fixed",
+                "name": "Pensión",
+                "payDay": 1,
+                "value": 499000
+              },
+              {
+                "id": "mercado_1",
+                "kind": "fixed",
+                "name": "Mercado 1",
+                "payDay": 1,
+                "value": 500000
+              },
+              {
+                "id": "mercado_2",
+                "kind": "fixed",
+                "name": "Mercado 2",
+                "payDay": 16,
+                "value": 500000
+              },
+              {
+                "id": "gym",
+                "kind": "irregular",
+                "name": "GYM",
+                "note": "Cada ~3 meses, a veces $0 porque lo cubre el bono de Compensar"
+              },
+              {
+                "id": "pasajes",
+                "kind": "fixed",
+                "name": "Pasajes",
+                "payDay": 1,
+                "value": 150000
+              },
+              {
+                "id": "ortodoncia",
+                "kind": "fixed",
+                "name": "Ortodoncia",
+                "payDay": 16,
+                "value": 50000
+              },
+              {
+                "id": "extras",
+                "kind": "list",
+                "name": "Extras",
+                "note": "Uniforme, ropa, viajes, viáticos, inscripción universidad — irregular, colegio por terminar"
+              }
+            ]
+          },
+          {
+            "id": "moto_personal",
+            "name": "Moto personal",
+            "items": [
+              {
+                "id": "gasolina",
+                "kind": "multi",
+                "name": "Gasolina",
+                "note": "Varias tanqueadas al mes"
+              },
+              {
+                "id": "llanta_delantera",
+                "kind": "irregular",
+                "name": "Llanta delantera",
+                "note": "Por desgaste, no por calendario"
+              },
+              {
+                "id": "llanta_trasera",
+                "kind": "irregular",
+                "name": "Llanta trasera",
+                "note": "Por desgaste, no por calendario"
+              },
+              {
+                "id": "kit_arrastre",
+                "kind": "irregular",
+                "name": "Kit de arrastre",
+                "note": "Por desgaste, no por calendario"
+              },
+              {
+                "id": "pastillas",
+                "kind": "irregular",
+                "name": "Pastillas (del./tras.)",
+                "note": "Esporádico"
+              },
+              {
+                "id": "aceite",
+                "kind": "variable",
+                "name": "Aceite",
+                "value": 40000
+              }
+            ]
+          },
+          {
+            "id": "estudios_propios",
+            "name": "Estudios propios",
+            "items": [
+              {
+                "id": "matricula_unad",
+                "kind": "variable",
+                "name": "Matrícula UNAD",
+                "value": null,
+                "note": "Se paga cada ~6 meses, normalmente dic/ene"
+              }
+            ]
+          }
+        ]
+      },
+      "version": 23,
+      "updatedAt": "2026-09-05T14:58:37.804936Z"
+    }
+  },
+  "finanzas_mensual": {
+    "2026-09": {
+      "id": "2026-09",
+      "data": {
+        "ingreso_q1": 2100000,
+        "items": {
+          "agua": {
+            "paid": false,
+            "value": null
+          },
+          "apto_fusa__administracion": {
+            "paid": false
+          },
+          "apto_fusa__gas": {
+            "value": 26000
+          },
+          "cartera_finandina": {
+            "paid": true
+          },
+          "ceci": {
+            "paid": true
+          },
+          "conciliacion": {
+            "paid": true
+          },
+          "extras": {
+            "list": [
+              {
+                "amount": 175000,
+                "date": "2026-09-04",
+                "name": "UNAL"
+              }
+            ]
+          },
+          "gafas_ma": {
+            "paid": true
+          },
+          "gas": {
+            "paid": true
+          },
+          "gasolina": {
+            "occurrences": []
+          },
+          "google_one": {
+            "paid": true
+          },
+          "luz": {
+            "paid": true
+          },
+          "mercado_1": {
+            "paid": true
+          },
+          "parqueadero": {
+            "paid": true
+          },
+          "pasajes": {
+            "paid": true,
+            "value": 50000
+          },
+          "pension": {
+            "paid": true
+          },
+          "servicios__gas": {
+            "paid": true,
+            "value": 26000
+          },
+          "sony__conciliacion": {
+            "paid": true
+          },
+          "sony__tdc_master": {
+            "value": 450000
+          },
+          "tv_streaming": {
+            "paid": true
+          }
+        }
+      },
+      "version": 35,
+      "updatedAt": "2026-09-05T12:31:01.940698Z"
+    }
+  },
+  "ui_prefs": {
+    "accent_colors": {
+      "id": "accent_colors",
+      "data": {
+        "view-calendario": "#ee6a3a",
+        "view-finanzas": "#d8d3df",
+        "view-home": "#60adf0"
+      },
+      "version": 4,
+      "updatedAt": "2026-09-05T13:21:37.034343Z"
+    },
+    "bg_colors": {
+      "id": "bg_colors",
+      "data": {
+        "view-finanzas": "#0c0817"
+      },
+      "version": 1,
+      "updatedAt": "2026-09-05T12:30:30.715274Z"
+    },
+    "quincena_colors": {
+      "id": "quincena_colors",
+      "data": {
+        "q2": "#3b006b"
+      },
+      "version": 27,
+      "updatedAt": "2026-09-05T14:58:12.115635Z"
+    }
+  },
+  "salud": {
+    "recovery": {
+      "id": "recovery",
+      "data": {
+        "castRemoved": "2026-09-15",
+        "controlConfirmed": false,
+        "controlDate": "2026-10-06",
+        "injury": "Fractura de Jones (pie)",
+        "restrictions": [
+          "Sin bicicleta",
+          "Sin gimnasio"
+        ],
+        "stage": "Zapato postoperatorio"
+      },
+      "version": 1,
+      "updatedAt": "2026-09-03T19:19:48.557308Z"
+    }
+  },
+  "agenda": [
+    {
+      "id": "2026-09-04-f2-codigo-r3-r4",
+      "data": {
+        "date": "2026-09-04",
+        "title": "Fase 2 — Código Python (R3-R4: categoría)",
+        "type": "estudio"
+      }
+    },
+    {
+      "id": "2026-09-05-f2-codigo-r5-r6",
+      "data": {
+        "date": "2026-09-05",
+        "title": "Fase 2 — Código Python (R5-R6) + pruebas",
+        "type": "estudio"
+      }
+    },
+    {
+      "id": "2026-09-06-fase2-cierre",
+      "data": {
+        "date": "2026-09-06",
+        "title": "Fase 2 — Informe y cierre",
+        "type": "estudio"
+      }
+    },
+    {
+      "id": "2026-09-07-maraton-programacion",
+      "data": {
+        "date": "2026-09-07",
+        "title": "Entrenamiento Maratones de Programación (Pablo F. Hernández), 19:00-20:30",
+        "type": "meeting"
+      }
+    },
+    {
+      "id": "2026-09-07-tarea2-historia",
+      "data": {
+        "date": "2026-09-07",
+        "title": "Tarea 2 — Historia + Habilidades del ingeniero",
+        "type": "estudio"
+      }
+    },
+    {
+      "id": "2026-09-08-biologia-d1",
+      "data": {
+        "date": "2026-09-08",
+        "title": "VII Ciclo de Conferencias en Biología Aplicada — Día 1 (17:00-19:00, virtual)",
+        "type": "meeting"
+      }
+    },
+    {
+      "id": "2026-09-08-cipas-recordatorio",
+      "data": {
+        "date": "2026-09-08",
+        "title": "Revisar agenda CIPAS PM/CC (Cátedra + Ingeniería + Pensamiento Lógico)",
+        "type": "estudio"
+      }
+    },
+    {
+      "id": "2026-09-08-tarea2-etica",
+      "data": {
+        "date": "2026-09-08",
+        "title": "Tarea 2 — Ética profesional + PDF final",
+        "type": "estudio"
+      }
+    },
+    {
+      "id": "2026-09-09-biologia-d2",
+      "data": {
+        "date": "2026-09-09",
+        "tentative": true,
+        "title": "VII Ciclo de Conferencias en Biología Aplicada — Día 2 (17:00-19:00, cruza con turno laboral)",
+        "type": "meeting"
+      }
+    },
+    {
+      "id": "2026-09-09-tarea2-envio",
+      "data": {
+        "date": "2026-09-09",
+        "title": "Tarea 2 — Revisión final y envío",
+        "type": "estudio"
+      }
+    },
+    {
+      "id": "2026-09-12-cumpleanos",
+      "data": {
+        "date": "2026-09-12",
+        "title": "Día libre — cumpleaños",
+        "type": "personal"
+      }
+    },
+    {
+      "id": "2026-09-15-retiro-yeso",
+      "data": {
+        "date": "2026-09-15",
+        "title": "Retiro de yeso",
+        "type": "salud"
+      }
+    },
+    {
+      "id": "2026-10-06-control-ortopedista",
+      "data": {
+        "date": "2026-10-06",
+        "tentative": true,
+        "title": "Control ortopedista",
+        "type": "salud"
+      }
+    },
+    {
+      "id": "2026-10-14-lab-bogota-d1",
+      "data": {
+        "date": "2026-10-14",
+        "tentative": true,
+        "title": "Laboratorio LEGO Education — Día 1 (Bogotá)",
+        "type": "estudio"
+      }
+    },
+    {
+      "id": "2026-10-14-lego-d1",
+      "data": {
+        "date": "2026-10-14",
+        "tentative": true,
+        "title": "Laboratorio LEGO Education — Día 1 (Bogotá)",
+        "type": "meeting"
+      }
+    },
+    {
+      "id": "2026-10-15-lab-bogota-d2",
+      "data": {
+        "date": "2026-10-15",
+        "tentative": true,
+        "title": "Laboratorio LEGO Education — Día 2 (Bogotá)",
+        "type": "estudio"
+      }
+    },
+    {
+      "id": "2026-10-15-lego-d2",
+      "data": {
+        "date": "2026-10-15",
+        "tentative": true,
+        "title": "Laboratorio LEGO Education — Día 2 (Bogotá)",
+        "type": "meeting"
+      }
+    }
+  ],
+  "estudio_materias": {
+    "80017": {
+      "id": "80017",
+      "data": {
+        "agendaUrl": "https://datateca.unad.edu.co/contenidos/agendas/2026-2204/80017.htm",
+        "code": "80017",
+        "credits": 3,
+        "meetings": [
+          {
+            "sesion": "CIPAS I — Raíces Unadistas",
+            "fecha": "2026-09-15",
+            "replicaFecha": "2026-09-19",
+            "asistida": false,
+            "refuerza": "Reto 2",
+            "fuente": "Evento de Google Calendar (comprobación 327.987.188), 9 sep 2026 — réplica presencial en Diagonal 1 Nro 26-18, Barrio el Comboy. Sin información de puntos en la descripción del evento."
+          },
+          {
+            "sesion": "CIPAS II — Ramificando Saberes",
+            "fecha": "2026-10-13",
+            "replicaFecha": "2026-10-17",
+            "asistida": false,
+            "refuerza": "Reto 3",
+            "fuente": "Evento de Google Calendar (comprobación 327.987.188), 9 sep 2026 — réplica presencial en Diagonal 1 Nro 26-18, Barrio el Comboy. Sin información de puntos en la descripción del evento."
+          },
+          {
+            "sesion": "CIPAS III — Del florecimiento al legado",
+            "fecha": "2026-11-03",
+            "replicaFecha": "2026-11-07",
+            "asistida": false,
+            "refuerza": "Reto 4",
+            "fuente": "Evento de Google Calendar (comprobación 327.987.188), 9 sep 2026 — réplica presencial en Diagonal 1 Nro 26-18, Barrio el Comboy. Sin información de puntos en la descripción del evento."
+          }
+        ],
+        "name": "Cátedra Unadista",
+        "nodes": [
+          {
+            "attempts": [
+              {
+                "result": "9/10 → 23/25 (mejor intento, se toma esta)",
+                "when": "20 ago, 4:57"
+              },
+              {
+                "result": "0/10 → no presentado",
+                "when": "20 ago, agotó 1h"
+              }
+            ],
+            "closes": "2026-08-30",
+            "comment": "Completado con 90% — sin nada pendiente aquí.",
+            "desc": "Cuestionario de 10 preguntas en el aula, 2 intentos (se toma la nota más alta). Recurso base: OVA \"Perfil de un estudiante Unadista\". No requiere entrega escrita.",
+            "grade": {
+              "max": 25,
+              "pct": 90,
+              "score": 23
+            },
+            "id": "R1",
+            "momento": "Inicial",
+            "opens": "2026-08-17",
+            "progress": {
+              "pct": 100,
+              "status": "completado"
+            },
+            "pts": 25,
+            "sources": [
+              {
+                "name": "OVA: Perfil de un estudiante Unadista"
+              }
+            ],
+            "status": "done",
+            "title": "Contextualización"
+          },
+          {
+            "attempts": [
+              {
+                "result": "20/20 → 125/125",
+                "when": "31 ago, 15:52"
+              }
+            ],
+            "closes": "2026-09-27",
+            "comment": "100/100 — quedó perfecto, sin pendientes.",
+            "desc": "Cuestionario del bloque intermedio sobre planeación estratégica personal/profesional.",
+            "grade": {
+              "max": 125,
+              "pct": 100,
+              "score": 125
+            },
+            "id": "R2",
+            "momento": "Intermedio",
+            "opens": "2026-08-31",
+            "progress": {
+              "pct": 100,
+              "status": "completado"
+            },
+            "pts": 125,
+            "sources": [
+              {
+                "name": "Guía de aprendizaje - Reto 2 - Planeación Estratégica"
+              }
+            ],
+            "status": "done",
+            "title": "Planeación Estratégica"
+          },
+          {
+            "closes": "2026-10-25",
+            "comment": "Aún no la hemos tocado — abre el 28 de septiembre. Ya tienes la guía descargada con antelación, te aviso cuando toque revisarla.",
+            "desc": "Guía ya descargada con antelación; contenido detallado por confirmar cuando abra el bloque.",
+            "id": "R3",
+            "momento": "Intermedio",
+            "opens": "2026-09-28",
+            "progress": {
+              "pct": 0,
+              "status": "sin iniciar"
+            },
+            "pts": 125,
+            "sources": [
+              {
+                "name": "Guía de aprendizaje - Reto 3 - Aprender con Autonomía (ya descargada)"
+              }
+            ],
+            "status": "upcoming",
+            "title": "Aprender con Autonomía"
+          },
+          {
+            "closes": "2026-11-22",
+            "comment": "Falta que UNAD publique el contenido completo de la guía; por ahora solo tenemos la rúbrica. Ya verificamos que el entregable real es el ensayo Word, no el video que sugiere la rúbrica.",
+            "desc": "Ensayo reflexivo de proyección profesional (Word, 3-5 págs): sentido de pertenencia, identidad Unadista, liderazgo transformador, solidaridad. La rúbrica menciona \"video\" por error de copiado — el Syllabus confirma que la evidencia real es el ensayo Word (POA).",
+            "id": "R4",
+            "momento": "Intermedio",
+            "opens": "2026-10-26",
+            "progress": {
+              "pct": 0,
+              "status": "sin iniciar"
+            },
+            "pts": 100,
+            "rubric": [
+              {
+                "c": "Estructura tipo caso (intro, caso, análisis, propuesta, conclusiones, APA)",
+                "pts": 20
+              },
+              {
+                "c": "Calidad del contenido (claridad, síntesis, argumentación)",
+                "pts": 40
+              },
+              {
+                "c": "Identidad Unadista (misión/visión, liderazgo transformador, perfil de egresado)",
+                "pts": 40
+              }
+            ],
+            "sources": [
+              {
+                "name": "Guía de aprendizaje - Tarea 4 (pendiente de publicar contenido completo)"
+              }
+            ],
+            "status": "upcoming",
+            "title": "Proyección Profesional"
+          },
+          {
+            "closes": "2026-12-01",
+            "comment": "Evaluación final — la resolvemos cuando se acerque, integra las otras 4.",
+            "desc": "Prueba objetiva que cubre los 4 resultados de aprendizaje (RAC1-4) de todo el curso.",
+            "id": "R5",
+            "momento": "Final",
+            "opens": "2026-11-26",
+            "progress": {
+              "pct": 0,
+              "status": "sin iniciar"
+            },
+            "pts": 125,
+            "sources": [],
+            "status": "upcoming",
+            "title": "Evaluación Final"
+          }
+        ]
+      },
+      "version": 5,
+      "updatedAt": "2026-09-10T02:00:00.000000Z"
+    },
+    "200610": {
+      "id": "200610",
+      "data": {
+        "agendaUrl": "https://datateca.unad.edu.co/contenidos/agendas/2026-2204/200610.htm",
+        "code": "200610",
+        "contacts": [
+          {
+            "name": "Luis Fernando Arias Ramirez",
+            "note": "Envía las notificaciones de habilitación de retos (ej. Reto 2, 31 ago 2026).",
+            "role": "Docente"
+          },
+          {
+            "name": "Wcdaly Cortes Algeciras",
+            "note": "Remitente de \"¡Hablemos del curso!\" — Web Conferencia del curso.",
+            "role": "Docente"
+          },
+          {
+            "name": "Yulieth Ching",
+            "note": "Invita también a la Web Conferencia \"¡Hablemos del curso!\".",
+            "role": "Contacto (rol sin confirmar)"
+          }
+        ],
+        "credits": 3,
+        "meetings": [
+          {
+            "sesion": "Sesión 1 HDGC",
+            "fecha": "2026-09-17",
+            "replicaFecha": "2026-09-24",
+            "asistida": false,
+            "refuerza": "Reto 2/3",
+            "fuente": "Evento de Google Calendar (comprobación 327.964.862), 9 sep 2026 — sin información de puntos en la descripción del evento."
+          },
+          {
+            "sesion": "Sesión 2 HDGC",
+            "fecha": "2026-10-15",
+            "replicaFecha": "2026-10-22",
+            "asistida": false,
+            "refuerza": "Reto 3",
+            "fuente": "Evento de Google Calendar (comprobación 327.964.862), 9 sep 2026 — sin información de puntos en la descripción del evento."
+          },
+          {
+            "sesion": "Sesión 3 HDGC",
+            "fecha": "2026-11-05",
+            "replicaFecha": "2026-11-12",
+            "asistida": false,
+            "refuerza": "Reto 4",
+            "fuente": "Evento de Google Calendar (comprobación 327.964.862), 9 sep 2026 — sin información de puntos en la descripción del evento."
+          }
+        ],
+        "name": "Herramientas Digitales para la Gestión del Conocimiento",
+        "nodes": [
+          {
+            "attempts": [
+              {
+                "result": "10/10 → 25/25",
+                "when": "21 ago, 4:32"
+              }
+            ],
+            "closes": "2026-08-30",
+            "comment": "Perfecto, 100/100, sin pendientes.",
+            "desc": "Cuestionario POC sobre TIC — conceptos básicos y características (RAC1).",
+            "grade": {
+              "max": 25,
+              "pct": 100,
+              "score": 25
+            },
+            "id": "R1",
+            "momento": "Inicial",
+            "opens": "2026-08-17",
+            "progress": {
+              "pct": 100,
+              "status": "completado"
+            },
+            "pts": 25,
+            "sources": [
+              {
+                "name": "Syllabus del curso"
+              }
+            ],
+            "status": "done",
+            "title": "Conocimientos previos"
+          },
+          {
+            "attempts": [
+              {
+                "result": "20/20 → 180/180",
+                "when": "31 ago, 14:21"
+              }
+            ],
+            "closes": "2026-09-27",
+            "comment": "El reto de más peso del curso (180 pts) y salió perfecto — sin pendientes.",
+            "desc": "El reto de más peso del curso. Herramientas de comunicación síncronas/asíncronas, ofimática en línea (Microsoft 365, Google Drive), repositorios en línea (RAC2).",
+            "grade": {
+              "max": 180,
+              "pct": 100,
+              "score": 180
+            },
+            "id": "R2",
+            "momento": "Intermedio",
+            "opens": "2026-08-31",
+            "progress": {
+              "pct": 100,
+              "status": "completado"
+            },
+            "pts": 180,
+            "sources": [
+              {
+                "name": "Guía de Aprendizaje Reto 2 — Aplicaciones y plataformas ofimáticas en línea"
+              }
+            ],
+            "status": "done",
+            "title": "Plataformas y aplicaciones ofimáticas"
+          },
+          {
+            "closes": "2026-10-25",
+            "comment": "Sin tocar todavía, abre el 28 de septiembre. Es cuestionario como los Retos 1-2, no informe.",
+            "desc": "Cuestionario POC (sin entregable escrito) — evolución de la web, herramientas de creación de contenido (Canva, PowerPoint online, Genial.ly, Gamma, Skywork) y ejercicios guiados con GPT/Gemini personalizados provistos por el docente (RAC3). ~19h estimadas.",
+            "id": "R3",
+            "momento": "Intermedio",
+            "opens": "2026-09-28",
+            "progress": {
+              "pct": 0,
+              "status": "sin iniciar"
+            },
+            "pts": 100,
+            "sources": [
+              {
+                "name": "Guía de Aprendizaje Reto 3 Contenidos en línea"
+              }
+            ],
+            "status": "upcoming",
+            "title": "Creación de contenido en línea"
+          },
+          {
+            "closes": "2026-11-22",
+            "comment": "Informe escrito en Word, no cuestionario — cuando abra hay que planear tiempo de redacción y armar las 2 tablas (buscadores/IA y redes/seguridad) directamente editables, no pegadas.",
+            "desc": "⚠️ Informe académico Word (.docx), 1000-1200 palabras, 7 secciones (portada, introducción, tabla comparativa de buscadores/IA ≥6 registros, tabla de redes sociales/seguridad ≥5 registros, reflexión ≥200 palabras, conclusiones, referencias APA). Tablas editables nativas — no Excel, capturas ni URLs sueltas como evidencia. ~13h estimadas.",
+            "id": "R4",
+            "momento": "Intermedio",
+            "opens": "2026-10-26",
+            "progress": {
+              "pct": 0,
+              "status": "sin iniciar"
+            },
+            "pts": 70,
+            "rubric": [
+              {
+                "c": "De forma",
+                "pts": 14
+              },
+              {
+                "c": "De contenido",
+                "pts": 28
+              },
+              {
+                "c": "De calidad académica",
+                "pts": 28
+              }
+            ],
+            "sources": [
+              {
+                "name": "Guía de Aprendizaje Reto 4 Redes Búsqueda Seguridad y Gestión del conocimiento"
+              },
+              {
+                "name": "Rúbrica de evaluación - Reto 4"
+              }
+            ],
+            "status": "upcoming",
+            "title": "Redes, búsqueda, seguridad y gestión del conocimiento"
+          },
+          {
+            "closes": "2026-12-01",
+            "comment": "Evaluación final, la dejamos para el cierre del curso.",
+            "desc": "Cuestionario POC que cubre RAC1-4 de todo el curso.",
+            "id": "R5",
+            "momento": "Final",
+            "opens": "2026-11-26",
+            "progress": {
+              "pct": 0,
+              "status": "sin iniciar"
+            },
+            "pts": 125,
+            "sources": [],
+            "status": "upcoming",
+            "title": "Evaluación final"
+          }
+        ]
+      },
+      "version": 7,
+      "updatedAt": "2026-09-10T02:00:00.000000Z"
+    },
+    "200611": {
+      "id": "200611",
+      "data": {
+        "agendaUrl": "https://datateca.unad.edu.co/contenidos/agendas/2026-2204/200611.htm",
+        "code": "200611",
+        "contacts": [
+          {
+            "name": "Carolina Castaño",
+            "note": "Junto con la Red de Tutores PLM (Pensamiento Lógico y Matemático).",
+            "role": "Directora"
+          },
+          {
+            "name": "Sandra Johana Dominguez",
+            "note": "Firma el correo de bienvenida al Reto 2.",
+            "role": "Tutor"
+          },
+          {
+            "name": "Atención lun/mié/vie",
+            "role": "Tutor en línea",
+            "schedule": "10:00-11:00 a.m. y 3:00-4:00 p.m."
+          },
+          {
+            "name": "Atención mar/jue/sáb",
+            "role": "Monitor en línea",
+            "schedule": "Mar y jue: 10:00 a.m.-12:00 m. y 3:00-5:00 p.m. · Sáb: 8:00 a.m.-12:00 m."
+          }
+        ],
+        "credits": 3,
+        "meetings": [
+          {
+            "sesion": "Sesión 1 — Lógica proposicional",
+            "fecha": "2026-09-09",
+            "pts": 15,
+            "asistida": true,
+            "refuerza": "Reto 2",
+            "fuente": "Correo interno del campus de un docente de 200611, 9 sep 2026 — pendiente respaldo en guía escrita"
+          },
+          {
+            "sesion": "Sesión 2 — Conjuntos / Razonamiento cuantitativo",
+            "fecha": "2026-09-30",
+            "replicaFecha": "2026-10-14",
+            "pts": 15,
+            "asistida": false,
+            "refuerza": "Reto 3",
+            "fuente": "Correo interno del campus de un docente de 200611, 9 sep 2026 — pendiente respaldo en guía escrita"
+          },
+          {
+            "sesion": "Sesión 3 — Pensamiento computacional",
+            "fecha": "2026-10-28",
+            "replicaFecha": "2026-11-11",
+            "pts": 20,
+            "asistida": false,
+            "refuerza": "Reto 4",
+            "fuente": "Correo interno del campus de un docente de 200611, 9 sep 2026 — pendiente respaldo en guía escrita"
+          }
+        ],
+        "name": "Pensamiento Lógico y Matemático",
+        "nodes": [
+          {
+            "attempts": [
+              {
+                "result": "9/10 → 23/25",
+                "when": "23 ago, 7:36"
+              },
+              {
+                "result": "9/10 → 23/25 (mismo resultado)",
+                "when": "23 ago, 7:38"
+              }
+            ],
+            "closes": "2026-08-30",
+            "comment": "90% — quedó bien, sin pendientes.",
+            "desc": "Cuestionario diagnóstico inicial de lógica y pensamiento matemático.",
+            "grade": {
+              "max": 25,
+              "pct": 90,
+              "score": 23
+            },
+            "id": "R1",
+            "momento": "Inicial",
+            "opens": "2026-08-17",
+            "progress": {
+              "pct": 100,
+              "status": "completado"
+            },
+            "pts": 25,
+            "sources": [
+              {
+                "name": "Syllabus curso Pensamiento Lógico y Matemático"
+              }
+            ],
+            "status": "done",
+            "title": "Diagnóstico de saberes previos"
+          },
+          {
+            "attempts": [
+              {
+                "result": "20/20 → 150/150",
+                "when": "1 sep, 30:06"
+              }
+            ],
+            "closes": "2026-09-25",
+            "comment": "El reto de más peso del curso (150 pts) — perfecto, sin pendientes.",
+            "desc": "El reto de más peso del curso. Proposiciones categóricas, cuantificadores (∀,∃), tablas de verdad, leyes de De Morgan.",
+            "grade": {
+              "max": 150,
+              "pct": 100,
+              "score": 150
+            },
+            "id": "R2",
+            "momento": "Intermedio",
+            "opens": "2026-08-31",
+            "progress": {
+              "pct": 100,
+              "status": "completado"
+            },
+            "pts": 150,
+            "sources": [
+              {
+                "name": "Introducción al Pensamiento Computacional (lectura de apoyo)"
+              }
+            ],
+            "status": "done",
+            "title": "Lógica proposicional"
+          },
+          {
+            "closes": "2026-10-23",
+            "comment": "Sin empezar, abre el 26 de septiembre. Los ejercicios guiados del OVA son preparación, no se califican aparte del cuestionario.",
+            "desc": "Cuestionario POC de 20 preguntas (sin entregable escrito) — teoría de conjuntos, análisis de datos, porcentajes, proporcionalidad y ecuaciones de primer grado. Caso guía: \"Optimización del sistema de préstamos tecnológicos\". ~36h estimadas.",
+            "id": "R3",
+            "momento": "Intermedio",
+            "opens": "2026-09-26",
+            "progress": {
+              "pct": 0,
+              "status": "sin iniciar"
+            },
+            "pts": 110,
+            "sources": [
+              {
+                "name": "Guía de aprendizaje - Reto 3 - Modela y resuelve Pensamiento matemático"
+              }
+            ],
+            "status": "upcoming",
+            "title": "Pensamiento matemático"
+          },
+          {
+            "closes": "2026-11-22",
+            "comment": "Es informe en PDF, no quiz — igual patrón que Herramientas Digitales pero en PDF, no Word. Conecta directo con Fundamentos de Programación. El criterio de calidad académica pesa más (45/90).",
+            "desc": "⚠️ Informe en PDF (no Word), 500-3000 palabras, 8 secciones. Caso guía \"Operación Euro Tour 2026\" — actúas como \"Arquitecto de Soluciones Lógicas\" aplicando las 4 capas del pensamiento computacional (descomposición, reconocimiento de patrones, abstracción, algoritmos) a 6 misiones. El diagrama de flujo (Figura 3) ya viene dado — se analiza, no se diseña desde cero. ~13h estimadas.",
+            "id": "R4",
+            "momento": "Intermedio",
+            "opens": "2026-10-24",
+            "progress": {
+              "pct": 0,
+              "status": "sin iniciar"
+            },
+            "pts": 90,
+            "rubric": [
+              {
+                "c": "De forma",
+                "pts": 9
+              },
+              {
+                "c": "De contenido",
+                "pts": 36
+              },
+              {
+                "c": "De calidad académica",
+                "pts": 45
+              }
+            ],
+            "sources": [
+              {
+                "name": "Guía de aprendizaje - Reto 4 - Diseña soluciones Pensamiento computacional"
+              },
+              {
+                "name": "Rúbrica de evaluación - Reto 4"
+              }
+            ],
+            "status": "upcoming",
+            "title": "Pensamiento computacional"
+          },
+          {
+            "closes": "2026-12-01",
+            "comment": "POC final con reconocimiento facial — recuerda dejar el registro fotográfico hecho con tiempo, antes del 26 de nov.",
+            "desc": "Cuestionario en Moodle con reconocimiento facial (registro fotográfico previo obligatorio). Integra y consolida todo el curso.",
+            "id": "R5",
+            "momento": "Final",
+            "opens": "2026-11-26",
+            "progress": {
+              "pct": 0,
+              "status": "sin iniciar"
+            },
+            "pts": 125,
+            "sources": [],
+            "status": "upcoming",
+            "title": "Evaluación final (POC)"
+          }
+        ]
+      },
+      "version": 7,
+      "updatedAt": "2026-09-10T01:15:00.000000Z"
+    },
+    "212014": {
+      "id": "212014",
+      "data": {
+        "agendaUrl": "https://datateca.unad.edu.co/contenidos/agendas/2026-2204/212014.htm",
+        "code": "212014",
+        "credits": 2,
+        "meetings": [
+          {
+            "sesion": "Sesión 1",
+            "fecha": "2026-09-14",
+            "replicaFecha": "2026-09-21",
+            "asistida": false,
+            "refuerza": "Tarea 2",
+            "fuente": "Evento de Google Calendar (comprobación 327.950.469), 9 sep 2026 — sin información de puntos en la descripción del evento."
+          },
+          {
+            "sesion": "Sesión 2",
+            "fecha": "2026-10-13",
+            "replicaFecha": "2026-10-19",
+            "asistida": false,
+            "refuerza": "Tarea 3",
+            "fuente": "Evento de Google Calendar (comprobación 327.950.469), 9 sep 2026 — sin información de puntos en la descripción del evento."
+          }
+        ],
+        "name": "Introducción a la Ingeniería",
+        "nodes": [
+          {
+            "closes": "2026-08-30",
+            "comment": "Ya enviaste el mapa mental y participaste en el foro el 27 de agosto — pasó Turnitin con 6% de similitud, sin problema. Solo falta que el docente lo califique, no depende de ti.",
+            "desc": "Mapa mental (Canva) relacionando Ingeniería, Sistema, Proceso, Variable, Modelo, Diseño, Eficiencia + participación en foro. Turnitin ID 3018851779, similitud 6%.",
+            "grade": null,
+            "id": "T1",
+            "momento": "Inicial",
+            "opens": "2026-08-17",
+            "progress": {
+              "pct": 100,
+              "status": "entregado, pendiente de nota"
+            },
+            "pts": 25,
+            "sources": [
+              {
+                "name": "Guía de aprendizaje - Tarea 1 - Generalidades del curso"
+              }
+            ],
+            "status": "done",
+            "submitted": "27 ago 2026, 13:51 (3d 10h antes del cierre) — enviada para calificar, aún sin nota",
+            "title": "Generalidades del curso"
+          },
+          {
+            "closes": "2026-09-27",
+            "comment": "Vamos avanzando bien: 2 de 3 contenidos ya están listos para pasar a Canva (historia y ética). Falta trabajar habilidades del ingeniero con la lectura real, construir las 3 piezas visuales, y armar el PDF final con la participación del foro. Bloques ya agendados: 7 y 8 de septiembre.",
+            "desc": "3 actividades en Canva: línea de tiempo (9 momentos históricos), mapa mental de habilidades del ingeniero (5 blandas + 4 duras), infografía de ética profesional COPNIA (3 deberes + 3 prohibiciones). Entregable: 1 PDF con portada, introducción, objetivos, las 3 piezas (imagen+link c/u), captura del foro, conclusiones, bibliografía APA.",
+            "id": "T2",
+            "momento": "Intermedio",
+            "opens": "2026-08-31",
+            "progress": {
+              "pct": 55,
+              "status": "en curso",
+              "subtasks": [
+                {
+                  "name": "Actividad 1 — Historia (línea de tiempo)",
+                  "done": false,
+                  "draft": "<table class=\"draft-table\"><tr><th>Año/Periodo</th><th>Momento</th><th>Características</th></tr><tr><td>Paleolítico</td><td>Producción del fuego</td><td>No hay fecha exacta, pero el descubrimiento del fuego permitió la cocción de alimentos (salubridad), generar calor y vínculos sociales, y cocer materiales como el barro — despertó la intención de moldear estructuras más duraderas.</td></tr><tr><td>Cercano Oriente, Neolítico</td><td>Asentamientos → origen de las ciudades</td><td>Inicio de las polis/metrópolis: asentamientos que dieron origen a las ciudades, permitiendo conglomeración de personas, compartir ideas y buscar soluciones mediante el ingenio — de ahí \"ingenieros\".</td></tr><tr><td>~3200 a.C.</td><td>Uso de la rueda (Mesopotamia)</td><td>Favoreció la movilidad y procesos antes muy difíciles; potenció transporte y carga. Sigue siendo pilar hoy: vehículos, rodamientos, motores (hélices, cigüeñales).</td></tr><tr><td>~3000 a.C.</td><td>Arquitectura egipcia (pirámides, Esfinge)</td><td>Aún no hay explicación clara y definitiva de cómo se construyeron estructuras tan inmensas y pesadas hace más de cinco mil años — muchas suposiciones, ninguna certeza total.</td></tr><tr><td>~s. VIII a.C.</td><td>Navegación griega</td><td>Junto con explicar fenómenos naturales y ubicarse con las estrellas, permitió usar el agua como transporte, conectar civilizaciones y transportar mercancía.</td></tr><tr><td>~s. VIII a.C.</td><td>Filosofía/ciencia griega</td><td>Explicación lógica y racional a los fenómenos naturales — fórmulas, algoritmos, explicaciones científicas de curvas, áreas y volúmenes.</td></tr><tr><td>~19 a.C.</td><td>Hormigón y obras civiles romanas (Pont du Gard)</td><td>La fabricación del hormigón permitió modelar estructuras desde cero y personalizadas (columnas, torres, edificios) — ya no solo tallar piedra. Empezó a ajustar el mundo a nosotros, no al revés.</td></tr><tr><td>s. XV-XVI</td><td>Método de observación renacentista</td><td>Filósofos, investigadores e inventores de la época usaron la observación para generar descubrimientos y deducciones.</td></tr><tr><td>s. XV</td><td>Leonardo Da Vinci y sus diseños</td><td>A partir de la observación generó teorías y prototipos que aún hoy se implementan — ej. helicóptero, rueda de bicicleta.</td></tr></table><p class=\"draft-footnote\">Dictado por voz por Rafa (10 sep 2026), verificado contra la lectura real. Pendiente: proofread final y pasar a Canva.</p>",
+                  "note": "Las 9 características ya están dictadas y verificadas contra la lectura — falta que Rafa las revise una vez más (fue dictado por voz) y las pase a Canva.",
+                  "when": "10 sep — contenido listo, falta Canva"
+                },
+                {
+                  "name": "Actividad 2 — Habilidades del ingeniero",
+                  "done": false,
+                  "draft": "<p><b>Definición (borrador):</b> conjunto de capacidades técnicas y humanas que permiten a un ingeniero diseñar, ejecutar y gestionar soluciones a problemas reales de forma efectiva y responsable.</p><p><b>5 habilidades blandas:</b></p><ul><li>Comunicación efectiva — transmitir ideas técnicas complejas a audiencias técnicas y no técnicas</li><li>Trabajo en equipo — colaborar en proyectos multidisciplinarios coordinando esfuerzos</li><li>Pensamiento crítico — analizar problemas, evaluar alternativas, decidir con fundamento</li><li>Adaptabilidad — responder a cambios tecnológicos y de contexto con aprendizaje continuo</li><li>Liderazgo — guiar equipos y proyectos asumiendo responsabilidad sobre resultados</li></ul><p><b>4 habilidades duras:</b></p><ul><li>Pensamiento matemático y analítico — modelar y resolver problemas con herramientas cuantitativas</li><li>Dominio de herramientas técnicas — software especializado (CAD, simulación, lenguajes de programación)</li><li>Conocimiento técnico disciplinar — normas, procesos y materiales del área de ejercicio</li><li>Gestión de proyectos — planificar cronogramas, recursos y entregables</li></ul><p class=\"draft-footnote\">⚠️ Esto es solo una propuesta inicial mía, sin verificar todavía contra la lectura real (pp.154-185) — por eso esta actividad sigue marcada como pendiente.</p>",
+                  "note": "Planteamos la estructura (5 blandas + 4 duras) pero falta trabajar el contenido con la lectura real de pp.154-185.",
+                  "when": "Lun 7 sep, 14:00-17:00"
+                },
+                {
+                  "name": "Actividad 3 — Ética profesional",
+                  "done": true,
+                  "draft": "<p><b>Definición:</b> conjunto de normas de conducta (Título IV, Ley 842 de 2003) que rigen el ejercicio profesional de la ingeniería, buscando enaltecer la profesión y proteger a la sociedad, los clientes y los colegas.</p><p><b>3 deberes (Art. 31 — Deberes generales):</b></p><ol><li>Custodiar y cuidar los bienes, documentos e información confiados por razón del ejercicio profesional.</li><li>Permitir el acceso y colaborar con el Consejo Profesional Nacional de Ingeniería en sus investigaciones.</li><li>Denunciar los delitos, contravenciones y faltas contra el Código de Ética de los que se tenga conocimiento.</li></ol><p><b>3 prohibiciones (Art. 32 — Prohibiciones generales):</b></p><ol><li>Permitir, tolerar o facilitar el ejercicio ilegal de la profesión.</li><li>Solicitar o aceptar comisiones, dádivas o recompensas no autorizadas por el ejercicio profesional.</li><li>Causar, intencional o culposamente, daño o pérdida de bienes o documentos confiados por el ejercicio.</li></ol><p class=\"draft-footnote\">Tomado directo del texto oficial del Código COPNIA — reescríbelo con tus palabras para la infografía.</p>",
+                  "note": "Deberes y prohibiciones ya extraídos directo del Código COPNIA (Art. 31 y 32) — listo para pasar a Canva.",
+                  "when": "Mar 8 sep, 9:00-12:00"
+                },
+                {
+                  "name": "Armado del PDF final + foro",
+                  "done": false,
+                  "note": "Pendiente hasta tener las 3 piezas terminadas en Canva.",
+                  "when": "Mar 8 sep, 14:00-16:00"
+                },
+                {
+                  "name": "Revisión final y envío",
+                  "done": false,
+                  "note": "Revisión de ortografía y APA antes de enviar por mensajería interna.",
+                  "when": "Mié 9 sep, 19:00-20:00"
+                }
+              ]
+            },
+            "pts": 130,
+            "rubric": [
+              {
+                "c": "Historia de la ingeniería",
+                "pts": 50
+              },
+              {
+                "c": "Habilidades del ingeniero",
+                "pts": 35
+              },
+              {
+                "c": "Ética profesional",
+                "pts": 30
+              },
+              {
+                "c": "Presentación (APA, ortografía)",
+                "pts": 15
+              }
+            ],
+            "sources": [
+              {
+                "name": "González & Villamil (2013) — Introducción a la ingeniería, pp.23-48",
+                "url": "https://elibro-net.bibliotecavirtual.unad.edu.co/es/ereader/unad/114351?page=23"
+              },
+              {
+                "name": "González & Villamil (2013) — Introducción a la ingeniería, pp.154-185",
+                "url": "https://elibro-net.bibliotecavirtual.unad.edu.co/es/ereader/unad/114351?page=23"
+              },
+              {
+                "name": "Código de Ética COPNIA (Ley 842 de 2003)",
+                "url": "https://www.copnia.gov.co/tribunal-de-etica/codigo-de-etica"
+              },
+              {
+                "name": "OVA: Evolución de la Ingeniería",
+                "url": "https://repository.unad.edu.co/handle/10596/64777"
+              }
+            ],
+            "status": "active",
+            "title": "Fundamentos de la ingeniería"
+          },
+          {
+            "closes": "2026-10-25",
+            "comment": "Sin tocar, abre el 28 de septiembre. Ojo con el punto en inglés (Industry 5.0) — dale tiempo aparte.",
+            "desc": "Individual, ~24h estimadas. Actividad 1: resolver la Tabla 2 (12 preguntas) sobre la malla curricular propia, con el PEI y la OVA \"PEP\". Actividad 2: presentación en Canva con 5 tendencias de la ingeniería + un punto en inglés sobre Industry 5.0 (lectura + análisis propio).",
+            "id": "T3",
+            "momento": "Intermedio",
+            "opens": "2026-09-28",
+            "progress": {
+              "pct": 0,
+              "status": "sin iniciar"
+            },
+            "pts": 100,
+            "rubric": [
+              {
+                "c": "Apropia requisitos del programa",
+                "pts": 40
+              },
+              {
+                "c": "Identifica tendencias innovadoras",
+                "pts": 30
+              },
+              {
+                "c": "Analiza impacto de la 5ª revolución (inglés)",
+                "pts": 15
+              },
+              {
+                "c": "Presentación con especificaciones",
+                "pts": 15
+              }
+            ],
+            "sources": [
+              {
+                "name": "Guia de aprendizaje - Tarea 3 - Programa y prospectiva profesional"
+              },
+              {
+                "name": "Rúbrica de evaluación - Tarea 3"
+              }
+            ],
+            "status": "upcoming",
+            "title": "Programa y prospectiva profesional"
+          },
+          {
+            "closes": "2026-11-22",
+            "comment": "⚠️ No hay rúbrica separada para esta tarea (solo la guía del componente práctico). El contenido se resuelve presencial el 14-15 de octubre en Bogotá. ✅ Cambio de turno con la empresa CONFIRMADO (9 sep 2026) — ya no hay ningún pendiente logístico para asistir.",
+            "desc": "⚠️ Actividad COLABORATIVA (grupos de 2-4). Metodología CDIO + 4C's LEGO Education, 2 sesiones (14-15 oct, Sala de Lectura, Bogotá, 8:00am-2:00pm ambos días). Sesión 1: preinforme individual + inventario Ref.9686 + caso de ensambladora de autos (CDIO, 3 prototipos LEGO cronometrados). Sesión 2: inventario Ref.45544 EV3 + robot autónomo programado (LEGO Mindstorms EV3) + video grupal (≤3 min). Entrega: preinforme individual + informe grupal en PDF (máx. 2 días tras Sesión 2) + enlace de video.",
+            "id": "T4",
+            "momento": "Intermedio",
+            "opens": "2026-08-31",
+            "progress": {
+              "pct": 25,
+              "status": "logística lista — cambio de turno confirmado"
+            },
+            "pts": 120,
+            "sources": [
+              {
+                "name": "Comprobación de reserva 327,787,008"
+              },
+              {
+                "name": "Guía para el desarrollo del componente práctico - Tarea 4"
+              }
+            ],
+            "status": "active",
+            "title": "Práctica de laboratorio (LEGO Education)"
+          },
+          {
+            "closes": "2026-12-06",
+            "comment": "Socialización final con Canva y video ≤3min (no PowerPoint como se pensaba antes) — la dejamos para noviembre. El criterio de presentación del tema pesa más (70/125).",
+            "desc": "Individual, ~12h estimadas. Presentación en Canva (10 diapositivas): 2 desarrollos de ingeniería en tu región (últimos ~10 años) con impacto social/económico/ambiental/cultural + diapositiva \"El quehacer del Ingeniero\". Video ≤3 min con cámara siempre visible, explicando (no leyendo) las diapositivas.",
+            "id": "T5",
+            "momento": "Final",
+            "opens": "2026-11-23",
+            "progress": {
+              "pct": 0,
+              "status": "sin iniciar"
+            },
+            "pts": 125,
+            "rubric": [
+              {
+                "c": "Presentación del tema",
+                "pts": 70
+              },
+              {
+                "c": "Video con sustentación",
+                "pts": 40
+              },
+              {
+                "c": "Documento con especificaciones",
+                "pts": 15
+              }
+            ],
+            "sources": [
+              {
+                "name": "Guía de aprendizaje – Tarea 5 – Socialización final"
+              },
+              {
+                "name": "Rúbrica de evaluación - Tarea 5"
+              }
+            ],
+            "status": "upcoming",
+            "title": "Socialización final"
+          }
+        ]
+      },
+      "version": 11,
+      "updatedAt": "2026-09-10T19:09:07.751Z"
+    },
+    "213022": {
+      "id": "213022",
+      "data": {
+        "agendaUrl": "https://datateca.unad.edu.co/contenidos/agendas/2026-2204/213022.htm",
+        "code": "213022",
+        "contacts": [
+          {
+            "link": "https://teams.microsoft.com/meet/210426037477414?p=MiHPMVRDHgkmXodhqt",
+            "linkLabel": "Conectar por Teams",
+            "name": "Pablo Francisco Hernández",
+            "role": "Tutor",
+            "schedule": "Lun-vie, 9:00-11:00 a.m. y 4:00-6:00 p.m."
+          },
+          {
+            "name": "Luis Hernando Alzate Manotas",
+            "role": "Profesor"
+          }
+        ],
+        "credits": 3,
+        "name": "Fundamentos de Programación",
+        "nodes": [
+          {
+            "attempts": [
+              {
+                "result": "8/8 → 25/25",
+                "when": "20 ago, 5:10"
+              }
+            ],
+            "closes": "2026-08-30",
+            "comment": "Perfecto, 100%, sin pendientes.",
+            "desc": "Qué es programar, lenguajes y paradigmas, programación estructurada, variables/tipos/constantes.",
+            "grade": {
+              "max": 25,
+              "pct": 100,
+              "score": 25
+            },
+            "id": "F1",
+            "momento": "Inicial",
+            "opens": "2026-08-17",
+            "progress": {
+              "pct": 100,
+              "status": "completado"
+            },
+            "pts": 25,
+            "sources": [
+              {
+                "name": "Syllabus del curso Fundamentos de Programación"
+              }
+            ],
+            "status": "done",
+            "title": "Conceptualización"
+          },
+          {
+            "closes": "2026-09-27",
+            "comment": "Código Python completo y probado (R1-R6, 5 casos de prueba), grupo confirmado 213022 por el profesor Luis Alzate, sangría y formato de dos decimales corregidos (${valor_final:.2f}), ZIP final armado: Codigo_Grupo213022_Fase2_HerreraRafael.zip. ✅ Entregado en el espacio de rúbrica del campus el 10 sep 2026 — aún sin calificación, pendiente de revisión docente.",
+            "desc": "⚠️ Se resuelve UN (1) solo problema del banco de 5, no los 5. Rafa eligió el Problema 4 (IVA por categoría con validación). Entrega: informe PDF (tabla situación problema, tabla de requerimientos, diagrama de flujo, código completo) + carpeta con el proyecto Python, en un único .ZIP.",
+            "id": "F2",
+            "momento": "Intermedio",
+            "opens": "2026-08-31",
+            "submitted": "10 sep 2026 — enviada para calificar, aún sin nota",
+            "progress": {
+              "pct": 100,
+              "status": "entregado, pendiente de nota",
+              "subtasks": [
+                {
+                  "name": "Paso 1 — Reportar en el foro (Tabla 2)",
+                  "done": true,
+                  "draft": "<p><b>Tabla 1 — Información Situación Problema a Resolver</b></p><p><b>Estudiante:</b> Rafael Ricardo Herrera Berbeo — Identificación: 1069724809</p><p><b>Problema Asignado:</b> Problema 4 — Cálculo del valor final de un producto según su categoría</p>",
+                  "note": "Problema 4 publicado en el foro — reservado.",
+                  "when": "Jue 3 sep"
+                },
+                {
+                  "name": "Paso 2 — Tabla 3 de requerimientos",
+                  "done": true,
+                  "draft": "<table class=\"draft-table\"><tr><th>ID</th><th>Descripción</th><th>Entradas</th><th>Resultados</th></tr><tr><td>R1</td><td>Capturar el precio base del producto</td><td>Precio base ingresado por el usuario</td><td>Precio base almacenado (precio_base)</td></tr><tr><td>R2</td><td>Validar que el precio sea positivo</td><td>Variable precio_base</td><td>Si ≤0: error y fin. Si válido: continúa</td></tr><tr><td>R3</td><td>Capturar el código de categoría</td><td>Código ingresado por el usuario</td><td>Código almacenado (categoria)</td></tr><tr><td>R4</td><td>Validar que el código exista</td><td>Variable categoria</td><td>Si inválido: error y fin. Si válido: continúa</td></tr><tr><td>R5</td><td>Calcular el valor final según categoría</td><td>precio_base, categoria, IVA=0.19</td><td>Básico: sin IVA · Estándar: ×1.19 · Lujo: ×1.24 → valor_final</td></tr><tr><td>R6</td><td>Mostrar el valor final</td><td>Variable valor_final</td><td>Impreso por consola</td></tr></table>",
+                  "note": "Validada — el diagrama de flujo construido implementa exactamente esta lógica, sin ajustes.",
+                  "when": "Jue 3 sep"
+                },
+                {
+                  "name": "Paso 3 — Diagrama de flujo (draw.io)",
+                  "done": true,
+                  "draft": "<img class=\"attach-img\" src=\"/estudios/diagrama-flujo-f2.png\" alt=\"Diagrama de flujo del Problema 4, construido en draw.io\" data-filename=\"diagrama_flujo_problema4.png\"><div class=\"attach-actions\"><button class=\"attach-download\" data-filename=\"diagrama_flujo_problema4.png\">⬇ Descargar PNG</button></div><p class=\"draft-footnote\">Exportado de draw.io — diagrama_flujo_problema4.png · clic en la imagen para ampliarla</p>",
+                  "note": "Construido y revisado — símbolos correctos (óvalo/paralelogramo/rombo/rectángulo), con leyenda, orden y convergencia correctos. Sin observaciones.",
+                  "when": "Vie 4 sep"
+                },
+                {
+                  "name": "Paso 4 — Código Python",
+                  "done": true,
+                  "draft": "<table class=\"draft-table\"><tr><th>Caso</th><th>Entrada</th><th>Salida</th></tr><tr><td>Precio inválido</td><td>-5000</td><td>Error: el precio debe ser mayor a $0</td></tr><tr><td>Categoría inválida</td><td>50000, Premium</td><td>Error: la Categoría no es válida</td></tr><tr><td>Básico</td><td>50000, Básico</td><td>$50000.00</td></tr><tr><td>Estándar</td><td>50000, Estándar</td><td>$59500.00</td></tr><tr><td>Lujo</td><td>100000, Lujo</td><td>$124000.00</td></tr></table><p class=\"draft-footnote\">Código en ejercicios/fase-2/fase2_problema4.py — probado corriendo el script con los 5 casos (9 sep 2026, tras corregir sangría y formato de decimales), todos pasaron con el formato final de 2 decimales.</p>",
+                  "note": "R1-R6 completos y probados: precio_base, validación de precio, categoria, validación de categoría, cálculo de valor_final (con constantes IVA y TASA_LUJO en mayúsculas, sin números mágicos) y print final. Corregido 9 sep 2026: eliminada línea con espacios fantasma, y formato ${valor_final:.2f} para dos decimales limpios.",
+                  "when": "Vie 4 sep — corregido 9 sep"
+                },
+                {
+                  "name": "Paso 5 — Informe + ZIP final",
+                  "done": true,
+                  "note": "Completado 9 sep 2026 — PDF regenerado (Fase2_HerreraRafael.pdf, con Grupo 213022 y código corregido) y ZIP armado: Codigo_Grupo213022_Fase2_HerreraRafael.zip, en ejercicios/fase-2/. Listo para subir al espacio de rúbrica."
+                }
+              ]
+            },
+            "pts": 100,
+            "rubric": [
+              {
+                "c": "Tipos de datos, expresiones y operadores aritméticos",
+                "pts": 30
+              },
+              {
+                "c": "Elementos de diagrama de flujo",
+                "pts": 30
+              },
+              {
+                "c": "Uso de estructuras de control selectivas",
+                "pts": 30
+              },
+              {
+                "c": "Informe individual",
+                "pts": 10
+              }
+            ],
+            "sources": [
+              {
+                "name": "Guía de aprendizaje - Fase 2"
+              },
+              {
+                "name": "Rúbrica de evaluación - Fase 2"
+              },
+              {
+                "name": "Anexo 1 - Banco de problemas - Fase 2"
+              },
+              {
+                "name": "draw.io (herramienta sugerida para el diagrama de flujo)",
+                "url": "https://draw.io"
+              }
+            ],
+            "status": "done",
+            "title": "Variables y Estructuras"
+          },
+          {
+            "closes": "2026-10-25",
+            "comment": "Sin tocar, abre el 28 de septiembre. Antes de empezar, confirmar en el foro cuántos de los 10 problemas te tocan (probablemente 1, por el patrón de Fase 2, pero no está confirmado literal como en Fase 4/5).",
+            "desc": "Individual. Banco de 10 problemas (Anexo 2): 5 de estructuras repetitivas (horno industrial, cuotas conjunto residencial, encuesta TV cable, salarios por antigüedad, encuesta hinchas fútbol) + 5 de arreglos (ventas pizzería, triage hospitalario, compra helados, matriz capicúa, productividad empleados). ⚠️ Sin confirmar todavía si se resuelve 1 solo problema (como en Fase 2) o varios — falta la guía real o el foro del tutor.",
+            "id": "F3",
+            "momento": "Intermedio",
+            "opens": "2026-09-28",
+            "progress": {
+              "pct": 0,
+              "status": "sin iniciar"
+            },
+            "pts": 100,
+            "rubric": [
+              {
+                "c": "Tipos de datos, expresiones y operadores aritméticos",
+                "pts": 30
+              },
+              {
+                "c": "Estructuras de control y repetición",
+                "pts": 30
+              },
+              {
+                "c": "Uso de arreglos (incl. bidimensionales)",
+                "pts": 30
+              },
+              {
+                "c": "Informe individual",
+                "pts": 10
+              }
+            ],
+            "sources": [
+              {
+                "name": "Anexo 2 - Banco de problemas - Fase 3"
+              },
+              {
+                "name": "Rúbrica de evaluación - Fase 3"
+              }
+            ],
+            "status": "upcoming",
+            "title": "Repetitivas y Arreglos"
+          },
+          {
+            "closes": "2026-11-22",
+            "comment": "El reto de más peso (150 pts) y es colaborativa — cuando se acerque, coordinar con el grupo con tiempo. Ojo: el criterio 4 (35 pts) evalúa explícitamente el uso de IA como asistente de depuración, no solo que el código quede correcto.",
+            "desc": "⚠️ El reto de más peso del curso. COLABORATIVA (elige el grupo 1 de 5 problemas). No es programar desde cero — cada problema trae código Python con errores intencionales (sintaxis y lógica) que hay que depurar usando IA como asistente de diagnóstico (leer Traceback, consultar tipo de error, contrastar con la solución correcta). Banco: Cine Full (matriz asientos), ventas y bonos (diccionario), nómina, inventario con prioridad, asignación de recursos a tareas (matriz).",
+            "id": "F4",
+            "momento": "Intermedio",
+            "opens": "2026-10-26",
+            "progress": {
+              "pct": 0,
+              "status": "sin iniciar"
+            },
+            "pts": 150,
+            "rubric": [
+              {
+                "c": "Tipos de datos, expresiones y operadores aritméticos",
+                "pts": 35
+              },
+              {
+                "c": "Estructuras de control simple y anidada",
+                "pts": 35
+              },
+              {
+                "c": "Estructuras de repetición",
+                "pts": 35
+              },
+              {
+                "c": "Funciones + uso de IA para analizar/optimizar/proponer soluciones",
+                "pts": 35
+              },
+              {
+                "c": "Informe grupal (aportes individuales)",
+                "pts": 10
+              }
+            ],
+            "sources": [
+              {
+                "name": "Anexo 3 - Banco de problemas - Fase 4"
+              },
+              {
+                "name": "Rúbrica de evaluación - Fase 4"
+              }
+            ],
+            "status": "upcoming",
+            "title": "Componente Práctico"
+          },
+          {
+            "closes": "2026-12-06",
+            "comment": "Evaluación final POA, para noviembre. Dejar listo con tiempo el repo de GitHub y confirmar la plataforma de video para la sustentación — es un requisito que no aparece en las fases anteriores.",
+            "desc": "Individual. Integra RAC1-2-3, mismo formato (informe + código Python). Elige 1 de 5 problemas del Anexo 4, todos basados en matrices (clasificación de compromiso de sesiones, promoción de menú, reabastecimiento de inventario, catálogo de videoteca, horas semanales de un equipo). ⚠️ Requisito nuevo: sustentación en video + código publicado en GitHub (repo accesible y bien estructurado).",
+            "id": "F5",
+            "momento": "Final",
+            "opens": "2026-11-23",
+            "progress": {
+              "pct": 0,
+              "status": "sin iniciar"
+            },
+            "pts": 125,
+            "rubric": [
+              {
+                "c": "Estructuras secuenciales y de control",
+                "pts": 25
+              },
+              {
+                "c": "Estructuras de repetición",
+                "pts": 30
+              },
+              {
+                "c": "Funciones que optimizan la solución",
+                "pts": 30
+              },
+              {
+                "c": "Sustentación en video + repo GitHub",
+                "pts": 30
+              },
+              {
+                "c": "Informe individual",
+                "pts": 10
+              }
+            ],
+            "sources": [
+              {
+                "name": "Anexo 4 - Banco de problemas - Fase 5"
+              },
+              {
+                "name": "Rúbrica de evaluación - Fase 5 - Evaluación Final POA"
+              }
+            ],
+            "status": "upcoming",
+            "title": "Evaluación Final POA"
+          }
+        ]
+      },
+      "version": 16,
+      "updatedAt": "2026-09-10T03:00:00.000000Z"
+    }
+  }
+}
