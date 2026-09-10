@@ -1,17 +1,19 @@
 # Propuesta — overlay de lógica de estrategias en el gráfico de Live
 
-Estado (09 sep 2026): **v1 + v2 construidas y pusheadas.**
+Estado (10 sep 2026): **v1 + v2 + v3 construidas y pusheadas — los 3 modelos
+completos.**
 - Selector Ninguno/Time-Based Entry/Continuation/Last Quarter en Live.
 - Vela H1 de referencia de cada hora operativa de hoy, como caja RELLENA de
   verdad (`BaselineSeries` con `baseValue`, no un plugin de canvas propio —
   más simple y menos riesgoso de tirar sin poder verlo en el navegador).
-- **Time-Based Entry ya marca la entrada/SL/TP REAL detectada** (barrido +
-  confirmación sobre velas M1 de hoy, portado de
-  `backtest-time-based-entry.mjs`) — verificado corriendo contra datos
-  reales antes de pushear. Continuation/Last Quarter siguen solo con la
-  vela de referencia — portar su detección real necesita un estado que se
-  arrastra hora a hora (dirección del día, DOL, posición abierta), más
-  grande que Time-Based Entry — pendiente, ver "Qué falta".
+- **Los 3 modelos marcan la entrada/SL/TP REAL detectada** sobre velas M1 de
+  hoy: Time-Based Entry (`detectTbeSetupsToday`, portado de
+  `backtest-time-based-entry.mjs`) y Continuation/Last Quarter
+  (`detectStatefulWsSetupsToday`, portado de `backtest-continuation.mjs`/
+  `backtest-last-quarter.mjs`, arrastrando dirección del día + DOL +
+  posición abierta hora a hora) — ambos verificados corriendo contra datos
+  reales de Supabase antes de pushear. Punto de entrada único en el overlay:
+  `detectWsSetupsToday(model, snap, now)`.
 
 Resto de este documento: la propuesta original completa, como referencia.
 
@@ -110,12 +112,10 @@ se dibuja cada zona. Sigue sin construirse.
   tienen sus propios checks de "Capas" para apagarlos si satura.
 - Es solo visualización, no propone ni ejecuta — confirmado.
 
-## Qué falta (siguiente paso, no construido todavía)
+## Qué falta
 
-1. **Continuation y Last Quarter con entrada real**: a diferencia de Time-Based
-   Entry (autocontenido por hora), estos dos necesitan arrastrar estado
-   entre horas dentro del mismo día — dirección fijada por la primera señal,
-   DOL del día, si ya hay posición abierta, si ya se tocó el DOL. Es
-   portable (mismo criterio que `backtest-continuation.mjs`/
-   `backtest-last-quarter.mjs`), pero es un módulo más grande que
-   `detectTbeSetupsToday`.
+Nada pendiente de los 3 modelos — los tres marcan entrada/SL/TP real de hoy.
+Posible mejora futura (no pedida todavía): las "cajas de zona" (ventana de
+raid, zona de gestión post-entrada) descritas arriba en "cajas en vez de solo
+líneas" siguen sin construirse — hoy solo se dibuja la caja de la vela H1 de
+referencia.
