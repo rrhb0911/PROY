@@ -16,3 +16,10 @@ scripts-automatizacion/
 ZammyDeportes/
 PROY Project/tower/
 PROY Project/trading-live/scripts/*.log
+
+# Copias en conflicto de OneDrive (incidente 2026-09-08/10, ver
+# "PROY Project/COORDINACION-SESIONES.md"). OneDrive renombra la copia
+# perdedora como "archivo-<NOMBRE-EQUIPO>.ext" cuando dos máquinas tocan
+# el mismo archivo. Son basura: nunca contienen trabajo que no esté ya
+# commiteado. Esto solo evita que ensucien "git status".
+*-194-177-153-160*
