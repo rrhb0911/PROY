@@ -454,14 +454,6 @@
       }
     },
     {
-      "id": "2026-09-15-retiro-yeso",
-      "data": {
-        "date": "2026-09-15",
-        "title": "Retiro de yeso",
-        "type": "salud"
-      }
-    },
-    {
       "id": "2026-10-06-control-ortopedista",
       "data": {
         "date": "2026-10-06",
@@ -1126,28 +1118,28 @@
           },
           {
             "closes": "2026-09-27",
-            "comment": "Vamos avanzando bien: 2 de 3 contenidos ya están listos para pasar a Canva (historia y ética). Falta trabajar habilidades del ingeniero con la lectura real, construir las 3 piezas visuales, y armar el PDF final con la participación del foro. Bloques ya agendados: 7 y 8 de septiembre.",
+            "comment": "Actividades 1 (Historia) y 2 (Habilidades) completamente cerradas: lectura real verificada, contenido construido y Canva terminado para ambas, con imagen y link guardados. Actividad 3 (Ética) ya tiene el contenido extraído del Código COPNIA, falta pasar a infografía en Canva. Después: armar el PDF final con las 3 piezas + evidencia de foro + conclusiones + referencias APA (falta aún la ficha completa de González & Villamil).",
             "desc": "3 actividades en Canva: línea de tiempo (9 momentos históricos), mapa mental de habilidades del ingeniero (5 blandas + 4 duras), infografía de ética profesional COPNIA (3 deberes + 3 prohibiciones). Entregable: 1 PDF con portada, introducción, objetivos, las 3 piezas (imagen+link c/u), captura del foro, conclusiones, bibliografía APA.",
             "id": "T2",
             "momento": "Intermedio",
             "opens": "2026-08-31",
             "progress": {
-              "pct": 55,
+              "pct": 70,
               "status": "en curso",
               "subtasks": [
                 {
                   "name": "Actividad 1 — Historia (línea de tiempo)",
-                  "done": false,
+                  "done": true,
                   "draft": "<table class=\"draft-table\"><tr><th>Año/Periodo</th><th>Momento</th><th>Características</th></tr><tr><td>Paleolítico</td><td>Producción del fuego</td><td>No hay fecha exacta, pero el descubrimiento del fuego permitió la cocción de alimentos (salubridad), generar calor y vínculos sociales, y cocer materiales como el barro — despertó la intención de moldear estructuras más duraderas.</td></tr><tr><td>Cercano Oriente, Neolítico</td><td>Asentamientos → origen de las ciudades</td><td>Inicio de las polis/metrópolis: asentamientos que dieron origen a las ciudades, permitiendo conglomeración de personas, compartir ideas y buscar soluciones mediante el ingenio — de ahí \"ingenieros\".</td></tr><tr><td>~3200 a.C.</td><td>Uso de la rueda (Mesopotamia)</td><td>Favoreció la movilidad y procesos antes muy difíciles; potenció transporte y carga. Sigue siendo pilar hoy: vehículos, rodamientos, motores (hélices, cigüeñales).</td></tr><tr><td>~3000 a.C.</td><td>Arquitectura egipcia (pirámides, Esfinge)</td><td>Aún no hay explicación clara y definitiva de cómo se construyeron estructuras tan inmensas y pesadas hace más de cinco mil años — muchas suposiciones, ninguna certeza total.</td></tr><tr><td>~s. VIII a.C.</td><td>Navegación griega</td><td>Junto con explicar fenómenos naturales y ubicarse con las estrellas, permitió usar el agua como transporte, conectar civilizaciones y transportar mercancía.</td></tr><tr><td>~s. VIII a.C.</td><td>Filosofía/ciencia griega</td><td>Explicación lógica y racional a los fenómenos naturales — fórmulas, algoritmos, explicaciones científicas de curvas, áreas y volúmenes.</td></tr><tr><td>~19 a.C.</td><td>Hormigón y obras civiles romanas (Pont du Gard)</td><td>La fabricación del hormigón permitió modelar estructuras desde cero y personalizadas (columnas, torres, edificios) — ya no solo tallar piedra. Empezó a ajustar el mundo a nosotros, no al revés.</td></tr><tr><td>s. XV-XVI</td><td>Método de observación renacentista</td><td>Filósofos, investigadores e inventores de la época usaron la observación para generar descubrimientos y deducciones.</td></tr><tr><td>s. XV</td><td>Leonardo Da Vinci y sus diseños</td><td>A partir de la observación generó teorías y prototipos que aún hoy se implementan — ej. helicóptero, rueda de bicicleta.</td></tr></table><p class=\"draft-footnote\">Dictado por voz por Rafa (10 sep 2026), verificado contra la lectura real. Pendiente: proofread final y pasar a Canva.</p>",
-                  "note": "Las 9 características ya están dictadas y verificadas contra la lectura — falta que Rafa las revise una vez más (fue dictado por voz) y las pase a Canva.",
-                  "when": "10 sep — contenido listo, falta Canva"
+                  "note": "Terminado y verificado: 9 hitos con año/periodo confirmados contra la lectura real (González & Villamil, pp.23-48 + OVA). Canva terminado 10 sep 2026 (\"Del Fuego a Da Vinci: una Evolución Continua\"), imagen exportada y guardada.",
+                  "when": "10 sep — Canva y actividad cerrados"
                 },
                 {
                   "name": "Actividad 2 — Habilidades del ingeniero",
-                  "done": false,
-                  "draft": "<p><b>Definición (borrador):</b> conjunto de capacidades técnicas y humanas que permiten a un ingeniero diseñar, ejecutar y gestionar soluciones a problemas reales de forma efectiva y responsable.</p><p><b>5 habilidades blandas:</b></p><ul><li>Comunicación efectiva — transmitir ideas técnicas complejas a audiencias técnicas y no técnicas</li><li>Trabajo en equipo — colaborar en proyectos multidisciplinarios coordinando esfuerzos</li><li>Pensamiento crítico — analizar problemas, evaluar alternativas, decidir con fundamento</li><li>Adaptabilidad — responder a cambios tecnológicos y de contexto con aprendizaje continuo</li><li>Liderazgo — guiar equipos y proyectos asumiendo responsabilidad sobre resultados</li></ul><p><b>4 habilidades duras:</b></p><ul><li>Pensamiento matemático y analítico — modelar y resolver problemas con herramientas cuantitativas</li><li>Dominio de herramientas técnicas — software especializado (CAD, simulación, lenguajes de programación)</li><li>Conocimiento técnico disciplinar — normas, procesos y materiales del área de ejercicio</li><li>Gestión de proyectos — planificar cronogramas, recursos y entregables</li></ul><p class=\"draft-footnote\">⚠️ Esto es solo una propuesta inicial mía, sin verificar todavía contra la lectura real (pp.154-185) — por eso esta actividad sigue marcada como pendiente.</p>",
-                  "note": "Planteamos la estructura (5 blandas + 4 duras) pero falta trabajar el contenido con la lectura real de pp.154-185.",
-                  "when": "Lun 7 sep, 14:00-17:00"
+                  "done": true,
+                  "draft": "<p><b>Definición:</b> Habilidades que combinan conocimiento técnico y trabajo humano para diseñar y ejecutar soluciones.</p><p><b>5 habilidades blandas:</b></p><ul><li>Liderazgo — mantiene al equipo unido, organiza tareas y gestiona conflictos.</li><li>Toma de decisiones — elegir rápido bajo presión sin comprometer la seguridad.</li><li>Imaginación/Creatividad — buscar soluciones nuevas y aprovechar al máximo los recursos.</li><li>Pensamiento crítico/analítico — analizar fallos paso a paso hasta encontrar la causa real.</li><li>Comunicación asertiva — explicar ideas de forma clara, incluso a quien no es técnico.</li></ul><p><b>4 habilidades duras:</b></p><ul><li>Diseño — planear, simular y corregir antes de construir.</li><li>Construcción/ejecución de proyectos — llevar las ideas a la realidad y supervisar que todo funcione.</li><li>Uso de herramientas/manejo de tecnología — usar bien tecnología y software para trabajar mejor.</li><li>Análisis de datos y cálculo matemático — aplicar matemáticas y datos para garantizar seguridad.</li></ul><p class=\"draft-footnote\">Construidas por inferencia propia a partir de la lectura real (González & Villamil, cap. 6, pp.154-185 — confirmado que el libro no trae una lista explícita de habilidades, es lectura de contexto por rama de la ingeniería) + reflexión personal de Rafa, dictada por voz y revisada.</p>",
+                  "note": "Terminado y verificado contra la lectura real (Capítulo 6 completo, pp.154-185 — confirmado que no hay lista explícita en el libro, se construyó por inferencia). Canva terminado 11 sep 2026, con definición + 9 nodos + íconos, sin problemas de legibilidad tras 2 rondas de revisión.",
+                  "when": "11 sep — Canva y actividad cerrados"
                 },
                 {
                   "name": "Actividad 3 — Ética profesional",
@@ -1313,8 +1305,8 @@
           }
         ]
       },
-      "version": 11,
-      "updatedAt": "2026-09-10T19:09:07.751Z"
+      "version": 12,
+      "updatedAt": "2026-09-11T16:58:00.690Z"
     },
     "213022": {
       "id": "213022",
@@ -1370,12 +1362,12 @@
           },
           {
             "closes": "2026-09-27",
-            "comment": "Código Python completo y probado (R1-R6, 5 casos de prueba), grupo confirmado 213022 por el profesor Luis Alzate, sangría y formato de dos decimales corregidos (${valor_final:.2f}), ZIP final armado: Codigo_Grupo213022_Fase2_HerreraRafael.zip. ✅ Entregado en el espacio de rúbrica del campus el 10 sep 2026 — aún sin calificación, pendiente de revisión docente.",
+            "comment": "Código Python completo y probado (R1-R6, 5 casos de prueba), grupo confirmado 213022 por el profesor Luis Alzate. Se detectó que la primera entrega tenía el bloque de código fuente del PDF pegado con una versión vieja (Grupo 63 sin confirmar) pese a que la portada ya decía 213022; se corrigió, se borró esa entrega y se volvió a subir. ✅ Reentregado y confirmado en el espacio de rúbrica del campus el 10 sep 2026, 16:35 (Turnitin en cola) — aún sin calificación, pendiente de revisión docente.",
             "desc": "⚠️ Se resuelve UN (1) solo problema del banco de 5, no los 5. Rafa eligió el Problema 4 (IVA por categoría con validación). Entrega: informe PDF (tabla situación problema, tabla de requerimientos, diagrama de flujo, código completo) + carpeta con el proyecto Python, en un único .ZIP.",
             "id": "F2",
             "momento": "Intermedio",
             "opens": "2026-08-31",
-            "submitted": "10 sep 2026 — enviada para calificar, aún sin nota",
+            "submitted": "10 sep 2026, 16:35 — reentregado tras corregir el PDF, enviado para calificar, aún sin nota",
             "progress": {
               "pct": 100,
               "status": "entregado, pendiente de nota",
@@ -1585,8 +1577,8 @@
           }
         ]
       },
-      "version": 16,
-      "updatedAt": "2026-09-10T03:00:00.000000Z"
+      "version": 17,
+      "updatedAt": "2026-09-11T19:33:26.198Z"
     }
   }
 }
