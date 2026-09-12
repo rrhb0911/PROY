@@ -446,14 +446,6 @@
       }
     },
     {
-      "id": "2026-09-12-cumpleanos",
-      "data": {
-        "date": "2026-09-12",
-        "title": "Día libre — cumpleaños",
-        "type": "personal"
-      }
-    },
-    {
       "id": "2026-10-06-control-ortopedista",
       "data": {
         "date": "2026-10-06",
@@ -508,7 +500,7 @@
         "credits": 3,
         "meetings": [
           {
-            "sesion": "CIPAS I — Raíces Unadistas",
+            "sesion": "Sesión 1",
             "fecha": "2026-09-15",
             "replicaFecha": "2026-09-19",
             "asistida": false,
@@ -516,7 +508,7 @@
             "fuente": "Evento de Google Calendar (comprobación 327.987.188), 9 sep 2026 — réplica presencial en Diagonal 1 Nro 26-18, Barrio el Comboy. Sin información de puntos en la descripción del evento."
           },
           {
-            "sesion": "CIPAS II — Ramificando Saberes",
+            "sesion": "Sesión 2",
             "fecha": "2026-10-13",
             "replicaFecha": "2026-10-17",
             "asistida": false,
@@ -524,7 +516,7 @@
             "fuente": "Evento de Google Calendar (comprobación 327.987.188), 9 sep 2026 — réplica presencial en Diagonal 1 Nro 26-18, Barrio el Comboy. Sin información de puntos en la descripción del evento."
           },
           {
-            "sesion": "CIPAS III — Del florecimiento al legado",
+            "sesion": "Sesión 3",
             "fecha": "2026-11-03",
             "replicaFecha": "2026-11-07",
             "asistida": false,
@@ -672,7 +664,7 @@
           }
         ]
       },
-      "version": 5,
+      "version": 6,
       "updatedAt": "2026-09-10T02:00:00.000000Z"
     },
     "200610": {
@@ -700,7 +692,7 @@
         "credits": 3,
         "meetings": [
           {
-            "sesion": "Sesión 1 HDGC",
+            "sesion": "Sesión 1",
             "fecha": "2026-09-17",
             "replicaFecha": "2026-09-24",
             "asistida": false,
@@ -708,7 +700,7 @@
             "fuente": "Evento de Google Calendar (comprobación 327.964.862), 9 sep 2026 — sin información de puntos en la descripción del evento."
           },
           {
-            "sesion": "Sesión 2 HDGC",
+            "sesion": "Sesión 2",
             "fecha": "2026-10-15",
             "replicaFecha": "2026-10-22",
             "asistida": false,
@@ -716,7 +708,7 @@
             "fuente": "Evento de Google Calendar (comprobación 327.964.862), 9 sep 2026 — sin información de puntos en la descripción del evento."
           },
           {
-            "sesion": "Sesión 3 HDGC",
+            "sesion": "Sesión 3",
             "fecha": "2026-11-05",
             "replicaFecha": "2026-11-12",
             "asistida": false,
@@ -863,7 +855,7 @@
           }
         ]
       },
-      "version": 7,
+      "version": 8,
       "updatedAt": "2026-09-10T02:00:00.000000Z"
     },
     "200611": {
@@ -896,7 +888,7 @@
         "credits": 3,
         "meetings": [
           {
-            "sesion": "Sesión 1 — Lógica proposicional",
+            "sesion": "Sesión 1",
             "fecha": "2026-09-09",
             "pts": 15,
             "asistida": true,
@@ -904,7 +896,7 @@
             "fuente": "Correo interno del campus de un docente de 200611, 9 sep 2026 — pendiente respaldo en guía escrita"
           },
           {
-            "sesion": "Sesión 2 — Conjuntos / Razonamiento cuantitativo",
+            "sesion": "Sesión 2",
             "fecha": "2026-09-30",
             "replicaFecha": "2026-10-14",
             "pts": 15,
@@ -913,7 +905,7 @@
             "fuente": "Correo interno del campus de un docente de 200611, 9 sep 2026 — pendiente respaldo en guía escrita"
           },
           {
-            "sesion": "Sesión 3 — Pensamiento computacional",
+            "sesion": "Sesión 3",
             "fecha": "2026-10-28",
             "replicaFecha": "2026-11-11",
             "pts": 20,
@@ -1065,7 +1057,7 @@
           }
         ]
       },
-      "version": 7,
+      "version": 8,
       "updatedAt": "2026-09-10T01:15:00.000000Z"
     },
     "212014": {
