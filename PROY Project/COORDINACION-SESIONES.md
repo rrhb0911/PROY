@@ -37,6 +37,26 @@ coordinación que Rafa pidió establecer el 2026-09-10.
    pendiente), respóndele cuando puedas — no es urgente salvo que se indique
    lo contrario.
 
+## Dónde está la verdad de cada dominio (auditado 2026-09-16)
+
+Los `.md` sueltos en la raíz de PROY (`ESTUDIOS.md`, `FINANZAS.md`, `CALENDARIO.md`, `TRADING.md`,
+`CICLISMO.md`) eran la planeación original del dashboard "PROY Project/frontend" (jul-2026), **antes** de
+que Tower existiera. La mayoría de esos módulos ya se construyeron de verdad, pero en Tower, no en
+`frontend/` — esos archivos quedaron sin tocar desde jul-2026 y no reflejan el estado real. Cada uno ya
+tiene un banner de advertencia arriba señalando esto. Antes de citar cualquiera de ellos como "estado
+actual", confirmar contra la fuente real:
+
+| Dominio | Fuente de verdad real | Doc viejo (histórico, no confiar) |
+|---|---|---|
+| Estudios | Tower (`estudio_materias`) + sesión UNAD (`study/UNAD/CLAUDE.md`) | `ESTUDIOS.md` |
+| Finanzas | Tower (`finanzas_config`/`finanzas_mensual`) | `FINANZAS.md` |
+| Calendario | Tower (Google Calendar real, sync bidireccional) | `CALENDARIO.md` |
+| Trading (forex/WS) | Tower + `trading-live/` (sesión "Trading") | `TRADING.md` (la parte de Binance/crypto ahí sigue siendo backlog real, nunca se construyó) |
+| Deporte/Ciclismo (básico) | Tower (recuperación, catálogo de entrenamientos) | `CICLISMO.md` (la parte de Strava/WKO5 ahí sigue siendo backlog real) |
+| Salud | `SALUD.md` (activo, actualizado 2026-09-10) — sí es fuente de verdad | — |
+| Metas | `METAS.md` (activo, actualizado 2026-09-10) — sí es fuente de verdad | — |
+| Documentos | Ninguna todavía — Tower solo tiene un stub deshabilitado | `DOCUMENTOS.md` (sigue siendo backlog válido) |
+
 ## Por qué existe este archivo
 
 Para no depender de que todas las sesiones estén vivas al mismo tiempo. Si

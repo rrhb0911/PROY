@@ -1,5 +1,11 @@
 # Módulo de Estudios — PROY
 
+> ⚠️ **Superado desde que Tower absorbió este módulo (Estudios, `estudio_materias` en Supabase, sesión "UNAD").**
+> Este archivo es un borrador de planeación de jul-2026, sin tocar desde entonces — no refleja las materias
+> reales ni el avance actual. Fuente de verdad real: Tower (`t.ilbici.live`, módulo Estudios) + la bitácora
+> de la sesión UNAD (`study/UNAD/CLAUDE.md`). Se deja acá como referencia histórica de la idea original, no
+> como estado actual. Ver `COORDINACION-SESIONES.md`.
+
 ## Visión General
 
 Bitácora de aprendizaje personal. Centraliza cursos, notas, recursos y proyectos educativos. Funciona como un **Notebook LM personal** basado en markdown, con capacidad futura de conectar con Google NotebookLM para generar resúmenes, podcasts y material de estudio desde las notas.

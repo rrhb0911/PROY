@@ -1,5 +1,11 @@
 # Módulo de Ciclismo — PROY
 
+> ⚠️ **Parcialmente vigente.** El seguimiento básico (recuperación, catálogo de entrenamientos) ya vive real
+> en Tower (`t.ilbici.live`, módulo Deporte y Salud) — ver `tower/PENDIENTES-TOWER.md`. La integración con
+> Strava/WKO5/CTL-ATL-TSB descrita acá **no se ha construido todavía** — sigue siendo la idea original de
+> jul-2026, y coincide con la idea #1 que Rafa quiere retomar con Jarvis (ver memoria del asistente,
+> `project_ideas_futuras_jarvis`) cuando conecte el MCP de Strava. Ver `COORDINACION-SESIONES.md`.
+
 ## Visión General
 
 Sistema integral de entrenamiento ciclista que unifica datos de **Strava**, **GoldenCheetah**, **TrainingPeaks** y **WKO5** para analizar evolución, planificar entrenamientos por zonas y optimizar rendimiento con métricas avanzadas. El objetivo es tener un sistema propio que calcule las mismas métricas que WKO5 sin depender de software de terceros.

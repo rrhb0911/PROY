@@ -1,5 +1,11 @@
 # Módulo: Calendario — PROY
 
+> ⚠️ **Superado desde que Tower absorbió este módulo** (Calendario, integrado con Google Calendar real,
+> sync bidireccional). Este archivo es un borrador de planeación de jul-2026, sin tocar desde entonces.
+> Fuente de verdad real: Tower (`t.ilbici.live`, módulo Calendario) + `tower/PENDIENTES-TOWER.md` (bitácora
+> extensa del trabajo real hecho ahí). Se deja acá como referencia histórica, no como estado actual.
+> Ver `COORDINACION-SESIONES.md`.
+
 ## Visión General
 
 Calendario personal integrado con **Google Calendar API**. Unifica entregas de proyectos, pagos, entrenos, citas, vencimientos de documentos y sesiones de estudio en una vista única.

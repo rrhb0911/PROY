@@ -1,5 +1,11 @@
 # Módulo de Trading — PROY
 
+> ⚠️ **Parcialmente superado.** La parte de forex/CFDs vía cTrader (estrategias WS, sentimiento, P&L) ya vive
+> real en Tower (`t.ilbici.live`, módulo Trading) + `trading-live/` (sesión "Trading") — ese es el estado
+> actual para eso, no este archivo. La parte de Binance/crypto descrita acá **nunca se construyó** en
+> ningún lado — sigue siendo solo la idea original de jul-2026, vigente como backlog si Rafa quiere
+> retomarla. Ver `COORDINACION-SESIONES.md`.
+
 ## Visión General
 
 Sistema de trading unificado que conecta **cTrader** (forex/CFDs) vía MCP + FIX API y **Binance** (crypto) para operar, ejecutar estrategias y analizar mercados asistido por IA.

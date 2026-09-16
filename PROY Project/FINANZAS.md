@@ -1,5 +1,11 @@
 # Módulo de Finanzas Personales — PROY
 
+> ⚠️ **Superado desde que Tower absorbió este módulo (Finanzas, tablas `finanzas_config`/`finanzas_mensual`
+> en Supabase).** Este archivo es un borrador de planeación de jul-2026 basado en `GASTOS.xlsx`, sin tocar
+> desde entonces — Tower ya no usa ese Excel como fuente, tiene su propio esquema de categorías/quincenas.
+> Fuente de verdad real: Tower (`t.ilbici.live`, módulo Finanzas). Se deja acá como referencia histórica,
+> no como estado actual. Ver `COORDINACION-SESIONES.md`.
+
 ## Visión General
 
 Control unificado de ingresos, gastos, deudas y patrimonio. Vincula tu trabajo actual (Transcom), trabajos alternos (proyectos freelance), y todos los egresos categorizados del archivo `GASTOS.xlsx`.
