@@ -140,6 +140,18 @@ imposibles de hacer.
    - Agregado a `METAS.md` → Hábitos Diarios como "Core McGill (Lu/Mi/Vi)".
    - **Importante — alcance temporal explícito (confirmado por Rafa):** este hábito y el evento de calendario son válidos **solo mientras dure la recuperación**. Se retiran/cancelan en cuanto el médico autorice volver al gimnasio con carga axial (sentadilla/peso muerto) — no antes. La corrección real de días libres es **lunes y martes** (no martes/jueves/domingo, que fue un error de la sesión anterior ya corregido antes de programar el calendario).
 
+**2026-09-16 — Dolor en hombro derecho (deltoides posterior), sin relación aparente con la fractura de pie**
+
+Rafa reporta dolor de un mes de evolución, inicio gradual — apareció en la primera semana de quietud forzada por la fractura de Jones (no durante la rutina de gimnasio, que ya estaba pausada). Caracterización (Q&A con Claude, sin diagnóstico — no reemplaza evaluación médica):
+
+- **Ubicación:** deltoides posterior. Muscular, no profundo en la articulación.
+- **Tipo:** tirón punzante, agudo ("como un chuzón").
+- **Dispara con:** llevar el brazo hacia atrás/horizontal (solo en esa dirección, no hacia adelante); duele un poco al intentar alcanzar la espalda alta (rascarse).
+- **Sin señales de alarma:** sin chasquidos, sin debilidad, sin hormigueo/adormecimiento. Intensidad 5-6/10. No ha probado nada para aliviarlo.
+- **Hipótesis no clínica** (para contexto, no diagnóstico): compensación postural muscular por la inmovilidad de la fractura — tensión/acortamiento de rotadores externos y estabilizadores posteriores del hombro (infraespinoso, redondo menor, romboides), consistente con que apareció justo al empezar la quietud forzada.
+- **Sugerido a Rafa** (autocuidado básico, sin cargar el hombro): evitar dormir de ese lado, calor local 10-15min antes de mover el hombro, movilidad suave sin forzar el rango doloroso. **Mencionar en el próximo control médico** (el de la fractura, ~06 oct tentativo) aunque sea otro tema — es información útil de que apareció durante esa inmovilidad.
+- **Pendiente:** si no mejora en 1-2 semanas con esto, o aparece debilidad/hormigueo, evaluación en persona (fisioterapia, no ortopedia) antes de esperar al control de oct.
+
 ## Estructura (futura, si se conecta a Supabase/dashboard)
 ```
 salud/
