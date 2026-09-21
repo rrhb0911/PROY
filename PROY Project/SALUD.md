@@ -158,8 +158,8 @@ Rafa salió en bici hoy (domingo) casi 2 horas a 160W de potencia normalizada �
 
 - **Después del esfuerzo:** dolor generalizado en rodillas, cintura y glúteos — típico de 5 semanas sin montar (pérdida de tolerancia postural/muscular específica de la bici), no relacionado con la fractura.
 - **Pie:** sin dolor. Confirmado explícitamente al bañarse — planta del pie, cero dolor, cero molestia.
-- **Sobre la fractura (parte superior/dorsal del pie):** sí hay sensibilidad — al dar golpecitos con el dedo (test de percusión) siente dolor suave tipo "corrientazo"/punzada.
-- **Sin diagnóstico** — la sensibilidad a la percusión sobre un sitio de fractura en recuperación puede ser normal en esta etapa, pero es justo el tipo de dato que vale la pena que el ortopedista escuche directamente. **Mencionar explícitamente en el control del 06-oct (tentativo):** el episodio de hoy (duración/intensidad real) + la sensibilidad al golpeteo sobre la fractura.
+- **Sobre la fractura (parte superior/dorsal del pie):** sí hay sensibilidad — al dar golpecitos con el dedo (test de percusión) siente un hormigueo tipo "corrientazo" que **se irradia a lo largo del metatarso** (no se queda en el punto donde toca).
+- **Coincide con la definición clásica de signo de Tinel positivo** (percusión sobre nervio en recuperación → hormigueo irradiado distal) — investigado con Rafa 2026-09-21, sin diagnóstico. Un Tinel positivo suele indicar axones regenerando (el nervio sanando), no necesariamente algo malo; en fracturas de quinto metatarsiano es un hallazgo descrito en la literatura. **Mencionar explícitamente en el control del 06-oct (tentativo)** usando ese término — más el episodio de hoy (duración/intensidad real del esfuerzo).
 - **Recomendado a Rafa:** no repetir un esfuerzo así de largo/intenso hasta la valoración médica — volver al plan Z1 conservador que ya está armado en Tower/calendario para octubre, en vez de tomar hoy como referencia de lo que el pie tolera.
 
 ## Estructura (futura, si se conecta a Supabase/dashboard)
