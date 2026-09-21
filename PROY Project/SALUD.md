@@ -152,6 +152,16 @@ Rafa reporta dolor de un mes de evolución, inicio gradual — apareció en la p
 - **Sugerido a Rafa** (autocuidado básico, sin cargar el hombro): evitar dormir de ese lado, calor local 10-15min antes de mover el hombro, movilidad suave sin forzar el rango doloroso. **Mencionar en el próximo control médico** (el de la fractura, ~06 oct tentativo) aunque sea otro tema — es información útil de que apareció durante esa inmovilidad.
 - **Pendiente:** si no mejora en 1-2 semanas con esto, o aparece debilidad/hormigueo, evaluación en persona (fisioterapia, no ortopedia) antes de esperar al control de oct.
 
+**2026-09-21 — Salida en bici (casi 2h, 160W NP), 5 semanas post-fractura de Jones — dolor generalizado sin afectar el pie, pero sensibilidad a la percusión sobre la fractura**
+
+Rafa salió en bici hoy (domingo) casi 2 horas a 160W de potencia normalizada — **antes** del plan oficial de retorno (que arranca 1 oct, solo Z1) y **sin valoración médica todavía**. Real desviación del plan cauteloso acordado.
+
+- **Después del esfuerzo:** dolor generalizado en rodillas, cintura y glúteos — típico de 5 semanas sin montar (pérdida de tolerancia postural/muscular específica de la bici), no relacionado con la fractura.
+- **Pie:** sin dolor. Confirmado explícitamente al bañarse — planta del pie, cero dolor, cero molestia.
+- **Sobre la fractura (parte superior/dorsal del pie):** sí hay sensibilidad — al dar golpecitos con el dedo (test de percusión) siente dolor suave tipo "corrientazo"/punzada.
+- **Sin diagnóstico** — la sensibilidad a la percusión sobre un sitio de fractura en recuperación puede ser normal en esta etapa, pero es justo el tipo de dato que vale la pena que el ortopedista escuche directamente. **Mencionar explícitamente en el control del 06-oct (tentativo):** el episodio de hoy (duración/intensidad real) + la sensibilidad al golpeteo sobre la fractura.
+- **Recomendado a Rafa:** no repetir un esfuerzo así de largo/intenso hasta la valoración médica — volver al plan Z1 conservador que ya está armado en Tower/calendario para octubre, en vez de tomar hoy como referencia de lo que el pie tolera.
+
 ## Estructura (futura, si se conecta a Supabase/dashboard)
 ```
 salud/
