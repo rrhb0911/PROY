@@ -10,7 +10,7 @@ Gestión de proyectos de desarrollo web. Termómetro visual del estado de cada p
 
 | Proyecto | Cliente | Estado | Próxima Entrega | Costo Mensual | Tecnología |
 |----------|---------|--------|-----------------|---------------|------------|
-| **VitalDent Web** | VitalDent M&M | En desarrollo | — | — | Next.js + Supabase |
+| **VitalDent Web** | VitalDent M&M | Archivado (23-sep-2026) | — | — | Next.js + Supabase |
 | **VitalDent Apps Script** | VitalDent M&M | Producción | — | — | Google Apps Script |
 | **Zammy Portal** | Zammy Deportes SAS | Producción | — | — | Next.js + Supabase |
 | **LabDent Site** | Dra. Angela Ramirez | Publicado | — | — | Hostinger |
@@ -18,13 +18,15 @@ Gestión de proyectos de desarrollo web. Termómetro visual del estado de cada p
 | **Dental RX (Radiología)** | Dra. Angela Ramirez | Publicado | — | — | Hostinger |
 | **PROY Dashboard** | Personal | En desarrollo | — | — | Next.js + Supabase |
 
+> **VitalDent Web archivado (23-sep-2026):** Rafa cerró el soporte/desarrollo activo — no es un apagado, Yury sigue operando la app tal cual quedó (`vitaldent.ilbici.live`, commit `511216c`), todos los accesos siguen intactos por si hay una emergencia. Detalle completo (mapa de accesos, patrones de arquitectura reutilizables, lecciones aprendidas) en `aplicaciones-web/vitaldent-web/ARCHIVO-Y-LECCIONES.md`.
+
 ---
 
 ## Termómetro de Proyectos
 
 ```
 PROY ───────────────────────────────────────── 65% ████████████████░░░
-VitalDent Web ──────────────────────────────── 40% ██████████░░░░░░░░░
+VitalDent Web (ARCHIVADO) ───────────────────── 40% ██████████░░░░░░░░░ (congelado, soporte/desarrollo activo cerrado)
 Zammy Portal ───────────────────────────────── 85% ██████████████████░
 VitalDent Apps Script ──────────────────────── 95% ███████████████████
 LabDent Site ───────────────────────────────── 100% ███████████████████
