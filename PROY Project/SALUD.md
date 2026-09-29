@@ -172,6 +172,14 @@ Una semana montando (1-1.5h, NP 140-180W), sin valoración médica todavía. Est
 - **Sin diagnóstico** — el patrón (sin dolor en carga, sensibilidad neurológica tipo hormigueo, nada agravado por la mecánica del pedaleo) no coincide con las señales típicas de alarma de mala consolidación (que suelen doler con carga). Aun así, sentirse bien no confirma consolidación ósea completa — eso solo lo determina el ortopedista/imagenología.
 - **A vigilar hasta el control del 06-oct (tentativo):** la TENDENCIA día a día (igual / mejorando / empeorando), no solo el estado puntual. Si progresa a peor (no solo persiste igual), consultar antes de esperar la cita.
 
+**2026-09-29 — Logística real del control: se corre a mediados de octubre, no 06-oct**
+
+Rafa aclara el timeline real: el traslado de EPS a Fusagasugá (SUGA) queda activo el 01-oct — recién ahí puede pedir cita, sujeto a disponibilidad. Estimación propia: la radiografía de control podría tardar hasta mediados de octubre, y la cita con el ortopedista lógicamente va DESPUÉS de esa radiografía — así que probablemente también mediados de octubre (semana 8-9 post-operatoria, no la semana 6 que se esperaba originalmente para el 06-oct).
+
+- **Actualizado en Tower** (`salud_recovery`): `controlDate` de `2026-10-06` → `2026-10-15` (sigue sin confirmar — es estimado, no cita real todavía).
+- **Nota aparte, sin tocar todavía**: el mismo registro sigue con `stage: "Zapato postoperatorio"` y `restrictions: ["Sin bicicleta", "Sin gimnasio"]` — desactualizado desde que retomó bici (21-sep) y el plan de octubre. Pendiente confirmar con Rafa antes de corregirlo.
+- **Viaje a Bogotá 14-15 oct (moto, laboratorios UNAD)**: Rafa ya maneja moto localmente en Fusa sin dolor/molestia, pero él mismo nota que un trayecto largo a Bogotá con tráfico es distinto a salidas cortas locales. Ese viaje cae justo antes/alrededor de la fecha estimada del control — vale la pena tenerlo presente.
+
 ## Estructura (futura, si se conecta a Supabase/dashboard)
 ```
 salud/
