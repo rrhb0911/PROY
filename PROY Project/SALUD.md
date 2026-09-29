@@ -162,6 +162,16 @@ Rafa salió en bici hoy (domingo) casi 2 horas a 160W de potencia normalizada �
 - **Coincide con la definición clásica de signo de Tinel positivo** (percusión sobre nervio en recuperación → hormigueo irradiado distal) — investigado con Rafa 2026-09-21, sin diagnóstico. Un Tinel positivo suele indicar axones regenerando (el nervio sanando), no necesariamente algo malo; en fracturas de quinto metatarsiano es un hallazgo descrito en la literatura. **Mencionar explícitamente en el control del 06-oct (tentativo)** usando ese término — más el episodio de hoy (duración/intensidad real del esfuerzo).
 - **Recomendado a Rafa:** no repetir un esfuerzo así de largo/intenso hasta la valoración médica — volver al plan Z1 conservador que ya está armado en Tower/calendario para octubre, en vez de tomar hoy como referencia de lo que el pie tolera.
 
+**2026-09-29 — Check-in semana 1 de bici real (post 21-sep): sensibilidad estable, sin dolor**
+
+Una semana montando (1-1.5h, NP 140-180W), sin valoración médica todavía. Estado reportado por Rafa:
+
+- **Planta del pie:** cero dolor, incluso con presión directa. Sin cambios respecto al 21-sep.
+- **Percusión sobre el metatarso (zona de cirugía):** hormigueo que se corre hasta la punta del meñique del pie — no dolor, descrito como "sensible"/"templado". Mismo signo de Tinel ya identificado el 21-sep, ahora presente de forma consistente después de cada salida (antes solo se había probado una vez).
+- **Mecánica de pedaleo:** sin desenchoclar bajo carga lateral ni forzar el pie contra el pedal — cuidado explícito de no estresar la zona.
+- **Sin diagnóstico** — el patrón (sin dolor en carga, sensibilidad neurológica tipo hormigueo, nada agravado por la mecánica del pedaleo) no coincide con las señales típicas de alarma de mala consolidación (que suelen doler con carga). Aun así, sentirse bien no confirma consolidación ósea completa — eso solo lo determina el ortopedista/imagenología.
+- **A vigilar hasta el control del 06-oct (tentativo):** la TENDENCIA día a día (igual / mejorando / empeorando), no solo el estado puntual. Si progresa a peor (no solo persiste igual), consultar antes de esperar la cita.
+
 ## Estructura (futura, si se conecta a Supabase/dashboard)
 ```
 salud/
