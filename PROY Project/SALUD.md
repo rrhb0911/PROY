@@ -180,6 +180,23 @@ Rafa aclara el timeline real: el traslado de EPS a Fusagasugá (SUGA) queda acti
 - **Nota aparte, sin tocar todavía**: el mismo registro sigue con `stage: "Zapato postoperatorio"` y `restrictions: ["Sin bicicleta", "Sin gimnasio"]` — desactualizado desde que retomó bici (21-sep) y el plan de octubre. Pendiente confirmar con Rafa antes de corregirlo.
 - **Viaje a Bogotá 14-15 oct (moto, laboratorios UNAD)**: Rafa ya maneja moto localmente en Fusa sin dolor/molestia, pero él mismo nota que un trayecto largo a Bogotá con tráfico es distinto a salidas cortas locales. Ese viaje cae justo antes/alrededor de la fecha estimada del control — vale la pena tenerlo presente.
 
+**2026-10-03 — Perfil quirúrgico y cronología consolidado, día 46 post-cirugía (6.5 semanas)**
+
+Resumen clínico completo armado por Rafa, el más detallado hasta ahora — consolida y en varios puntos corrige el estado que venía en esta bitácora.
+
+- **Intervención:** fijación interna con tornillo intramedular (no conservador, confirma lo ya documentado el 08-sep).
+- **Fecha de cirugía:** 18 de agosto de 2026 (día 46 hoy, semana 6.5).
+- **Fase biológica:** transición a callo duro — el hueso inmaduro ya comparte carga con el tornillo (consolidación clínica activa), a la espera de confirmación radiológica.
+- **Planta del pie:** cero dolor, cero adormecimiento, en cualquier actividad (caminar, pedalear, reposo).
+- **Foco de la fractura:** sin dolor a la presión directa sobre el hueso.
+- **Zona superior/empeine:** sensibilidad residual tipo "golpe morado" (contusión leve) al palpar. **Los corrientazos agudos (signo de Tinel) ya desaparecieron** — eran irritación nerviosa, resuelta.
+- **Marcha:** camina sin muletas, con leve cojera biomecánica por desconfianza (compensa apoyando más el talón que la planta completa).
+- **Escaleras:** molestia por elongación de tejidos blandos al flexionar el pie operado en el descenso — protocolo indicado: "subir con el sano, bajar con el operado".
+- **Ciclismo:** hasta 2h sentado, NP 160W, tolerancia perfecta del pie. **Límite real encontrado:** pedalear DE PIE (fuera del sillín) genera un "tirón" en la zona del tornillo — confirma que tejidos blandos y callo inmaduro aún no toleran palanca/balanceo lateral/transferencia total de peso en el antepié. Dolor periférico (rodillas, lumbar) tras ciclismo prolongado es desadaptación física/compensación postural, no el metatarsiano.
+- **Calzado:** zapato postoperatorio descartado hace más de una semana — usa tenis deportivos estructurados (caminar/gimnasio) y zapatillas rígidas de ciclismo.
+
+**Correcciones al estado registrado en Tower** (`salud_recovery`, pendiente desde el 29-sep): `stage` pasa de "Zapato postoperatorio" (obsoleto) a algo que refleje semana 6.5, callo duro, sin apoyo restringido. `restrictions` ["Sin bicicleta", "Sin gimnasio"] se eliminan — ambas están autorizadas y en curso activo — y se agrega la restricción real identificada hoy: **nada de pedaleo de pie / fuera del sillín**.
+
 ## Estructura (futura, si se conecta a Supabase/dashboard)
 ```
 salud/
