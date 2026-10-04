@@ -503,7 +503,7 @@
             "sesion": "Sesión 1",
             "fecha": "2026-09-15",
             "replicaFecha": "2026-09-19",
-            "asistida": false,
+            "asistida": true,
             "refuerza": "Reto 2",
             "fuente": "Evento de Google Calendar (comprobación 327.987.188), 9 sep 2026 — réplica presencial en Diagonal 1 Nro 26-18, Barrio el Comboy. Sin información de puntos en la descripción del evento."
           },
@@ -600,8 +600,8 @@
             "momento": "Intermedio",
             "opens": "2026-09-28",
             "progress": {
-              "pct": 0,
-              "status": "sin iniciar"
+              "pct": 100,
+              "status": "completado"
             },
             "pts": 125,
             "sources": [
@@ -609,8 +609,13 @@
                 "name": "Guía de aprendizaje - Reto 3 - Aprender con Autonomía (ya descargada)"
               }
             ],
-            "status": "upcoming",
-            "title": "Aprender con Autonomía"
+            "status": "done",
+            "title": "Aprender con Autonomía",
+            "grade": {
+              "max": 125,
+              "pct": 100,
+              "score": 125
+            }
           },
           {
             "closes": "2026-11-22",
@@ -665,7 +670,7 @@
         ]
       },
       "version": 6,
-      "updatedAt": "2026-09-10T02:00:00.000000Z"
+      "updatedAt": "2026-10-04T21:21:09.511Z"
     },
     "200610": {
       "id": "200610",
@@ -695,7 +700,7 @@
             "sesion": "Sesión 1",
             "fecha": "2026-09-17",
             "replicaFecha": "2026-09-24",
-            "asistida": false,
+            "asistida": true,
             "refuerza": "Reto 2/3",
             "fuente": "Evento de Google Calendar (comprobación 327.964.862), 9 sep 2026 — sin información de puntos en la descripción del evento."
           },
@@ -788,8 +793,8 @@
             "momento": "Intermedio",
             "opens": "2026-09-28",
             "progress": {
-              "pct": 0,
-              "status": "sin iniciar"
+              "pct": 100,
+              "status": "completado"
             },
             "pts": 100,
             "sources": [
@@ -797,8 +802,13 @@
                 "name": "Guía de Aprendizaje Reto 3 Contenidos en línea"
               }
             ],
-            "status": "upcoming",
-            "title": "Creación de contenido en línea"
+            "status": "done",
+            "title": "Creación de contenido en línea",
+            "grade": {
+              "max": 100,
+              "pct": 100,
+              "score": 100
+            }
           },
           {
             "closes": "2026-11-22",
@@ -856,7 +866,7 @@
         ]
       },
       "version": 8,
-      "updatedAt": "2026-09-10T02:00:00.000000Z"
+      "updatedAt": "2026-10-04T21:21:09.511Z"
     },
     "200611": {
       "id": "200611",
@@ -887,6 +897,14 @@
         ],
         "credits": 3,
         "meetings": [
+          {
+            "sesion": "Momento inicial",
+            "fecha": "2026-08-26",
+            "pts": 0,
+            "asistida": true,
+            "refuerza": "Reto 1",
+            "fuente": "Confirmado por Rafa el 4 oct 2026. No suma puntos."
+          },
           {
             "sesion": "Sesión 1",
             "fecha": "2026-09-09",
@@ -990,8 +1008,8 @@
             "momento": "Intermedio",
             "opens": "2026-09-26",
             "progress": {
-              "pct": 0,
-              "status": "sin iniciar"
+              "pct": 100,
+              "status": "completado"
             },
             "pts": 110,
             "sources": [
@@ -999,8 +1017,13 @@
                 "name": "Guía de aprendizaje - Reto 3 - Modela y resuelve Pensamiento matemático"
               }
             ],
-            "status": "upcoming",
-            "title": "Pensamiento matemático"
+            "status": "done",
+            "title": "Pensamiento matemático",
+            "grade": {
+              "max": 110,
+              "pct": 100,
+              "score": 110
+            }
           },
           {
             "closes": "2026-11-22",
@@ -1058,7 +1081,7 @@
         ]
       },
       "version": 8,
-      "updatedAt": "2026-09-10T01:15:00.000000Z"
+      "updatedAt": "2026-10-04T21:21:09.511Z"
     },
     "212014": {
       "id": "212014",
@@ -1071,7 +1094,7 @@
             "sesion": "Sesión 1",
             "fecha": "2026-09-14",
             "replicaFecha": "2026-09-21",
-            "asistida": false,
+            "asistida": true,
             "refuerza": "Tarea 2",
             "fuente": "Evento de Google Calendar (comprobación 327.950.469), 9 sep 2026 — sin información de puntos en la descripción del evento."
           },
@@ -1090,13 +1113,17 @@
             "closes": "2026-08-30",
             "comment": "Ya enviaste el mapa mental y participaste en el foro el 27 de agosto — pasó Turnitin con 6% de similitud, sin problema. Solo falta que el docente lo califique, no depende de ti.",
             "desc": "Mapa mental (Canva) relacionando Ingeniería, Sistema, Proceso, Variable, Modelo, Diseño, Eficiencia + participación en foro. Turnitin ID 3018851779, similitud 6%.",
-            "grade": null,
+            "grade": {
+              "max": 25,
+              "pct": 100,
+              "score": 25
+            },
             "id": "T1",
             "momento": "Inicial",
             "opens": "2026-08-17",
             "progress": {
               "pct": 100,
-              "status": "entregado, pendiente de nota"
+              "status": "completado"
             },
             "pts": 25,
             "sources": [
@@ -1116,8 +1143,8 @@
             "momento": "Intermedio",
             "opens": "2026-08-31",
             "progress": {
-              "pct": 70,
-              "status": "en curso",
+              "pct": 100,
+              "status": "completado",
               "subtasks": [
                 {
                   "name": "Actividad 1 — Historia (línea de tiempo)",
@@ -1191,8 +1218,13 @@
                 "url": "https://repository.unad.edu.co/handle/10596/64777"
               }
             ],
-            "status": "active",
-            "title": "Fundamentos de la ingeniería"
+            "status": "done",
+            "title": "Fundamentos de la ingeniería",
+            "grade": {
+              "max": 130,
+              "pct": 95,
+              "score": 124
+            }
           },
           {
             "closes": "2026-10-25",
@@ -1202,8 +1234,8 @@
             "momento": "Intermedio",
             "opens": "2026-09-28",
             "progress": {
-              "pct": 0,
-              "status": "sin iniciar"
+              "pct": 60,
+              "status": "en curso: Tabla 2 completa; falta Actividad 2 (Canva)"
             },
             "pts": 100,
             "rubric": [
@@ -1232,7 +1264,7 @@
                 "name": "Rúbrica de evaluación - Tarea 3"
               }
             ],
-            "status": "upcoming",
+            "status": "active",
             "title": "Programa y prospectiva profesional"
           },
           {
@@ -1298,7 +1330,7 @@
         ]
       },
       "version": 12,
-      "updatedAt": "2026-09-11T16:58:00.690Z"
+      "updatedAt": "2026-10-04T21:21:09.511Z"
     },
     "213022": {
       "id": "213022",
@@ -1434,7 +1466,12 @@
               }
             ],
             "status": "done",
-            "title": "Variables y Estructuras"
+            "title": "Variables y Estructuras",
+            "grade": {
+              "max": 100,
+              "pct": 92,
+              "score": 92
+            }
           },
           {
             "closes": "2026-10-25",
@@ -1444,8 +1481,8 @@
             "momento": "Intermedio",
             "opens": "2026-09-28",
             "progress": {
-              "pct": 0,
-              "status": "sin iniciar"
+              "pct": 80,
+              "status": "PDF enviado al profesor (2 oct); pendiente retroalimentación y subir ZIP"
             },
             "pts": 100,
             "rubric": [
@@ -1474,7 +1511,7 @@
                 "name": "Rúbrica de evaluación - Fase 3"
               }
             ],
-            "status": "upcoming",
+            "status": "active",
             "title": "Repetitivas y Arreglos"
           },
           {
@@ -1570,7 +1607,7 @@
         ]
       },
       "version": 17,
-      "updatedAt": "2026-09-11T19:33:26.198Z"
+      "updatedAt": "2026-10-04T21:21:09.511Z"
     }
   }
 }
