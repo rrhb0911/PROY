@@ -900,7 +900,7 @@
             "fecha": "2026-09-30",
             "replicaFecha": "2026-10-14",
             "pts": 15,
-            "asistida": false,
+            "asistida": true,
             "refuerza": "Reto 3",
             "fuente": "Correo interno del campus de un docente de 200611, 9 sep 2026 — pendiente respaldo en guía escrita"
           },
