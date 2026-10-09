@@ -197,6 +197,21 @@ Resumen clínico completo armado por Rafa, el más detallado hasta ahora — con
 
 **Correcciones al estado registrado en Tower** (`salud_recovery`, pendiente desde el 29-sep): `stage` pasa de "Zapato postoperatorio" (obsoleto) a algo que refleje semana 6.5, callo duro, sin apoyo restringido. `restrictions` ["Sin bicicleta", "Sin gimnasio"] se eliminan — ambas están autorizadas y en curso activo — y se agrega la restricción real identificada hoy: **nada de pedaleo de pie / fuera del sillín**.
 
+**2026-10-09 — Radiografía de control realizada (MedSalud), cita con ortopedista aún sin fecha**
+
+Radiografía hecha hoy como estaba agendada (7:26am, MedSalud). Rafa compartió las 2
+proyecciones (dorsoplantar y lateral, pie derecho) — observación general no clínica: tornillo
+intramedular en el quinto metatarsiano en posición esperada, contorno óseo continuo sin
+desplazamiento visible a simple vista, calcáneo/tobillo sin deformidad aparente. **No es
+lectura médica** — la evaluación real de consolidación ósea la hace el ortopedista, que es
+justo el siguiente paso.
+
+- **Cita con ortopedista: todavía sin fecha.** Sigue pendiente la autorización (ver entrada
+  2026-09-29) — una vez la EPS a asigne, debería ser después de esta radiografía, como ya se
+  tenía previsto.
+- `controlDate` en Tower sigue en `2026-10-15` como estimado sin confirmar — no cambiar hasta
+  que haya cita real.
+
 ## Estructura (futura, si se conecta a Supabase/dashboard)
 ```
 salud/
