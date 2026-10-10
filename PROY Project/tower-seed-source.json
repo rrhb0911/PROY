@@ -1475,14 +1475,14 @@
           },
           {
             "closes": "2026-10-25",
-            "comment": "Sin tocar, abre el 28 de septiembre. Antes de empezar, confirmar en el foro cuántos de los 10 problemas te tocan (probablemente 1, por el patrón de Fase 2, pero no está confirmado literal como en Fase 4/5).",
+            "comment": "94/100 — buen desarrollo tecnico, mejorar evidencias de ejecucion y estilo academico en proximas fases.",
             "desc": "Individual. Banco de 10 problemas (Anexo 2): 5 de estructuras repetitivas (horno industrial, cuotas conjunto residencial, encuesta TV cable, salarios por antigüedad, encuesta hinchas fútbol) + 5 de arreglos (ventas pizzería, triage hospitalario, compra helados, matriz capicúa, productividad empleados). ⚠️ Sin confirmar todavía si se resuelve 1 solo problema (como en Fase 2) o varios — falta la guía real o el foro del tutor.",
             "id": "F3",
             "momento": "Intermedio",
             "opens": "2026-09-28",
             "progress": {
-              "pct": 90,
-              "status": "retroalimentación recibida 5 oct (sugerido 93/100); pendiente validaciones de entrada y ZIP antes del 25 oct"
+              "pct": 100,
+              "status": "completado"
             },
             "pts": 100,
             "rubric": [
@@ -1511,8 +1511,13 @@
                 "name": "Rúbrica de evaluación - Fase 3"
               }
             ],
-            "status": "active",
-            "title": "Repetitivas y Arreglos"
+            "status": "done",
+            "title": "Repetitivas y Arreglos",
+            "grade": {
+              "max": 100,
+              "pct": 94,
+              "score": 94
+            }
           },
           {
             "closes": "2026-11-22",
@@ -1607,7 +1612,7 @@
         ]
       },
       "version": 17,
-      "updatedAt": "2026-10-06T20:32:29.139Z"
+      "updatedAt": "2026-10-10T23:33:06.468Z"
     }
   }
 }
