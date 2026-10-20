@@ -212,6 +212,39 @@ justo el siguiente paso.
 - `controlDate` en Tower sigue en `2026-10-15` como estimado sin confirmar — no cambiar hasta
   que haya cita real.
 
+**2026-10-20 — Informe radiológico oficial + estado funcional autorreportado (día 62-63 post-op)**
+
+*Fuente médica (verificable):* RX de pie derecho (AP, lateral y oblicua), realizada 2026-10-09 en
+MedSalud IPS (Sanitas), informe firmado 2026-10-13 por Blanca Moreno, Radiología (reg. 879554).
+Texto del informe: "Fractura proximal del quinto metatarsiano con material de osteosíntesis
+adecuadamente posicionado, sin signos de aflojamiento, **impresiona** formación de callo óseo a ese
+nivel." Articulaciones, tejidos blandos y densidad ósea normales. Campo "Remite": no definido. El
+informe **no** dice "consolidada" ni autoriza ninguna actividad.
+
+*Autorreporte funcional de Rafa, 19-oct (no verificado clínicamente):* marcha sin cojera; descenso
+rápido de escalones y micro-impactos sin dolor; ciclismo de hasta 3 h repetidas sin dolor; pedaleo de
+pie y escaladas exigentes sin dolor; peso muerto 40 kg 1×/semana; evita deliberadamente sentadilla
+búlgara y flexión plantar extrema unilateral; desaparecieron las molestias del empeine con zapatillas
+rígidas.
+
+*Correcciones de lectura (Jarvis):*
+- Un resumen redactado fuera de esta bitácora calificaba el caso de "consolidación avanzada" y
+  "retorno casi completo a alto rendimiento". Eso **no se registra como diagnóstico**: es
+  interpretación no clínica. "Impresiona callo" es una impresión radiológica, no una confirmación de
+  unión, y la ausencia de dolor no equivale a consolidación (la zona proximal del 5.º metatarsiano
+  tiene irrigación limitada). Las frases sobre el tendón peroneo corto y la "desinflamación
+  neurológica" son hipótesis, no hallazgos.
+- **La restricción del 03-oct (sin pedaleo de pie / fuera del sillín) ya fue superada por decisión
+  propia, sin cita ni autorización del ortopedista.** Se deja constancia tal cual: la ortopedista
+  sigue sin haber evaluado la radiografía.
+
+*Pendiente:* cita con ortopedia **aún sin agenda** (confirmado 20-oct). `controlDate` en Tower
+(2026-10-15) quedó vencido sin cita real. Escalar a Sanitas para obtener la autorización y llevar el
+informe a la cita. Mientras tanto, parar y consultar si aparece dolor localizado en el borde lateral
+del pie (base del 5.º metatarsiano) al cargar o pedalear de pie, hinchazón que reaparece o dolor
+nocturno. No es un diagnóstico, solo criterio de seguridad. Tower **no** se actualizó (esta sesión no
+tiene acceso a Supabase).
+
 ## Estructura (futura, si se conecta a Supabase/dashboard)
 ```
 salud/
