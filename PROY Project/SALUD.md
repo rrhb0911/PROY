@@ -247,6 +247,22 @@ en el borde lateral (base del 5.º metatarsiano) al cargar o pedalear de pie, hi
 nocturno, parar y consultar. Tower **no** se actualizó (esta sesión no tiene acceso a Supabase).
 
 
+**2026-10-21 — Cita con ortopedia AGENDADA (28 oct 2026, 9:30 a.m.)**
+
+Primera cita de Ortopedia y Traumatología con la Dra. Karen Samanta Quelal Achinchoy, Clínica Belén de
+Fusagasugá, Sede Palestina (Sanitas). Consecutivo 2743668, autorización Sanitas 363283716 (vigente hasta
+15/12/2026), valor $20.100, Dx S92.3 fractura de hueso del metatarso. Llegar 40 min antes (8:50);
+cancelar con 24 h de anticipación (886 8888).
+
+- Evento creado en Google Calendar (28-oct 9:30–10:30; recordatorios 1 día, 2 h y 70 min antes).
+  No choca con bici (5:30), CIPAS 3 de Pensamiento Lógico (18:00) ni gym (19:00).
+- **Conflicto laboral:** el 28-oct es miércoles y el turno empieza a las 9:00 → pedir permiso.
+- Llevar: informe RX (firmado 13-oct), imágenes, cédula y el relato funcional de la entrada anterior.
+- Preguntas: ¿hay consolidación?, ¿autoriza pedaleo de pie/carga/saltos?, ¿tornillo: retiro o
+  seguimiento?, ¿fisioterapia?, mencionar el hormigueo del empeine (posible Tinel).
+- **Pendiente Tower:** `controlDate` (2026-10-15, vencido) → 2026-10-28. No actualizado: esta sesión
+  no tiene credenciales de Supabase.
+
 ## Estructura (futura, si se conecta a Supabase/dashboard)
 ```
 salud/
