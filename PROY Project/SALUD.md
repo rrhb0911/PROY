@@ -224,10 +224,12 @@ informe **no** dice "consolidada" ni autoriza ninguna actividad.
 *Estado funcional y sensaciones, según Rafa (corte 19-20 oct, no verificado clínicamente):*
 - **Marcha:** sin cojera, paso fluido en plano.
 - **Impacto:** baja escaleras rápido y tolera micro-impactos (pequeños saltos) sin dolor.
-- **Ciclismo:** sesiones de hasta 3 h, repetidas varias veces, sin dolor, molestia plantar ni fatiga.
-  Hace tramos de pie y escaladas a ritmo exigente sin dolor ni restricción.
-- **Gimnasio:** volvió al tren inferior. Peso muerto con 40 kg, 1×/semana, sin molestia. Evita a
-  propósito sentadilla búlgara y flexión plantar extrema unilateral.
+- **Ciclismo:** rodadas de 2 a 3 h con NP ~215-230 W (2 h) y ~200 W (3 h), sin dolor, molestia plantar
+  ni fatiga. Pedalea de pie sin problema.
+- **Gimnasio (corrección 22-oct, según Rafa):** Lun y Jue push, Mar y Vie pull, Mié tren inferior
+  (abductores, aductores, peso muerto, extensión de pierna, sentadilla búlgara ~30 kg y sentadilla en
+  Smith ~50 kg). *Se corrigió un error previo de esta bitácora que decía que evitaba la búlgara: eso
+  venía del texto de Gemini, no de Rafa.* Tren superior con progresión de cargas.
 - **Sensaciones:** ya no hay dolor en el borde lateral del pie y no aparece de noche. Desaparecieron
   las molestias del empeine tras usar zapatillas rígidas.
 - **Origen de este registro:** todo lo anterior es lo que Rafa ya hace y siente. Un resumen generado
