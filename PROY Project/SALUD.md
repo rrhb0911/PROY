@@ -266,6 +266,26 @@ cancelar con 24 h de anticipación (886 8888).
 - **Pendiente Tower:** `controlDate` (2026-10-15, vencido) → 2026-10-28. No actualizado: esta sesión
   no tiene credenciales de Supabase.
 
+**2026-10-22 — Cronograma de entrenamiento Nov–Feb: propuesta B confirmada por Rafa**
+
+Datos aportados por Rafa: FC máxima 185 lpm; volumen real de bici 15–18 h/semana; FTP sin verificar
+(confirma una estimación el 23-oct). Pidió sweet spot de 5–8′ desde noviembre (no solo sprints y
+baja cadencia) por pulsaciones altas y desadaptación aeróbica.
+
+- **Propuesta B (noviembre, 2–29 nov):** lun fondo Z2 (4–4,25 h), mar sweet spot 4×6′/4×7′/4×8′/3×6′ sobre
+  Z2, mié Z1–Z2 suave 2 h (Legs en la noche), jue sin bici, vie Z2 + sprints 10–12″, sáb Z2 + torque
+  sentado 3×6′/3×8′, dom Z2 progresivo. S4 es descarga (~−40 %). Horas calculadas: 16,5 / 17,25 / 17,8 / 10,25.
+- **Plan C** (todo sentado, sin sprints) queda como reserva si la ortopedista restringe el 28-oct. No cargado.
+- **Diciembre:** test de FTP (30 nov–6 dic) y trabajos de VO2max. **Enero:** sweet spot y umbral con retest.
+  **Febrero:** umbral extendido (tentativo).
+- **Zonas por pulsaciones (ref. FC máx 185):** Z1 <111, Z2 111–139, sweet spot ~148–163. Techo de Z2: ~139 lpm.
+- **Cargado:** 24 sesiones en Google Calendar (2–29 nov, 🚴 B · …) y 5 sesiones nuevas en
+  `deporte_entrenamientos` de Tower (`nov-b-*`). Se quitaron las ocurrencias «Z1 suave» del 30 y 31 oct.
+- **Pendiente:** vatios por sesión (FTP estimado), cita del 28-oct (sprints, pedaleo de pie, búlgara), y el
+  encabezado «en pausa por recuperación» del mesociclo en Tower (código de la app).
+- Nota de Jarvis: a NP 215–230 W en 2 h, su «Z2» puede ser tempo según el FTP real; el test de diciembre lo aclara.
+  Mockup: https://claude.ai/artifact/YNaavJzcVB4za6ZuJQvy1C
+
 ## Estructura (futura, si se conecta a Supabase/dashboard)
 ```
 salud/
