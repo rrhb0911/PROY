@@ -228,7 +228,8 @@ informe **no** dice "consolidada" ni autoriza ninguna actividad.
   ni fatiga. Pedalea de pie sin problema.
 - **Gimnasio (corrección 22-oct, según Rafa):** Lun y Jue push, Mar y Vie pull, Mié tren inferior
   (abductores, aductores, peso muerto, extensión de pierna, sentadilla búlgara ~30 kg y sentadilla en
-  Smith ~50 kg). *Se corrigió un error previo de esta bitácora que decía que evitaba la búlgara: eso
+  Smith ~50 kg). **La sentadilla búlgara empezó esta semana (semana del 19-oct)**: es la carga más nueva sobre
+  el antepié; consultar a la ortopedista el 28-oct. *Se corrigió un error previo de esta bitácora que decía que evitaba la búlgara: eso
   venía del texto de Gemini, no de Rafa.* Tren superior con progresión de cargas.
 - **Sensaciones:** ya no hay dolor en el borde lateral del pie y no aparece de noche. Desaparecieron
   las molestias del empeine tras usar zapatillas rígidas.
