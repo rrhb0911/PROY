@@ -286,6 +286,27 @@ baja cadencia) por pulsaciones altas y desadaptación aeróbica.
 - Nota de Jarvis: a NP 215–230 W en 2 h, su «Z2» puede ser tempo según el FTP real; el test de diciembre lo aclara.
   Mockup: https://claude.ai/artifact/YNaavJzcVB4za6ZuJQvy1C
 
+**2026-10-23 — Rodada de referencia (Strava) y FTP provisional de 280 W**
+
+Rodada de referencia: ~60 km, moving 2:10:06 (elapsed 2:44:29), desnivel +1.286 m (de ~1.750 m a ~600 m y
+de vuelta). Potencia media 201 W, 1.569 kJ, máx 780 W; FC media 149 y máx 180 lpm; cadencia media 82 rpm.
+En la subida de ~33 km la FC se sostuvo en 160–175 lpm. Rafa pedaleó de pie sin molestias en el pie
+(los picos de 400–780 W en el tramo medio indican sprints de pie, previos a la cita del 28-oct).
+Sensación: piernas cansadas, quizás por Legs del miércoles; por lo demás se sintió bien.
+
+Mejores esfuerzos (Strava): 5″ 665 W · 15″ 487 · 30″ 444 · 1′ 379 · 2′ 371 · 3′ 354 · 5′ 335 · 8′ 316 ·
+10′ 314 · 15′ 306 · 20′ 294 · 30′ 278 · 45′ 271 · 1 h 269 W.
+
+- **FTP provisional: 280 W** (20′ a 294 W × 0,95 = 279). Referencia cruzada: CP(5′,20′) ≈ 280 W; el 60′
+  (269 W) no fue un esfuerzo máximo. El plan pre-fractura usaba 349 W; 294 W es el 84 % de eso, con piernas cansadas.
+  Se **ajusta cada semana** por sensaciones y pulsaciones, en pasos de 5 W; test formal en diciembre.
+- **Zonas con 280 W:** Z1 <154 · Z2 157–210 · tempo/torque 213–252 · sweet spot 246–263 · Z4 255–294 ·
+  VO2max 297–336 W. Por pulsaciones (FC máx 185): Z2 111–139, sweet spot ~148–163.
+- **Lectura:** sus rodadas de NP 215–230 W en 2 h equivalen al 77–82 % del FTP provisional, es decir tempo,
+  no Z2. Eso explica las pulsaciones altas. NP 200 W es el 71 % (Z2 alto). En Z2 de verdad: 160–205 W y
+  FC ≤ 139.
+- **Cargado:** descripciones de las 24 sesiones de Calendar y las 5 entradas `nov-b-*` de Tower con vatios.
+
 ## Estructura (futura, si se conecta a Supabase/dashboard)
 ```
 salud/
