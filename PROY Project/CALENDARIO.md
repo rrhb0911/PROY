@@ -13,7 +13,7 @@ Google Calendar pone una ilustración de fondo en la app según palabras clave *
 - Ciclismo: `🚴 Cycling …`
 - Gimnasio: `🏋️ Gym: …`
 - Estudio (UNAD, CIPAS, clases, tareas): `Study — UNAD …`
-- Médico: `🩺 Doctor — …` (probado el 24-oct, pendiente confirmar que muestra imagen)
+- Médico: `🩺 Doctor — …` (verificado 24-oct: muestra imagen)
 - Otras actividades (natación, etc.): usar la palabra en inglés (`Swim`, `Run`, …), probar y anotar aquí cuáles funcionan.
 
 ## Visión General
