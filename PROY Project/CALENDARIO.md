@@ -6,6 +6,16 @@
 > extensa del trabajo real hecho ahí). Se deja acá como referencia histórica, no como estado actual.
 > Ver `COORDINACION-SESIONES.md`.
 
+## Convención de títulos en Google Calendar (regla vigente, 2026-10-24)
+
+Google Calendar pone una ilustración de fondo en la app según palabras clave **en inglés** en el título (verificado: "Gym", "Cycling" y "Study" funcionan; "Z1 suave" o "UNAD —" solos no). Todo evento nuevo que cree Jarvis debe llevar la palabra clave al inicio:
+
+- Ciclismo: `🚴 Cycling …`
+- Gimnasio: `🏋️ Gym: …`
+- Estudio (UNAD, CIPAS, clases, tareas): `Study — UNAD …`
+- Médico: `🩺 Doctor — …` (probado el 24-oct, pendiente confirmar que muestra imagen)
+- Otras actividades (natación, etc.): usar la palabra en inglés (`Swim`, `Run`, …), probar y anotar aquí cuáles funcionan.
+
 ## Visión General
 
 Calendario personal integrado con **Google Calendar API**. Unifica entregas de proyectos, pagos, entrenos, citas, vencimientos de documentos y sesiones de estudio en una vista única.
