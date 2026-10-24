@@ -307,6 +307,17 @@ Mejores esfuerzos (Strava): 5″ 665 W · 15″ 487 · 30″ 444 · 1′ 379 · 
   FC ≤ 139.
 - **Cargado:** descripciones de las 24 sesiones de Calendar y las 5 entradas `nov-b-*` de Tower con vatios.
 
+## 2026-10-24 — Gimnasio: plan de 3 sesiones aprobado
+
+Objetivo del gym: **tonificar y marcar musculatura del tren superior, no hipertrofia**; la prioridad sigue siendo el ciclismo (FCmax 185, 15–18 h/sem de bici, bloque B desde noviembre).
+
+- **Lunes — Upper A** (tras Fondo Z2 de la mañana).
+- **Martes — Legs** (solo piernas, ≥6 h después del sweet spot de la mañana; el 3-nov a las 15:00 por CIPAS 18:00). Incluye búlgara (empezó la semana del 19-oct), con carga conservadora hasta ver el resultado de ortopedia del 28-oct.
+- **Jueves — Upper B** (sin bici ese día).
+- **Miércoles: sin gimnasio**, recuperación Z1–Z2 suave; viernes llega descansado para sprints.
+- Motivo del cambio: llegaba muy cascado los viernes porque hacía pierna los miércoles (interferencia fuerza–resistencia).
+- Pendiente: reemplazar en Google Calendar las series del plan viejo (Push/Pull/Legs Lun–Vie) por estas 3 sesiones.
+
 ## Estructura (futura, si se conecta a Supabase/dashboard)
 ```
 salud/
