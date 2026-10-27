@@ -318,6 +318,15 @@ Objetivo del gym: **tonificar y marcar musculatura del tren superior, no hipertr
 - Motivo del cambio: llegaba muy cascado los viernes porque hacía pierna los miércoles (interferencia fuerza–resistencia).
 - Pendiente: reemplazar en Google Calendar las series del plan viejo (Push/Pull/Legs Lun–Vie) por estas 3 sesiones.
 
+## 2026-10-27 — Gym real (Legs) y rodadas, relato de Rafa
+
+- **Estructura de gym vigente (aclarada por Rafa):** 3 días/semana, nada más. **Lunes Push A, martes Legs, jueves Pull A.** (Reemplaza el esquema Upper A/Upper B del 24-oct.) Lo extra en casa (core, lagartijas) es libre, sin agendar, cuando haya tiempo y energía.
+- **Martes 27-oct, Legs:** peso muerto 55 kg, sentadilla búlgara 30 kg, sentadilla; 6 repeticiones por pierna en cada ejercicio, enfocado en el gesto, no en la carga. Se sintió bien.
+- **Sensación:** "maltrato" en la cintura baja, que atribuye a la tensión del peso muerto. La semana pasada tuvo la misma sensación sin malestar ni dolor.
+- **Bici lunes 26-oct:** 4 h 30 min, NP ~210 W, sin problema.
+- **Bici martes 27-oct:** casi 3 h, NP ~190–200 W, "súper bien"; pie excelente, sin molestias.
+- Cita de ortopedia confirmada para el 28-oct 9:30.
+
 ## Estructura (futura, si se conecta a Supabase/dashboard)
 ```
 salud/
