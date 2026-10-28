@@ -327,6 +327,15 @@ Objetivo del gym: **tonificar y marcar musculatura del tren superior, no hipertr
 - **Bici martes 27-oct:** casi 3 h, NP ~190–200 W, "súper bien"; pie excelente, sin molestias.
 - Cita de ortopedia confirmada para el 28-oct 9:30.
 
+## 2026-10-28 — Control de ortopedia: fractura consolidada, luz verde
+
+Valoración de la Dra. Karen Quelal (relato de Rafa): la recuperación va bien, **la fractura está consolidada**, **puede hacer ejercicio y aplicar fuerza**. Le envió radiografía y un **último control en ~1 mes** (fecha por agendar; tentativo ~27-nov en calendario y Tower).
+
+- Se levantan las restricciones médicas: ya no aplica la espera del 28-oct. Se activa la **propuesta B** (no la C), con sprints de pie, torque y búlgara permitidos, con progresión gradual.
+- Tower `salud_recovery` actualizado (v5): etapa "Consolidada", restricciones vacías, control tentativo 27-nov.
+- Pendiente de confirmar con la doctora cuando agende: si hay límite para impacto (saltos, correr); el plan actual no los incluye.
+- Antes de la cita, Rafa ya venía rodando por encima del plan Z1 (lunes 4 h 30 min a NP ~210 W; martes ~3 h a NP 190–200 W) sin molestias en el pie.
+
 ## Estructura (futura, si se conecta a Supabase/dashboard)
 ```
 salud/
