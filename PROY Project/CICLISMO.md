@@ -390,3 +390,31 @@ Usa esto cuando arranques cada fase:
 - **Verificado (31-oct, Rafa):** el CP configurado en GoldenCheetah es correcto, así que los TSS y el PMC (ATL 92,7 · CTL ~53 · TSB ~−44 · RR ~11) son fiables.
 - **Curvas de potencia (Aerobic Power; leyenda: amarillo 5′, verde 10′, azul 20′, azul claro 30′, rojo 60′):** mejores marcas previas 5′ 411 W · 10′ 387 W · 20′ 348 W · 30′ 322 W · 60′ 307 W. Hoy (aprox.): 5′ ~337 W (82 %), 20′ ~294 W (84 %, test con piernas cansadas), 60′ ~270 W (88 %). FTP previo real ≈ 305–330 W (60′ = 307 W). El 349 W del plan viejo coincide con el mejor 20′ (348 W) usado sin el factor 0,95, o sea sobreestimado. Recuperación actual ≈ 85 %; el rango del FTP hoy se amplía a 275–300 W (curvas ~270–285 W; intervalos del 30–31-oct sugieren ≥290 W). Se mantiene 290 W como valor de trabajo hasta el test del 28-nov.
 - **Test de FTP:** movido al **sábado 28-nov** (fin de la semana de descarga, TSB más favorable), en lugar del 13-nov. Segundo punto de control opcional en diciembre.
+
+## Bici — geometría estimada (Mekha, talla 52, ruedas 700c, 31-oct-2026)
+
+Estimada desde una foto lateral con la bici colgada de la pared (corregida por 1,8° de inclinación) y escalada con datos de Rafa: distancia entre ejes 990 mm, bielas 170 mm, altura de sillín 766 mm, neumáticos 28 mm (trasero) y 25 mm (delantero). Incertidumbre ±2,5 % (±1–2 cm en longitudes grandes).
+
+| | Medida | Valor |
+|---|---|---|
+| A | Tubo del asiento (centro del pedalier al borde superior) | ~510–520 mm |
+| B | Tubo superior efectivo | ~535–550 mm |
+| C | Alcance (reach) | ~380–395 mm |
+| D | Altura (stack) | ~540–555 mm |
+| E | Tubo de dirección | ~125–145 mm |
+| F | Caída del eje pedalier | ~70–90 mm |
+| G | Distancia entre ejes | 990 mm (dato) |
+| H | Vainas traseras | ~403–410 mm |
+| I | Offset de la horquilla | ~43–45 mm (supuesto) |
+| J | Altura de la horquilla | ~350–365 mm |
+| K | Ángulo del tubo de dirección | 72–73,5° |
+| L | Ángulo del asiento | ~73° |
+| M | Potencia | ~90 mm, a 90° del tubo de dirección (sube ~17°) |
+| N | Ancho del manubrio | 420 mm (dato) |
+| — | Altura del sillín (centro del pedalier al borde superior) | 766 mm (dato; falta confirmar si se midió a lo largo del tubo o en vertical) |
+| — | Retroceso de la punta del sillín | ~8 cm detrás de la vertical del pedalier |
+| — | Caída sillín–manubrio | ~9–10 cm |
+| — | Distancia punta del sillín–manubrio | ~54 cm |
+| — | Bielas | 170 mm (dato) |
+
+Componentes: ruedas 700c de carbono ~50 mm, frenos de llanta, doble plato con 11 velocidades y cambio trasero Shimano (parece electrónico), cuadro negro mate de tubo superior casi horizontal.
