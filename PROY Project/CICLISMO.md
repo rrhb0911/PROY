@@ -418,3 +418,26 @@ Estimada desde una foto lateral con la bici colgada de la pared (corregida por 1
 | — | Bielas | 170 mm (dato) |
 
 Componentes: ruedas 700c de carbono ~50 mm, frenos de llanta, doble plato con 11 velocidades y cambio trasero Shimano (parece electrónico), cuadro negro mate de tubo superior casi horizontal.
+
+### Comparativa 1:1 con GW Letras+D 2025 (carbono, disco) — talla recomendada: M-498 (31-oct-2026)
+
+Altura de sillín 766 mm confirmada a lo largo del tubo (entrepierna implícita ≈ 867 mm con LeMond 0,883). Mekha 52 estimada vs hoja de GW (B de la M-498 corregido a 545,2, el original dice 645,2):
+
+| | Medida | XS-430 | S-467 | M-498 | L-519 | XL-537 | **Mekha 52** |
+|---|---|---|---|---|---|---|---|
+| A | Longitud del tubo del asiento | 430 | 467 | 498 | 519 | 537 | 513 |
+| B | Tubo superior horizontal | 505,1 | 530,3 | 545,2* | 560,4 | 575,4 | 541 |
+| C | Alcance (reach) | 365,4 | 378,4 | 383,7 | 387,8 | 397 | 386 |
+| D | Altura (stack) | 504 | 530 | 546 | 565 | 584 | 547 |
+| E | Longitud del tubo de dirección | 100 | 120 | 140 | 160 | 180 | 135 |
+| F | Desplazamiento del eje de centro (BB drop) | 75 | 75 | 70 | 70 | 70 | 80 |
+| G | Distancia entre ejes | 973 | 977,2 | 985,2 | 995,2 | 1010,2 | 990 |
+| H | Longitud de la vaina | 415 | 415 | 415 | 415 | 415 | 406 |
+| I | Desplazamiento del tenedor | 45 | 45 | 45 | 45 | 45 | 44 |
+| J | Longitud del tenedor | 370 | 370 | 370 | 370 | 370 | 357 |
+| K | Ángulo del tubo de dirección | 70,5° | 72,5° | 73° | 73° | 73° | 72,8° |
+| L | Ángulo del asiento | 74,5° | 74° | 73,5° | 73° | 73° | 73° |
+| M | Longitud de la potencia | 90 | 90 | 100 | 110 | 120 | 90 |
+| N | Ancho del manubrio | 400 | 400 | 420 | 420 | 420 | 420 |
+
+Conclusión: por reach/stack la Mekha 52 corresponde a la GW **M-498** (distancia 4 mm) y no a la L-519 (17 mm); el tubo del asiento (513 mm) se parece más a la L, pero no decide el ajuste. Con M-498 y potencia de 90 mm el alcance efectivo queda 3 mm por debajo del actual.
