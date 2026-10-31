@@ -381,3 +381,12 @@ Usa esto cuando arranques cada fase:
 - Zonas con 290 W: Z1 <159 · Z2 160–217 (plan: 160–205) · Z3 218–261 · Z4 264–305 · Z5 307–348 · Z6 349–435 · sweet spot (88–94 %) 255–273 W.
 - HR: nunca superó 146 lpm en las dos rodadas; el techo Z2 de 139 lpm no limita. Posible que FCmax de 185 esté subestimada; usar potencia y sensaciones como guía. HR de la bajada del 30-oct (60 lpm de promedio) es sospechosa de banda mal conectada.
 - Calendario y catálogo Tower (nov-b-*) actualizados a 290 W.
+
+## 2026-10-31 — Lectura del PMC de GoldenCheetah (antes y después de la cirugía)
+
+- **Antes (may–ago):** CTL ~85 → ~104 a inicios de agosto; ATL entre 60 y 129. TSB mayormente cerca de 0 (±25).
+- **Parada (desde ~16-ago):** ATL cae a ~0; CTL baja de ~103 a ~27 hacia finales de septiembre. TSB sube hasta +59 (forma "fresca" pero por desentrenamiento, no por preparación).
+- **Retorno (octubre):** desde ~15-oct, ATL sube rápido; el 31-oct ATL 92,7, CTL ~53, TSB ~−44, ramp rate ~11 (por encima de lo recomendable de 5–8 por semana). Hay que vigilar fatiga, sueño y pie; la carga ya equivale a ~14 h por semana con una base de CTL de la mitad de la de agosto.
+- **Pendiente verificar:** que el CP/FTP configurado en GoldenCheetah sea ~290 W; si sigue en el valor viejo (~349 W) los TSS salen subestimados y la carga real es mayor que la que muestra el gráfico.
+- **Curvas de potencia (Aerobic Power):** pico de 5′ ~411 W y de 20′ ~322–348 W antes de la lesión; hoy 20′ ~294 W. El FTP de 349 W del plan viejo parece ser ~85 % del mejor 5′ (411 W), es decir, sobreestimado; el FTP real previo estaría en ~305–330 W.
+- **Test de FTP:** movido al **sábado 28-nov** (fin de la semana de descarga, TSB más favorable), en lugar del 13-nov. Segundo punto de control opcional en diciembre.
