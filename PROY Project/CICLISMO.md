@@ -441,3 +441,9 @@ Altura de sillín 766 mm confirmada a lo largo del tubo (entrepierna implícita 
 | N | Ancho del manubrio | 400 | 400 | 420 | 420 | 420 | 420 |
 
 Conclusión: por reach/stack la Mekha 52 corresponde a la GW **M-498** (distancia 4 mm) y no a la L-519 (17 mm); el tubo del asiento (513 mm) se parece más a la L, pero no decide el ajuste. Con M-498 y potencia de 90 mm el alcance efectivo queda 3 mm por debajo del actual.
+
+### Datos corporales y talla (31-oct-2026)
+
+- Estatura 183 cm, entrepierna 88 cm. Altura de sillín actual 766 mm (a lo largo del tubo): LeMond (×0,883) = 777 mm, Hamley (×0,885) = 779 mm → está ~11–13 mm (1,5 %) por debajo de la fórmula. Subir solo si la rodilla en el punto bajo del pedaleo supera 35° de flexión (medir con foto lateral); no subir si hay tensión lumbar.
+- La Mekha 52 (reach 386 + potencia 90 = 476 mm efectivos) queda pequeña para 183/88 (lo habitual sería ~485–505 mm). Opciones en GW Letras+D: **M-498 + potencia 90** (replica lo actual) o **L-519 + potencia 100** (reach efectivo 488 mm, stack +18 mm, tija expuesta 247 mm en vez de 253). Para cuidar la lumbar se prefiere L-519.
+- Pendiente: foto lateral de Rafa sobre la bici (ángulos de rodilla, cadera, espalda y codo).
