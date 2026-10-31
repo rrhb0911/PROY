@@ -372,3 +372,12 @@ Usa esto cuando arranques cada fase:
 - **WKO5 Guide**: help.trainingpeaks.com
 - **FIT SDK**: github.com/therunninghub/FIT-SDK
 - **Libro**: Training and Racing with a Power Meter (Allen & Coggan)
+
+## 2026-10-31 — Rodadas del 30 y 31-oct y recálculo del FTP
+
+- **30-oct (sprints, 54,7 km, ~2 h 10 min):** 6 sprints de 14–20 s a 707, 634, 519, 622, 597 y 579 W (promedio por sprint), HR pico 137; recuperaciones de 4′ a ~176–205 W (el plan pedía <150 W). Subidas con 177–188 W y HR 112–118. La referencia vieja (5 s 665 W, 15 s 487 W) queda superada.
+- **31-oct (intervalos en lugar del torque planeado, 64 km, ~2 h 44 min):** 4×6′ a 258, 260, 290 y 289 W (HR 136, 136, 143, 146), calentamiento 27′ a 215 W, subida final 59′ a 146 W con HR 115. Motivo del cambio: "me sentí bien, menos vatios habrían sido insuficientes". Pie excelente.
+- **FTP provisional: 280 → 290 W** (rango probable 285–305 W). Base: test de 20′ a 294 W con piernas cansadas (suelo, daba 280 W) + intervalos al 103–104 % con HR bajo. Confirmar con un test fresco de 20′ en la primera semana de diciembre. FTP pre-fractura de referencia: ~349 W.
+- Zonas con 290 W: Z1 <159 · Z2 160–217 (plan: 160–205) · Z3 218–261 · Z4 264–305 · Z5 307–348 · Z6 349–435 · sweet spot (88–94 %) 255–273 W.
+- HR: nunca superó 146 lpm en las dos rodadas; el techo Z2 de 139 lpm no limita. Posible que FCmax de 185 esté subestimada; usar potencia y sensaciones como guía. HR de la bajada del 30-oct (60 lpm de promedio) es sospechosa de banda mal conectada.
+- Calendario y catálogo Tower (nov-b-*) actualizados a 290 W.
